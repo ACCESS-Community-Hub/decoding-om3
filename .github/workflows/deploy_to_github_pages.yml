@@ -19,7 +19,7 @@ env:
   DOC_DIR: documentation
   ROOT_BUILD_DIR: ${{ github.workspace }}/website
   COMMENT_LABEL: pr-preview
-  ROOT_DOMAIN: https://cbull.info/Inside-MOM6
+  ROOT_DOMAIN: https://access-community-hub.github.io/decoding-om3/
 
 jobs:
   set-root-url:
