@@ -1,7 +1,5 @@
 
-Welcome to the documentation for the [_decoding-om3](https://github.com/ACCESS-Community-Hub/decoding-om3)! 
-
-The purpose of this open source project is to encourage community users to delve inside the murky inner workings of om3!
+Welcome to the documentation for the [_decoding-om3_](https://github.com/ACCESS-Community-Hub/decoding-om3) project! The purpose of this open source project is to encourage community users to delve inside the murky inner workings of om3.
 
 Currently these topics are being explored as training as part of the regular Thursday 11:30 am COSIMA meetings being coordinated [here](https://docs.google.com/spreadsheets/d/1vk8m-oDRZChAFPnZ-HuF81YmiF7dkSXQkhZXekuj4fw/edit?gid=0#gid=0). Please get in touch with @chrisb13 (`chris.bull@anu.edu.au`) or @adele-morrison to get involved. Meetings are [announced on this thread](https://forum.access-hive.org.au/t/cosima-working-group-announce/238/181) and the [meeting link is this](https://utas.zoom.us/j/82678917036?from=addon).
 
