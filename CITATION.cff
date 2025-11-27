@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+title: 'decoding-om3'
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Christopher Yit Sen 
+    family-names: Bull
+    email: chris.bull@anu.edu.au
+    affiliation: Australia's Climate Simulator (ACCESS-NRI), Australian National University, Canberra, Australia
+    orcid: 'https://orcid.org/0000-0001-8362-3446'
+  - given-names: Andrew McC 
+    family-names: Hogg
+    email: Andy.Hogg@anu.edu.au
+    affiliation: ACCESS-NRI
+    orcid: 'https://orcid.org/0000-0001-5898-7635'
+repository-code: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
+url: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
+repository-artifact: >-
+abstract: >-
+license: CC-BY-4.0
+version: 
+date-released: 
+keywords:
+  - access-om3
+  - mom6
+  - climate
+  - model
+  - MOM6
