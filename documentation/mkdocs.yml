@@ -4,11 +4,11 @@
 site_name: Inside-MOM6  
  
 # Site URL
-site_url: !ENV [SITE_URL, "http://cbull.info/Inside-MOM6/"]
+site_url: !ENV [SITE_URL, "https://access-community-hub.github.io/decoding-om3/"]
 
 # Git repository (Adds a link to the GitHub repository at the top)
-repo_url: https://github.com/chrisb13/Inside-MOM6
-repo_name: chrisb13/Inside-MOM6
+repo_url: https://github.com/ACCESS-Community-Hub/decoding-om3
+repo_name: ACCESS-Community-Hub/decoding-om3
 edit_uri: blob/main/documentation/docs/ #hopefully will fix the edit button from 404'ing, https://github.com/mkdocs/mkdocs/issues/2416
 
 # Theme
@@ -108,6 +108,8 @@ markdown_extensions:
 # Navigation
 nav:
   - Home:                  pages/index.md
+  - Contributing:          pages/contributing.md
+  - Decoding MOM6:         pages/decoding_mom6.md
   - AOMSS:                 pages/AOMSS_Lecture_Notes.md
 
 # Footer
