@@ -1,5 +1,31 @@
 # Season 1
-## How to search the MOM6 codebase on github
+## How to use github's search functionality to find code: MOM6 as an example.
+Presenter: @dougiesquire 
+
+Working example: https://github.com/access-nri/mom6
+Contains all of the MOM6 Fortran code
+
+Pro:
+ - Easy and convenient
+ - Allows you to see how parts of the model work
+
+Cons:
+ - Can only search on the default branch of the repo'.
+ - GitHub doesn't actually index everything.
+ - Can't search branches
+
+Workflow suggestions: 
+ - Initiate a seach by clicking in the search bar top-right or click `/`
+ - Search for the word "global" for example, [using this](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6%20global&type=code).
+ - Clicking on a line, will take you to specifically to that line, in that script.
+ - Containing things in quotes will look for exact matches "example phrase". Further [details here](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax#query-for-an-exact-match).
+ - Regex searches are also possible
+ - You can also specify paths within the repo for example "path:src/core"
+
+Further details on search strategies are [here](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax).
+
+
+
 ## Distributed nature of MOM6 code across different development hubs / github repositories
 ## How to find code that corresponds to a particular executable (both ACCESS-NRI and other MOM6 executables e.g. from Angus)
 ## How to find what diagnostics are available
