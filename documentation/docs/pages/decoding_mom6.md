@@ -1,8 +1,8 @@
 # Season 1
 ## How to use github's search functionality to find code: MOM6 as an example.
-Presenter: @dougiesquire 
+Presenter: @dougiesquire (4/12).
 
-Working example: https://github.com/access-nri/mom6
+Working example, [the MOM6 code repository](https://github.com/access-nri/mom6).
 Contains all of the MOM6 Fortran code
 
 Pro:
@@ -19,11 +19,11 @@ Cons:
 Workflow suggestions: 
 
  - Initiate a seach by clicking in the search bar top-right or click `/`
- - Search for the word "global" for example, [using this](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6%20global&type=code).
+ - Search for the word `"global"` for example, [using this](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6%20global&type=code).
  - Clicking on a line, will take you to specifically to that line, in that script.
- - Containing things in quotes will look for exact matches "example phrase". Further [details here](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax#query-for-an-exact-match).
- - Regex searches are also possible
- - You can also specify paths within the repo for example "path:src/core"
+ - Containing things in quotes will look for exact matches `"example phrase"`. Further [details here](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax#query-for-an-exact-match).
+ - Regex searches are also possible.
+ - You can also specify paths within the repo for example `path:src/core`.
 
 Further details on search strategies are [here](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax).
 
