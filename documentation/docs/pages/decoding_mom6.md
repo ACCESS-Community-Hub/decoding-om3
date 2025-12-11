@@ -1,6 +1,6 @@
 # Season 1
 ## How to use github's search functionality to find code: MOM6 as an example.
-Presenter: @dougiesquire (4/12).
+Presenter: @dougiesquire (4/12/2025).
 
 Working example, [the MOM6 code repository](https://github.com/access-nri/mom6).
 Contains all of the MOM6 Fortran code
@@ -27,9 +27,38 @@ Workflow suggestions:
 
 Further details on search strategies are [here](https://docs.github.com/en/search-github/github-code-search/understanding-github-code-search-syntax).
 
+## Lessons learned from MOM6 code development
 
+Presenter: @jbisits (11/12/2025).
+Take-home message: when starting development, take care with which version of the MOM6 code repository you fork from.
 
-## Distributed nature of MOM6 code across different development hubs / github repositories
+### Background
+
+When @jbisits started work on MOM6, he went to google and found the MOM6 codebase and then made a fork of `mom-ocean/MOM6` (the [central consortium repository](https://github.com/mom-ocean/MOM6)). Actually if one is looking to contribute to the MOM6 codebase from Australia, there is an [access-nri/MOM6](https://github.com/access-nri/mom6) fork. They are different forks with different branches and code bases! 
+
+### How do I find out which version of MOM6 I am currently using?
+
+Go to the OM3 configuration that you are using [example](https://github.com/ACCESS-NRI/access-om3-configs/blob/release-MC_25km_jra_iaf/config.yaml
+) and find the `config.yaml` following lines:
+
+Note these lines:
+```yaml
+modules:
+    use:
+        - /g/data/vk83/modules
+    load:
+        - access-om3/2025.08.001
+```
+
+Specifically note this line `access-om3/2025.08.001` highlights the [Spack bundle package](https://github.com/ACCESS-NRI/access-spack-packages/blob/main/packages/access-om3/package.py) and git tag that is being used for MOM6 code. One can then match this tag name `2025.08.001` from the model deployment repository, this link [lists all the tags](https://github.com/ACCESS-NRI/ACCESS-OM3/tags), and here is the tag we are looking for: [`2025.08.001`](https://github.com/ACCESS-NRI/ACCESS-OM3/releases/tag/2025.08.001).
+
+Further information:
+
+ - [MOM6 fork management for being a development node](https://github.com/ACCESS-NRI/MOM6/wiki);
+ - [OM3 build system and deployment](https://access-om3-configs.access-hive.org.au/infrastructure/Building/);
+ - [NOAA-GFDL MOM6 development guide](https://github.com/NOAA-GFDL/MOM6-examples/wiki/Developers-guide);
+ - [MOM6 development presentation by @marshallward](https://www.marshallward.org/mom6workshop/develop.html).
+
 ## How to find code that corresponds to a particular executable (both ACCESS-NRI and other MOM6 executables e.g. from Angus)
 ## How to find what diagnostics are available
 ## Overview of MOM6 configuration (input files etc)
