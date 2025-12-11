@@ -58,7 +58,7 @@ Further information:
  - [MOM6 fork management for being a development node](https://github.com/ACCESS-NRI/MOM6/wiki);
  - [OM3 build system and deployment](https://access-om3-configs.access-hive.org.au/infrastructure/Building/);
  - [NOAA-GFDL MOM6 development guide](https://github.com/NOAA-GFDL/MOM6-examples/wiki/Developers-guide);
- - [MOM6 development presentation by @marshallward](https://www.marshallward.org/mom6workshop/develop.html).
+ - [MOM6 development presentation](https://www.marshallward.org/mom6workshop/develop.html) by @marshallward.
 
 ## How to find code that corresponds to a particular executable (both ACCESS-NRI and other MOM6 executables e.g. from Angus)
 ## How to find what diagnostics are available
