@@ -42,7 +42,7 @@ Go to the OM3 configuration that you are using [example](https://github.com/ACCE
 ) and find the `config.yaml` following lines:
 
 Note these lines:
-```bash
+```yaml
 modules:
     use:
         - /g/data/vk83/modules
