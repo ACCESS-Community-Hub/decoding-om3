@@ -29,7 +29,7 @@ Cons:
 - Why use the GitHub search bar?
     - See how a specific piece of code is written - how is it implemented in MOM6? Need to search through the code
 - Dougie’s screen: Looking at [MOM6 fork on ACCESS-NRI GitHub org](https://github.com/ACCESS-NRI/MOM6)
-    - Can click on search at top or click “/“ to start a search
+    - Can click on search at top or click `/` to start a search
     - Eg [search `global`](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6%20global&type=code)
         - Will return all files in this repo with “Global” (not case sensitive by default)
         - Get the summary of the files, and can click to expand more lines of code
