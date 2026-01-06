@@ -13,8 +13,13 @@ authors:
   - given-names: Andrew McC 
     family-names: Hogg
     email: Andy.Hogg@anu.edu.au
-    affiliation: ACCESS-NRI
+    affiliation: Australia's Climate Simulator (ACCESS-NRI), Australian National University, Canberra, Australia
     orcid: 'https://orcid.org/0000-0001-5898-7635'
+  - given-names: Paige E.
+    family-names: Martin
+    email: paige.martin@anu.edu.au
+    affiliation: Australia's Climate Simulator (ACCESS-NRI), Australian National University, Canberra, Australia
+    orcid: 'https://orcid.org/0000-0003-3538-633X'
 repository-code: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 url: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 repository-artifact: >-
