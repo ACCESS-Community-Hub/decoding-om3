@@ -160,7 +160,7 @@ $\tilde{f}=2 \Omega \cos\phi$.
 
 ## Hydrostatic balance
 
-In the vertical direction, the primary balance is between gravity pressure gradients -- hydrostatic balance. To see this, take the vertical component of [\[eq:nsrot\]](#eq:nsrot){reference-type="eqref" reference="eq:nsrot"},
+In the vertical direction, the primary balance is between gravity pressure gradients -- hydrostatic balance. To see this, take the vertical component of `[\[eq:nsrot\]](#eq:nsrot){reference-type="eqref" reference="eq:nsrot"}`,
 
 $\frac{\partial w}{\partial t} + \mathbf{u} \cdot \nabla w - \tilde{f} u = -g -\frac{1}{\rho}\frac{\partial p}{\partial z} + \nu \nabla^2 w.$
 
@@ -173,8 +173,7 @@ $\label{eq:hydrostatic}
  \frac{\partial p}{\partial z} = -\rho g.$ This is the hydrostatic balance and for large-scale models it replaces the vertical component of the momentum equation.
 
 Thus, we only find vertical velocity from the continuity equation,
-[\[eq:continuity\]](#eq:continuity){reference-type="eqref"
-reference="eq:continuity"}:
+`[\[eq:continuity\]](#eq:continuity){reference-type="eqref" reference="eq:continuity"}`:
 
 $\frac{\partial w}{\partial z} = - \frac{\partial u}{\partial x} - \frac{\partial v}{\partial y}$
 
@@ -192,8 +191,7 @@ These $\tilde{f}$ terms are sometimes called the non-traditional Coriolis terms,
 
 ## Boussinesq approximation
 
-Equation [\[eq:hydrostatic\]](#eq:hydrostatic){reference-type="eqref"
-reference="eq:hydrostatic"} uses the full ocean density on the RHS, but
+Equation `[\[eq:hydrostatic\]](#eq:hydrostatic){reference-type="eqref" reference="eq:hydrostatic"}` uses the full ocean density on the RHS, but
 for the horizontal momentum (where the projection of gravity is zero)
 the role of density in momentum conservation is small. Thus, we invoke
 the Boussinesq approximation, where momentum in the horizontal direction
