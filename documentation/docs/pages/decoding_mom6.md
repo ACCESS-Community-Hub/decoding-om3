@@ -114,9 +114,9 @@ Scope: where and how to find which model components and source code are used in 
 #### Through ACCESS-NRI release database (friendly)
 
 The easiest way to find a related version is to use the [release database](https://reporting.access-nri-store.cloud.edu.au/release-provenance/releases
-). For example, suppose we are interested in model version `2025.08.001` (listed by a `config.yaml` file in an `access-om3-configs` file).
+). For example, suppose we are interested in model version `2025.08.001` (listed in a `config.yaml` file in an `access-om3-configs` branch or directory if you have already cloned an experiment).
 
-Then we can find it [here](https://reporting.access-nri-store.cloud.edu.au/release-provenance/releases/32/). Then clicking on any of the github icons for the relevant component takes you to the version of the code that was used in that release.
+We can find this model version [here](https://reporting.access-nri-store.cloud.edu.au/release-provenance/releases/32/). Then clicking on any of the github icons for the relevant component takes you to the version of the code that was used in that release.
 
 #### Directly through GitHub (more complicated)
 
