@@ -289,7 +289,7 @@ $\begin{aligned}
 & = \nabla \cdot (\mathbf{u} u).
 \end{aligned}$
 
-Let's write [\[eq:momu\]](#eq:momu){reference-type="eqref" reference="eq:momu"} as
+Let's write `[\[eq:momu\]](#eq:momu){reference-type="eqref" reference="eq:momu"}` as
 
 $\frac{\partial u}{\partial t}  + \frac{\partial uu}{\partial x} +  \frac{\partial vu}{\partial y} + \frac{\partial wu}{\partial z} - fv = g' \frac{\partial \eta_1}{\partial x} + \nu \nabla^2u$
 
@@ -325,10 +325,8 @@ $\label{eq:momlayer}
 (where the $\mathbf{v}\mathbf{v}$ term implies an outer product, or $v_i v_j$ in tensor form).
 
 The shallow water equations,
-[\[eq:masslayer\]](#eq:masslayer){reference-type="eqref"
-reference="eq:masslayer"} and
-[\[eq:momlayer\]](#eq:momlayer){reference-type="eqref"
-reference="eq:momlayer"}, are a nice compact set of equations that we
+`[\[eq:masslayer\]](#eq:masslayer){reference-type="eqref" reference="eq:masslayer"}` and
+`[\[eq:momlayer\]](#eq:momlayer){reference-type="eqref" reference="eq:momlayer"}`, are a nice compact set of equations that we
 can use to understand idealised flows -- and to explore numerics!
 
 ## Quasigeostrophy
@@ -352,7 +350,7 @@ TO BE ADDED
 ## Finite difference
 
 Take a simple example from
-[\[eq:masslayer\]](#eq:masslayer){reference-type="eqref" reference="eq:masslayer"}:
+`[\[eq:masslayer\]](#eq:masslayer){reference-type="eqref" reference="eq:masslayer"}`:
 
 $\frac{\partial h}{\partial t} +  \frac{\partial (uh)}{\partial x} +  \frac{\partial (vh)}{\partial y}=0.$
 
@@ -427,8 +425,7 @@ is defined at the same point as $u_i$.
 ![ArakawaC](../assets/ArakawaC.png){: style="height:600px;width:600px"}
 
 Let's extend this idea to two dimensions -- here is the Arakawa C-grid. Apply this to the shallow water equation
-[\[eq:momlayer\]](#eq:momlayer){reference-type="eqref"
-reference="eq:momlayer"}:
+`[\[eq:momlayer\]](#eq:momlayer){reference-type="eqref" reference="eq:momlayer"}`:
 
 $\frac{\partial \mathbf{v}h}{\partial t}  + \nabla \cdot (\mathbf{v}\mathbf{v}h)  + f \mathbf{\hat{z}} \times \mathbf{v}h = g' h \nabla \eta_1+ \nu h \nabla_h^2\mathbf{v} +  \pmb{\tau}$ 
 
@@ -447,7 +444,8 @@ An alternative approach here is a semi-implicit framework, where the Coriolis te
 
 We have already derived the equation for a single (reduced gravity) shallow water model. Here we will derive, in a slightly more rigorous manner, equations for a series of stacked shallow water models, following the derivation of Ward & Hogg (2011).
 
-We are going to start with the primitive equations [\[eq:momu\]](#eq:momu){reference-type="eqref" reference="eq:momu"}--[\[eq:cont\]](#eq:cont){reference-type="eqref" reference="eq:cont"} transformed into density space. We write this transformation to occurs from $(x,y,z,t) \to (x, y,  \rho, t)$, which
+We are going to start with the primitive equations 
+`[\[eq:momu\]](#eq:momu){reference-type="eqref" reference="eq:momu"}--[\[eq:cont\]](#eq:cont){reference-type="eqref" reference="eq:cont"}` transformed into density space. We write this transformation to occurs from $(x,y,z,t) \to (x, y,  \rho, t)$, which
 gives us 
 
 $\frac{d }{d z} \to \frac{1}{z_\rho} \frac{d }{d \rho}$
@@ -523,10 +521,8 @@ $\label{eq:momlayers}
 where $\mathbf{F}$ are the frictional/viscous terms which we will not worry about here.
 
 Multiply equation
-[\[eq:momlayers\]](#eq:momlayers){reference-type="eqref"
-reference="eq:momlayers"} by $z_\rho$ and add $\mathbf{v}$ times
-[\[eq:layers\]](#eq:layers){reference-type="eqref"
-reference="eq:layers"}:
+`[\[eq:momlayers\]](#eq:momlayers){reference-type="eqref" reference="eq:momlayers"}` by $z_\rho$ and add $\mathbf{v}$ times
+`[\[eq:layers\]](#eq:layers){reference-type="eqref" reference="eq:layers"}`:
 $z_\rho \frac{\partial \mathbf{v}}{\partial t} + \mathbf{v} \frac{\partial z_\rho}{\partial t}  + z_\rho \mathbf{v}\cdot \nabla \mathbf{v}  + \mathbf{v} \nabla \cdot (\mathbf{v}  z_\rho) + f \mathbf{\hat{z}} \times \mathbf{v} z_\rho  = - z_\rho \nabla M + z_\rho \mathbf{F}$
 $\frac{\partial \mathbf{v}z_\rho }{\partial t}   + \nabla \cdot (\mathbf{v}  \mathbf{v}  z_\rho) + f \mathbf{\hat{z}} \times \mathbf{v} z_\rho  = - z_\rho \nabla M + z_\rho \mathbf{F}$
 Now integrate across a region in between two isopycnal surfaces, noting
@@ -535,7 +531,7 @@ $\frac{\partial \mathbf{v}_k h_k }{\partial t}   + \nabla \cdot (\mathbf{v}_k  \
 
 ![StackedLayers](../assets/StackedLayers.png){: style="height:650px;width:900px"}
 
-The hydrostatic equation [\[eq:Mont\]](#eq:Mont){reference-type="eqref" reference="eq:Mont"} can also be integrated in density space to give
+The hydrostatic equation `[\[eq:Mont\]](#eq:Mont){reference-type="eqref" reference="eq:Mont"}` can also be integrated in density space to give
 
 $\int_{\rho_k}^{\rho_{k+1}} \frac{\partial M}{\partial \rho} \, d\rho = M_{k+1} - M_k = \frac{\Delta \rho g z}{\rho_0} = g_k \eta_k$
 
@@ -545,7 +541,7 @@ $M_{k+1} = M_k + g_k \eta_k$
 
 where $g_k = g(\rho_k - \rho_{k-1})/\rho_0$.
 
-We can also integrate [\[eq:layers\]](#eq:layers){reference-type="eqref" reference="eq:layers"} on its own to give
+We can also integrate `[\[eq:layers\]](#eq:layers){reference-type="eqref" reference="eq:layers"}` on its own to give
 
 $\frac{\partial h_k}{\partial t} + \nabla \cdot (\mathbf{v}_k h_k) = 0$
 
