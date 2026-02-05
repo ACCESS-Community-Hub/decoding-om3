@@ -105,9 +105,10 @@ Further information:
  - [NOAA-GFDL MOM6 development guide](https://github.com/NOAA-GFDL/MOM6-examples/wiki/Developers-guide);
  - [MOM6 development presentation](https://www.marshallward.org/mom6workshop/develop.html) by @marshallward.
 
-## How to find code that corresponds to a particular executable (both ACCESS-NRI and other MOM6 executables e.g. from Angus)
+## How to find code that corresponds to a particular executable
 ### ACCESS-NRI executables
-Presenter: @jbisits 
+Presenter: @jbisits.
+
 Scope: where and how to find which model components and source code are used in an OM3 configuration that are built with Spack (this applies to all ACCESS-NRI models).
 
 #### Through ACCESS-NRI release database (friendly)
@@ -169,6 +170,7 @@ For more information and other related steps:
 
 ### COSIMA executables (e.g. `mom6-panan`) 
 Presenter: @angus-g.
+
 Scope: where and how to find which model components and source code are used in a COSIMA configuration built with ninja.
 
 COSIMA made executables use a different build system and way of tracking provenance. Here's an example using the `mom6-panan`. Going to [the relevant line](https://github.com/COSIMA/mom6-panan/blob/master/config.yaml#L17) in the `config.yaml` we have: `exe: /g/data/ik11/inputs/mom6/bin/symmetric_FMS2-e7d09b7`
