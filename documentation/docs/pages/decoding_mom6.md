@@ -211,9 +211,13 @@ More information:
 
 ## How to find what diagnostics are available in MOM6
 Presenter: @dougiesquire.
-If one goes to to a run directory on Gadi, then you can look at `available_diags.000000`. This file tells you:
+If one goes to to a run directory on Gadi, then you can look at `available_diags.000000`. This file tells you all the available diagnostics. For each of the disagnostics it lists, it tells you:
+
  - which diagnostics are `[used]` or ` [Unused]`;
- - can tell you how it's available on different coordinates;
+ - the units;
+ - description of the variable;
+ - name of the variable;
+ - which grid points the diagnostic is output on.
 
 Here's an example:
 ```
