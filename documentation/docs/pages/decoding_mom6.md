@@ -262,6 +262,19 @@ namely `Kh_v`.
 Note that changing CICE outputs involves modifying the relevant namelist: `ice_in` ([here is an example](https://github.com/ACCESS-NRI/access-om3-configs/blob/649e9f4877c1d7ab8caaa8607be8ded96c823648/ice_in#L112)).
 
 ## Overview of MOM6 configuration (input files etc)
+Presenters: @aekiss @claireyung
+
+
+
+Handy resources:
+
+ - ACCESS-NRI's OM3 configurations [live here](https://github.com/acCESS-nri/access-om3-configs);
+ - ACCESS-NRI [ACCESS-OM3 configuration files explanation](https://access-om3-configs.access-hive.org.au/configurations/Overview/); 
+ - [MOM6 runtime parameters format (input.nml, MOM_input)](https://mom6.readthedocs.io/en/main/api/generated/pages/Runtime_Parameter_System.html);
+ - [diag_table](https://mom6.readthedocs.io/en/main/api/generated/pages/Diagnostics.html) ;
+ - [Another explanation of config files from MOM6 regional](https://regional-mom6.readthedocs.io/en/latest/mom6-file-structure-primer.html);
+ - [AOS MOM6 tutorial 2022: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (e.g. ~15 minutes)
+
 ## Searching through the MOM parameter docs and other output, e.g. what’s in what file, how to interpret maxCFL, truncations, warnings, errors
 ## Overview of MOM6 code structure - 
 ## How to contribute code back to MOM6
