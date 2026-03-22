@@ -276,7 +276,7 @@ MOM6 also has an in-built sea-ice model SIS2. An example configuratin is [here](
 
  - `field_table`;
  - `SIS_input` SIS2 input files;
- - `data_table` SIS2 diagnostics.
+ - `data_table` forcing files if using FMS coupler
 
 ACCESS-NRI ACCESS-OM3 uses a different coupler (NUOPC) compared to the above two examples. It also uses a different "standalone" sea-ice model CICE. So whilst the MOM elements discussed above remain the same. Additional files are required for NUOPC to couple the components. 
 
