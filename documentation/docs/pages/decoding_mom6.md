@@ -304,8 +304,73 @@ Handy resources:
  - [Another explanation of config files from MOM6 regional](https://regional-mom6.readthedocs.io/en/latest/mom6-file-structure-primer.html);
  - [AOS MOM6 tutorial 2022: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (e.g. ~15 minutes)
 
+## Overview of MOM6 code structure 
+Presenter: Paul Spence (@PaulSpence)
+Date: 26/03/2026.
+
+Suggested resources in which this presentation was heavily based:
+
+ - [Central MOM6 code](https://github.com/mom-ocean/MOM6);
+ - [ACCESS-NRI MOM6 fork](https://github.com/acCESS-nri/mom6);
+ - [Marshall Ward's talk on the structure of the MOM6 code base](https://www.marshallward.org/mom6workshop/internals.html#/mom6-directory-tree);
+ - [Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4).
+
+Thanks to @ marshallward for some great content!
+ 
+ - `src/` -- model code
+ - `config_src/` -- configurable components
+ - `pkg/` -- code directory but written by other people (eg. TEOS10 equation of state)
+ - `doc/` -- documentation
+ - `ac/` --
+
+The functions that call other model components (e.g NUOPC coupler)
+ - `config_src/drivers`
+ - `solo_driver/`
+
+NUOPC is an example of this.
+
+Other configs
+ - `config_src/memory`
+symmetric, non-symmetric, static
+
+ - `config/src_infra`
+FMS1, FMS2
+ - `config_src/external`
+BGC, data assimilation, python interface, etc.
+
+
+https://github.com/mom-ocean/MOM6/tree/main/src
+
+SRC/
+ - `core/`
+ - `parameterizations`
+ - `tracer`
+ - `ALE`
+ - `diagnostics`
+ - `user`
+
+Also see `framework/`, `equation_of_state/` etc
+
+We then watched a little of this video ([Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4)) focusing on modules.
+
+Module Format. Here's some examples:
+ - https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnostics.F90
+ - https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnose_MLD.F90
+
+
+Marshall suggests that a simple example is the geothermal module ([here](https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90)).
+
+public parts of the interface are the ones that you can call elsewhere (as opposed to private ones that )
+
+https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90#L25
+
+
+Dougie's comment
+Note config_src/external just contains a set of stubs *(dummy interfaces)_ for external codebases that could be used with MOM6.
+
+E.g. there is no actual BGC code in there - that lives in a different repository.
+
 ## Searching through the MOM parameter docs and other output, e.g. what’s in what file, how to interpret maxCFL, truncations, warnings, errors
-## Overview of MOM6 code structure - 
 ## How to contribute code back to MOM6
 # Season 2
 ## Navier Stokes -> stacked shallow water (adiabatic)
