@@ -24,6 +24,10 @@ authors:
     family-names: Gibson
     affiliation: Research School of Earth Sciences, Australian National University, Canberra, Australia
     orcid: 'https://orcid.org/0000-0001-7577-3604'
+  - given-names: Josef I.
+    family-names: Bisits
+    affiliation: School of Biological Earth and Environmental Sciences, The University of New South Wales, Sydney, Australia
+    orcid: 'https://orcid.org/0000-0002-6340-4470'
 repository-code: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 url: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 repository-artifact: >-
