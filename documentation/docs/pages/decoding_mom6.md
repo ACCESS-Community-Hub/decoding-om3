@@ -360,7 +360,7 @@ Module Format. Here's some examples:
  - [MOM_diagnose_MLD](https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnose_MLD.F90);
  - A simple example is the geothermal module ([here](https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90)).
 
-Public parts of the interface are the ones that you can call elsewhere (as opposed to private ones that )
+Public parts of the interface are the ones that you can call elsewhere (as opposed to private ones that you can't)
 
 https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90#L25
 
