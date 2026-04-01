@@ -315,33 +315,34 @@ Suggested resources in which this presentation was heavily based:
  - [Marshall Ward's talk on the structure of the MOM6 code base](https://www.marshallward.org/mom6workshop/internals.html#/mom6-directory-tree);
  - [Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4).
 
-Thanks to @ marshallward for some great content!
+Thanks to @marshallward for some great content!
+
+Looking at the `mom6` [directory](https://github.com/aCCESS-NRI/mom6), we have:
  
- - `src/` -- model code
- - `config_src/` -- configurable components
- - `pkg/` -- code directory but written by other people (eg. TEOS10 equation of state)
- - `doc/` -- documentation
- - `ac/` --
+ - `src/` -- model code;
+ - `config_src/` -- configurable components;
+ - `pkg/` -- code directory but written by other people (eg. TEOS10 equation of state);
+ - `doc/` -- documentation;
+ - `ac/` -- autoconf build.
 
-The functions that call other model components (e.g NUOPC coupler)
- - `config_src/drivers`
- - `solo_driver/`
+See 1 minute 20 in this [Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4) for more details.
 
-NUOPC is an example of this.
+`Config_src` is particurly important. It has functions that call other model components (e.g NUOPC coupler):
 
-Other configs
- - `config_src/memory`
-symmetric, non-symmetric, static
+ - `config_src/drivers`;
+ - `solo_driver/` (example [here](https://github.com/ACCESS-NRI/MOM6/tree/2026.01/config_src/drivers/solo_driver));
+ - [NUOPC](https://github.com/ACCESS-NRI/MOM6/tree/2026.01/config_src/drivers/nuopc_cap) used in OM3 is an example of this.
 
- - `config/src_infra`
-FMS1, FMS2
- - `config_src/external`
-BGC, data assimilation, python interface, etc.
+Other configs are:
 
+ - `config_src/memory` (e.g. [symmetric](https://github.com/ACCESS-NRI/MOM6/tree/2026.01/config_src/memory/dynamic_symmetric), [non-symmetric](https://github.com/ACCESS-NRI/MOM6/tree/2026.01/config_src/memory/dynamic_nonsymmetric), static.)
+ - `config/src_infra` FMS1, FMS2
+ - `config_src/external` BGC, data assimilation, python interface, etc.
 
-https://github.com/mom-ocean/MOM6/tree/main/src
+Note: `config_src/external` just contains a set of stubs (dummy interfaces) for external codebases that could be used with MOM6. For example there is no actual BGC code in there - that lives in a different repository ([here](https://github.com/ACCESS-NRI/GFDL-generic-tracers)).
 
-SRC/
+The `src` folder has model code and has directories:
+
  - `core/`
  - `parameterizations`
  - `tracer`
@@ -354,21 +355,15 @@ Also see `framework/`, `equation_of_state/` etc
 We then watched a little of this video ([Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4)) focusing on modules.
 
 Module Format. Here's some examples:
- - https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnostics.F90
- - https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnose_MLD.F90
 
+ - [MOM_diagnostics](https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnostics.F90);
+ - [MOM_diagnose_MLD](https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnose_MLD.F90);
+ - A simple example is the geothermal module ([here](https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90)).
 
-Marshall suggests that a simple example is the geothermal module ([here](https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90)).
-
-public parts of the interface are the ones that you can call elsewhere (as opposed to private ones that )
+Public parts of the interface are the ones that you can call elsewhere (as opposed to private ones that )
 
 https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90#L25
 
-
-Dougie's comment
-Note config_src/external just contains a set of stubs *(dummy interfaces)_ for external codebases that could be used with MOM6.
-
-E.g. there is no actual BGC code in there - that lives in a different repository.
 
 ## Searching through the MOM parameter docs and other output, e.g. what’s in what file, how to interpret maxCFL, truncations, warnings, errors
 ## How to contribute code back to MOM6
