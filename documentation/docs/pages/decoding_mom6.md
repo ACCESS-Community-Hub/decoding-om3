@@ -375,6 +375,38 @@ Module guidelines:
 Presenter: @chrisb13 and @aekiss
 Date: 02/04/2026
 
+Understanding the MOM6 diag_table.
+
+Resources:
+ - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (30 minutes 57 sec);
+ - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html).
+
+We watched [the video](https://www.youtube.com/watch?v=94m3CMTwJ1E) from Alistair Adcroft (30 minutes 57 sec). Briefly:
+
+3 sections to the diag table:
+
+ - Label (title section) -- required;
+ - Date (title section) -- required -- reference date for realistic models is typically `1900` whereas `0 0 1` is often used in realistic setups;
+ - File section.
+
+In the file section, we have:
+
+> "file_name",  output_freq,  "output_freq_units",  file_format,  "time_axis_units",  "time_axis_name"
+
+Here's an example from Claire Yung `MOM6-examples-z/diag_table` ([link](https://github.com/claireyung/IS-PG-MOM6/blob/main/MOM6-examples-z/diag_table)):
+
+> "GOLD Experiment"
+> 1 1 1 0 0 0
+> #"prog",     300,"seconds",1,"days","Time"
+
+ - "file_name": "prog" (excludes the `.nc` extension)
+ - output_freq: 300
+ - "output_freq_units": "seconds"
+ - file_format: 1 (Always set to 1, meaning netcdf.)
+ - "time_axis_units": "days" (units to use for the time-axis in the file. Valid values are “years”, “months”, “days”, “hours”, “minutes” or “seconds”)
+ - "time_axis_name": "Time" (The name of the time-axis, usually “Time”)
+
+
 ## OM3 runtime output files  (Chris)
 Presenter: @chrisb13 
 Date: 09/04/2026
