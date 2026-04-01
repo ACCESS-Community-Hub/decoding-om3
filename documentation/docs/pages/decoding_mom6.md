@@ -375,21 +375,23 @@ Module guidelines:
 Presenter: @chrisb13 and @aekiss
 Date: 02/04/2026
 
-Understanding the MOM6 diag_table.
+### Understanding the MOM6 diag_table.
+Presenter: @chrisb13 (channeling Alistair Adcroft)
 
 Resources:
- - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (30 minutes 57 sec);
+ - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (31 to 37 minutes);
  - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html).
 
 We watched [the video](https://www.youtube.com/watch?v=94m3CMTwJ1E) from Alistair Adcroft (30 minutes 57 sec). Briefly:
 
-3 sections to the diag table:
+4 parts to the diag table:
 
  - Label (title section) -- required;
  - Date (title section) -- required -- reference date for realistic models is typically `1900` whereas `0 0 1` is often used in realistic setups;
- - File section.
+ - File section -- this section defines an arbitrary number of files that will be created. Each file is limited to a single rate of either sampling or time-averaging;
+ - Field section -- an arbitrary number of lines, one per diagnostic field.
 
-In the file section, we have:
+In the **file** section, we have:
 
 > "file_name",  output_freq,  "output_freq_units",  file_format,  "time_axis_units",  "time_axis_name"
 
@@ -397,15 +399,63 @@ Here's an example from Claire Yung `MOM6-examples-z/diag_table` ([link](https://
 
 > "GOLD Experiment"
 > 1 1 1 0 0 0
-> #"prog",     300,"seconds",1,"days","Time"
+
+Claire [also has](https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L7):
+
+> "prog",     6,"hours",1,"days","Time"
+
+Here's how to interpret this:
 
  - "file_name": "prog" (excludes the `.nc` extension)
- - output_freq: 300
- - "output_freq_units": "seconds"
+ - output_freq: 6
+ - "output_freq_units": "hours"
  - file_format: 1 (Always set to 1, meaning netcdf.)
  - "time_axis_units": "days" (units to use for the time-axis in the file. Valid values are “years”, “months”, “days”, “hours”, “minutes” or “seconds”)
  - "time_axis_name": "Time" (The name of the time-axis, usually “Time”)
 
+In the **field** section, we have:
+
+> "module_name",  "field_name",  "output_name",  "file_name",  "time_sampling",  "reduction_method",  "regional_section",  packing
+
+ - module_name: Name of the component model. 
+ - field_name: The name of the variable as registered in the model.
+ - output_name: The name of the variable as it will appear in the file.
+ - file_name: One of the files defined above in the section File section (a target).
+ - time_sampling: Always set to “all”.
+ - reduction_method: “none” means sample or snapshot. “average” or “mean” performs a time-average. “min” or “max” diagnose the minium or maxium over each time period.
+ - regional_section: “lon_min lon_max lat_min lat_max vert_min vert_max” limits the diagnostic to a region (“none” means global output).
+ - packing: Data representation in the file. 1 means “real*8”, 2 means “real*4”, 4 mean 16-bit integers, 8 means 1-byte.
+
+
+https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L22-L33
+
+Picking up on Claire's example from earlier, we have several fields that will end up in the `prog.nc` file, namely:
+
+Claire [also has](https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L7):
+
+> "ocean_model","u","u","prog","all",.false.,"none",1
+> "ocean_model","v","v","prog","all",.false.,"none",1
+> "ocean_model","h","h","prog","all",.false.,"none",1
+> "ocean_model","temp","temp","prog","all",.false.,"none",2
+> "ocean_model","salt","salt","prog","all",.false.,"none",2
+
+So taking the first one as an example:
+
+ - module_name: Name of the component model. 
+ - field_name: we will output the variable `u`.
+ - output_name: when we output `u`, we'll call it `u`.
+ - file_name: target file is "prog".
+ - time_sampling: here it is “all” but this could be "mean" (note that you cannot mix and match within a file, nor can you have different frequencies).
+ - reduction_method: `.false.` means no time reduction.
+ - regional_section: “none” means no limited region.
+ - packing: 2 means “real*4”
+
+More examples [here](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html#example).
+
+Also, from earlier sessions recall that the list of available diagnostics is dependent on the particular configuration of the model. For this reason the model writes a record of the available diagnostic fields at run-time into a file “available_diags", [here's an example](https://github.com/ACCESS-NRI/access-om3-configs/blob/release-MC_25km_jra_iaf/docs/available_diags.000000) from ACCESS-OM3.
+
+### Using the COSIMA created `make_diag_table` workflow.
+Presenter: @aekiss
 
 ## OM3 runtime output files  (Chris)
 Presenter: @chrisb13 
