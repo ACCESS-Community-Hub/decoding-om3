@@ -319,19 +319,20 @@ Thanks to @marshallward for some great content!
 
 Looking at the `mom6` [directory](https://github.com/aCCESS-NRI/mom6), we have:
  
- - `src/` -- model code;
+ - `src/` -- model code and dynamical core solvers;
  - `config_src/` -- configurable components;
- - `pkg/` -- code directory but written by other people (eg. TEOS10 equation of state);
+ - `pkg/` -- code directory but written by other people (eg. TEOS10 equation of state) linked into `src/`;
  - `doc/` -- documentation;
- - `ac/` -- autoconf build.
+ - `ac/` -- autoconf build (build the model without mkf).
 
 See 1 minute 20 in this [Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4) for more details.
 
 `Config_src` is particurly important. It has functions that call other model components (e.g NUOPC coupler):
 
  - `config_src/drivers`;
- - `solo_driver/` (example [here](https://github.com/ACCESS-NRI/MOM6/tree/2026.01/config_src/drivers/solo_driver));
+ - `solo_driver/` ocean-only (example [here](https://github.com/ACCESS-NRI/MOM6/tree/2026.01/config_src/drivers/solo_driver));
  - [NUOPC](https://github.com/ACCESS-NRI/MOM6/tree/2026.01/config_src/drivers/nuopc_cap) used in OM3 is an example of this.
+ - other drivers (e.g. `ice_solo_driver` and `FMS_cap`)
 
 Other configs are:
 
@@ -339,31 +340,36 @@ Other configs are:
  - `config/src_infra` FMS1, FMS2
  - `config_src/external` BGC, data assimilation, python interface, etc.
 
-Note: `config_src/external` just contains a set of stubs (dummy interfaces) for external codebases that could be used with MOM6. For example there is no actual BGC code in there - that lives in a different repository ([here](https://github.com/ACCESS-NRI/GFDL-generic-tracers)).
+Note: `config_src/external` just contains a set of dummy interfaces for external codebases that could be used with MOM6. For example there is no actual BGC code in as that lives in a different repository ([here](https://github.com/ACCESS-NRI/GFDL-generic-tracers)).
 
 The `src` folder has model code and has directories:
 
- - `core/`
- - `parameterizations`
- - `tracer`
- - `ALE`
- - `diagnostics`
- - `user`
+ - `core/` -- main solvers such as initialisation and time-stepping 
+ - `parameterizations` -- viscosity, mixing and diabatic
+ - `tracer` -- tracer dynamics 
+ - `ALE` -- vertical remapping
+ - `diagnostics` -- diagnostic management
+ - `user` -- preset focing and topography
 
 Also see `framework/`, `equation_of_state/` etc
 
-We then watched a little of this video ([Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4)) focusing on modules.
+We then watched a little of this video ([Overview: MOM6 internals](https://www.youtube.com/watch?v=E8WKrESscc4)) focusing on modules, starting at 10 minutes.
 
-Module Format. Here's some examples:
+Module guidelines:
+
+ - "1 file per module rule".
+ - explicit about dependencies (improve readability).
+ - explicit about which functions are exposed publicly.
+ - has object-like programming structures.
+ - we don't put variables in modules. This is to ensure that we don't have global variables.
+ - this rightward facing arrow `!>` shows what is being documents. (You'll notice there are also `!<`.).
+ - Public parts of the interface are the ones that you can call elsewhere (as opposed to private ones that you can't). [Here an example](https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90#L25) of public subroutines.
+ 
+ Here's some examples:
 
  - [MOM_diagnostics](https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnostics.F90);
  - [MOM_diagnose_MLD](https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnose_MLD.F90);
  - A simple example is the geothermal module ([here](https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90)).
-
-Public parts of the interface are the ones that you can call elsewhere (as opposed to private ones that you can't)
-
-https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90#L25
-
 
 ## Searching through the MOM parameter docs and other output, e.g. what’s in what file, how to interpret maxCFL, truncations, warnings, errors
 ## How to contribute code back to MOM6
