@@ -371,8 +371,22 @@ Module guidelines:
  - [MOM_diagnose_MLD](https://github.com/mom-ocean/MOM6/blob/main/src/diagnostics/MOM_diagnose_MLD.F90);
  - A simple example is the geothermal module ([here](https://github.com/mom-ocean/MOM6/blob/08529ba87ea4ee6403446afc0c8b14f744f79c58/src/parameterizations/vertical/MOM_geothermal.F90)).
 
-## Searching through the MOM parameter docs and other output, e.g. what’s in what file, how to interpret maxCFL, truncations, warnings, errors
-## How to contribute code back to MOM6
+## Specifying model outputs via `diag_table` or `make_diag_table`
+Presenter: @chrisb13 and @aekiss
+Date: 02/04/2026
+
+## OM3 runtime output files  (Chris)
+Presenter: @chrisb13 
+Date: 09/04/2026
+
+## Interpreting OM3 maxCFL, truncations, warnings, errors (Helen)
+Presenter: @ helenmacdonald 
+Date: 16/04/2026
+
+## How to contribute code back to MOM6 
+Presenter: @ jbisits and @ dougiesquire 
+Date: 23/04/2026
+
 # Season 2
 ## Navier Stokes -> stacked shallow water (adiabatic)
 ## Generalised vertical coordinates
