@@ -380,9 +380,11 @@ Presenter: @chrisb13 (channeling Alistair Adcroft)
 
 Resources:
  - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (31 to 37 minutes);
- - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html).
+ - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html);
+ - [ACCESS hive docs configuration MOM6 diagnostics](configuring-mom6-diagnostics);
+ - [earlier presentation from @dougiesquire]().
 
-We watched [the video](https://www.youtube.com/watch?v=94m3CMTwJ1E) from Alistair Adcroft (30 minutes 57 sec). Briefly:
+Check out [the video](https://www.youtube.com/watch?v=94m3CMTwJ1E) from Alistair Adcroft (30 minutes 57 sec). Briefly:
 
 4 parts to the diag table:
 
@@ -429,14 +431,16 @@ In the **field** section, we have:
 
 https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L22-L33
 
-Picking up on Claire's example from earlier, we have several fields that will end up in the `prog.nc` file, namely:
-
-Claire [also has](https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L7):
+Picking up on Claire's example from earlier, [we have several fields](https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L22-L33) that will end up in the `prog.nc` file ([defined here](https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L7)), namely:
 
 > "ocean_model","u","u","prog","all",.false.,"none",1
+ 
 > "ocean_model","v","v","prog","all",.false.,"none",1
+ 
 > "ocean_model","h","h","prog","all",.false.,"none",1
+ 
 > "ocean_model","temp","temp","prog","all",.false.,"none",2
+
 > "ocean_model","salt","salt","prog","all",.false.,"none",2
 
 So taking the first one as an example:
