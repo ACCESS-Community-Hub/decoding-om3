@@ -383,7 +383,7 @@ Resources:
  - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (31 to 37 minutes);
  - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html);
  - [ACCESS hive docs configuration MOM6 diagnostics](configuring-mom6-diagnostics);
- - [Earlier presentation from @dougiesquire](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-add-a-diagnostic).
+ - [Dougie on adding diagnostics](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-add-a-diagnostic).
 
 Check out [the video](https://www.youtube.com/watch?v=94m3CMTwJ1E) from Alistair Adcroft (30 minutes 57 sec). Briefly:
 
