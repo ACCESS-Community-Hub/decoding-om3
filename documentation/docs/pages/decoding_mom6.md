@@ -375,6 +375,21 @@ Module guidelines:
 Presenter: @chrisb13 and @aekiss
 Date: 02/04/2026
 
+Understanding the MOM6 diag_table.
+
+Resources:
+ - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (30 minutes 57 sec);
+ - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html).
+
+We watched [the video](https://www.youtube.com/watch?v=94m3CMTwJ1E) from Alistair Adcroft (30 minutes 57 sec). Briefly:
+
+3 sections to the diag table:
+ - Label (title section) -- required;
+ - Date (title section) -- required -- reference date for realistic models is typically `1900` whereas `0 0 1`;
+ - File section
+
+
+
 ## OM3 runtime output files  (Chris)
 Presenter: @chrisb13 
 Date: 09/04/2026
