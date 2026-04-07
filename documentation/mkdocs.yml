@@ -55,29 +55,16 @@ theme:
 copyright: Copyright &copy; 2025 ACCESS-NRI
 
 plugins:
-#  - include-configuration-stubs:
-#      repo: ACCESS-NRI/Inside-MOM6
-#      main_website:
-#        pattern: "dev-* release-*"
-#        ref_type: branch
-#      preview_website:
-#        pattern: ""
-#        ref_type: branch
-#      stubs_parent_url: pages/configurations
-#      stubs_nav_path: Configurations
-#      stubs_dir: documentation/stub
-
   - git-revision-date-localized:
       type: date
       enable_creation_date: false
   - search:
       separator: '[\s\-,:!=\[\]()"/]+|(?!\b)(?=[A-Z][a-z])|\.(?!\d)|&[lg]t;'
-  - macros
   - bibtex:
       bib_file: references.bib
       csl_file: https://raw.githubusercontent.com/citation-style-language/styles/26eccff9e537f71494a4da7b91afac1adf571dc9/apa.csl
-  - events:
-      events_dir: community_resources/events/events
+  - resolve-absolute-urls
+  - macros
 
 markdown_extensions: 
   - attr_list
