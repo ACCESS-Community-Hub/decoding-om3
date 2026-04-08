@@ -461,6 +461,57 @@ Also, from earlier sessions recall that the list of available diagnostics is dep
 ### Using the COSIMA created `make_diag_table` workflow.
 Presenter: @aekiss
 
+[`make_diag_table`](https://github.com/COSIMA/make_diag_table) is a script that generates a `diag_table` file from a YAML file `diag_table_source.yaml`.
+It can be run with
+```
+python /g/data/vk83/apps/make_diag_table/make_diag_table.py
+```
+which reads `diag_table_source.yaml` and writes `diag_table`, overwriting it if it already exists.
+`diag_table_source.yaml` covers every feature of `diag_table`, so when using `make_diag_table` the normal practice is to only edit `diag_table_source.yaml`.
+
+Why use `make_diag_table`? In ACCESS-OM2 and ACCESS-OM3 we often want to save one file per variable, using an informative and standardised filename convention, e.g.
+```
+ocean-2d-surface_salt-1-daily-mean-ym_1958_01.nc
+ocean-2d-surface_salt-1-monthly-mean-ym_1958_01.nc
+ocean-2d-surface_temp-1-daily-mean-ym_1958_01.nc
+ocean-2d-surface_temp-1-monthly-mean-ym_1958_01.nc
+ocean-2d-surface_temp-1-monthly-min-ym_1958_01.nc
+ocean-2d-swflx-1-monthly-mean-ym_1958_01.nc
+ocean-2d-tau_x-1-monthly-mean-ym_1958_01.nc
+ocean-2d-tau_y-1-monthly-mean-ym_1958_01.nc
+ocean-2d-temp_int_rhodz-1-monthly-mean-ym_1958_01.nc
+ocean-2d-temp_xflux_adv_int_z-1-monthly-mean-ym_1958_01.nc
+ocean-2d-temp_yflux_adv_int_z-1-monthly-mean-ym_1958_01.nc
+ocean-2d-tx_trans_int_z-1-monthly-mean-ym_1958_01.nc
+ocean-2d-wfiform-1-monthly-mean-ym_1958_01.nc
+ocean-2d-wfimelt-1-monthly-mean-ym_1958_01.nc
+ocean-3d-age_global-1-monthly-mean-ym_1958_01.nc
+ocean-3d-buoyfreq2_wt-1-monthly-mean-ym_1958_01.nc
+ocean-3d-diff_cbt_t-1-monthly-mean-ym_1958_01.nc
+ocean-3d-dzt-1-monthly-mean-ym_1958_01.nc
+ocean-3d-pot_rho_0-1-monthly-mean-ym_1958_01.nc
+ocean-3d-pot_rho_2-1-monthly-mean-ym_1958_01.nc
+ocean-3d-pot_temp-1-monthly-mean-ym_1958_01.nc
+ocean-3d-salt-1-monthly-mean-ym_1958_01.nc
+ocean-3d-temp-1-monthly-mean-ym_1958_01.nc
+```
+This would involve a lot of repetitious and error-prone fiddling around if done by hand within `diag_table`. `make_diag_table` solves this problem by allowing you to specify a standardised file name convention and automatically generate file names for each variable you save.
+
+Here's [an example `diag_table_source.yaml`](https://github.com/COSIMA/make_diag_table/blob/master/diag_table_source.yaml). It is thoroughly commented and should be fairly intelligible.
+
+It is in two sections:
+- `global_defaults` which sets the defaults used for every file and field unless overridden in `defaults` in the `diag_table` section
+  - the `file_name` list the components which are concatenated to form a standardised filename; their values are defined below
+- `diag_table` which defines the diagnostics to appear in the generated `diag_table`
+  - These are grouped together in categories, which are variables that have a common set of parameters (such as `reduction_method` or `output_freq`) defined in `defaults` (which override `global_defaults`)
+    - within each category, `fields` is a dictionary containing all the variables in that category.
+
+**So to add an output field to an existing category, all you need to do is add its name to the `fields` dictionary and run**
+```
+python /g/data/vk83/apps/make_diag_table/make_diag_table.py
+```
+This will update `diag_table` to have new file and field entries, with a standardised file name.
+
 ## OM3 runtime output files  (Chris)
 Presenter: @chrisb13 
 Date: 09/04/2026
