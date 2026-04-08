@@ -551,7 +551,12 @@ datastore.json                                    output007      output018  outp
 error_logs                                        output008      output019  output030  output041  output052  restart005  restart016  restart027  restart038  restart049
 ```
 
-(More run details [available here](https://access-om3-configs.access-hive.org.au/Experiments/).)
+(Further details about these simulations is [available here](https://access-om3-configs.access-hive.org.au/Experiments/).)
+
+Things to cover:
+
+ - look at existing diag_table
+ - look at output files naming, internals
 
 ## Interpreting OM3 maxCFL, truncations, warnings, errors (Helen)
 Presenter: @ helenmacdonald 
