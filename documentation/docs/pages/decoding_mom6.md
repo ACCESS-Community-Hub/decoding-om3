@@ -380,23 +380,23 @@ Presenter: @chrisb13 (channeling Alistair Adcroft)
 
 Resources:
 
- - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E) (31 to 37 minutes);
+ - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E&t=1800s) (31 to 37 minutes);
  - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html);
  - [ACCESS hive docs configuration MOM6 diagnostics](configuring-mom6-diagnostics);
  - [Dougie on adding diagnostics](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-add-a-diagnostic).
 
-Check out [the video](https://www.youtube.com/watch?v=94m3CMTwJ1E) from Alistair Adcroft (30 minutes 57 sec). Briefly:
-
 4 parts to the diag table:
 
  - Label (title section) -- required;
- - Date (title section) -- required -- reference date for realistic models is typically `1900` whereas `0 0 1` is often used in realistic setups;
+ - Date (title section) -- required -- reference date (year month day hour minute second) for realistic models is typically `1900 1 1 0 0 0` whereas `1 1 1 0 0 0` is often used in idealised setups;
  - File section -- this section defines an arbitrary number of files that will be created. Each file is limited to a single rate of either sampling or time-averaging;
  - Field section -- an arbitrary number of lines, one per diagnostic field.
 
 In the **file** section, we have:
 
 > "file_name",  output_freq,  "output_freq_units",  file_format,  "time_axis_units",  "time_axis_name"
+
+plus optional extras (see [MOM6 docs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html#file-section)).
 
 Here's an example from Claire Yung `MOM6-examples-z/diag_table` ([link](https://github.com/claireyung/IS-PG-MOM6/blob/main/MOM6-examples-z/diag_table)):
 
@@ -425,10 +425,9 @@ In the **field** section, we have:
  - output_name: The name of the variable as it will appear in the file.
  - file_name: One of the files defined above in the section File section (a target).
  - time_sampling: Always set to “all”.
- - reduction_method: “none” means sample or snapshot. “average” or “mean” performs a time-average. “min” or “max” diagnose the minium or maxium over each time period.
+ - reduction_method: “none” means sample or snapshot. “average” or “mean” performs a time-average. “min” or “max” diagnose the minimum or maximum over each time period. [Other options](https://github.com/mom-ocean/MOM5/blob/6bdbdd4892543bbade921fa3224b2530d93c6f40/src/shared/diag_manager/diag_table.F90#L169-L182) are also available.
  - regional_section: “lon_min lon_max lat_min lat_max vert_min vert_max” limits the diagnostic to a region (“none” means global output).
- - packing: Data representation in the file. 1 means “real*8”, 2 means “real*4”, 4 mean 16-bit integers, 8 means 1-byte.
-
+ - packing: Data representation in the file. 1 means double precision (64 bit real), 2 means single precision (32 bit real), 4 means packed 16-bit integers, 8 means packed 1-byte.
 
 https://github.com/claireyung/IS-PG-MOM6/blob/3ba9863f52e075a3f588c34406d03f2b22c85fe8/MOM6-examples-z/diag_table#L22-L33
 
@@ -453,7 +452,7 @@ So taking the first one as an example:
  - time_sampling: here it is “all” but this could be "mean" (note that you cannot mix and match within a file, nor can you have different frequencies).
  - reduction_method: `.false.` means no time reduction.
  - regional_section: “none” means no limited region.
- - packing: 2 means “real*4”
+ - packing: 2 means “real*4” (single precision)
 
 More examples [here](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html#example).
 
