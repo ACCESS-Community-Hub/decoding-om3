@@ -382,7 +382,7 @@ Resources:
 
  - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E&t=1860s) (31 to 37 minutes);
  - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html);
- - [ACCESS hive docs configuration MOM6 diagnostics](configuring-mom6-diagnostics);
+ - [ACCESS hive docs configuration MOM6 diagnostics](https://docs.access-hive.org.au/models/run_a_model/run_access-om3/#configuring-mom6-diagnostics);
  - [Dougie on adding diagnostics](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-add-a-diagnostic).
 
 4 parts to the diag table:
