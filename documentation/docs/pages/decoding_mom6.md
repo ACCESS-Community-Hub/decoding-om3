@@ -517,10 +517,41 @@ This will update `diag_table` to have new file and field entries, with a standar
 Presenter: @chrisb13 
 Date: 09/04/2026
 
+Here are two different ways to visualise the C-grid that is used by MOM6. 
+
+1. The first way shows both the horizontal and vertical staggering:
+
+![C-grid from XGCM docs](../assets/grid2d_hv.svg)
+
+*Image from the [pycomodo project](https://web.archive.org/web/20160417032300/http://pycomodo.forge.imag.fr/norm.html).*
+
+Note that the tracers, velocties and vorticity points are horizontally staggered.
+
+2. We now focus on the notation that is used in the MOM6 documentation:
+
 ![MOM6 grid](../assets/mom6grid.png)
 
+*Image from the [MOM6 RTD](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Discrete_Grids.html).*
 
+Looking at output from a recent dev `MC_25km_jra_iaf-1.0-beta-5165c0f8` [experiment](https://github.com/ACCESS-Community-Hub/access-om3-experiments/tree/MC_25km_jra_iaf-1.0-beta-5165c0f8) we have:
 
+```bash
+[gadi-login-04: MC_25km_jra_iaf-1.0-beta-5165c0f8]$ cd /g/data/ol01/outputs/access-om3-25km/MC_25km_jra_iaf-1.0-beta-5165c0f8/
+[gadi-login-04: MC_25km_jra_iaf-1.0-beta-5165c0f8]$ ls
+datastore.csv                                     git-runlog     output009  output020  output031  output042  output053   restart006  restart017  restart028  restart039  restart050
+datastore_invalid_assets_2025-12-11-14:49:23.csv  metadata.yaml  output010  output021  output032  output043  output054   restart007  restart018  restart029  restart040  restart051
+datastore_invalid_assets_2025-12-12-10:15:36.csv  output000      output011  output022  output033  output044  output055   restart008  restart019  restart030  restart041  restart052
+datastore_invalid_assets_2025-12-15-14:14:40.csv  output001      output012  output023  output034  output045  output056   restart009  restart020  restart031  restart042  restart053
+datastore_invalid_assets_2025-12-16-05:19:19.csv  output002      output013  output024  output035  output046  pbs_logs    restart010  restart021  restart032  restart043  restart054
+datastore_invalid_assets_2025-12-17-13:33:13.csv  output003      output014  output025  output036  output047  restart000  restart011  restart022  restart033  restart044  restart055
+datastore_invalid_assets_2025-12-18-11:17:27.csv  output004      output015  output026  output037  output048  restart001  restart012  restart023  restart034  restart045  restart056
+datastore_invalid_assets_2025-12-19-08:47:53.csv  output005      output016  output027  output038  output049  restart002  restart013  restart024  restart035  restart046
+datastore_invalid_assets_2026-01-08-14:43:25.csv  output006      output017  output028  output039  output050  restart003  restart014  restart025  restart036  restart047
+datastore.json                                    output007      output018  output029  output040  output051  restart004  restart015  restart026  restart037  restart048
+error_logs                                        output008      output019  output030  output041  output052  restart005  restart016  restart027  restart038  restart049
+```
+
+(More run details [available here](https://access-om3-configs.access-hive.org.au/Experiments/).)
 
 ## Interpreting OM3 maxCFL, truncations, warnings, errors (Helen)
 Presenter: @ helenmacdonald 
