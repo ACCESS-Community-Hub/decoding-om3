@@ -517,6 +517,9 @@ This will update `diag_table` to have new file and field entries, with a standar
 Presenter: @chrisb13 
 Date: 09/04/2026
 
+![MOM6 grid](../assets/mom6grid.png)
+
+
 
 
 ## Interpreting OM3 maxCFL, truncations, warnings, errors (Helen)

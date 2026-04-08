@@ -10,7 +10,7 @@ A possible path forward from @AndyHoggANU and @chrisb13:
 
 **Contributions from people of all career stages and backgrounds are highly encouraged.** All these models and configurations are developed are open source. Development is led by the [COSIMA working group](https://cosima.org.au/) and ACCESS-NRI and where we follow an open model.
 
-Contributors so far include: Christopher Bull (ACCESS-NRI), Andy Hogg (ACCESS-NRI).
+Contributors so far include: Christopher Bull (ACCESS-NRI), Andy Hogg (ACCESS-NRI), Paige E. Martin (ACCESS-NRI), Angus H. Gibson (ANU), Josef I. Bisits (UNSW), Claire Yung (ANU), Dougal Squire (ACCESS-NRI), Andrew Kiss (ANU).
 
 ### Report a typo or make a suggestion
 
