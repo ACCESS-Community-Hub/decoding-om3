@@ -380,7 +380,7 @@ Presenter: @chrisb13 (channeling Alistair Adcroft)
 
 Resources:
 
- - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E&t=1800s) (31 to 37 minutes);
+ - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E&t=1860s) (31 to 37 minutes);
  - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html);
  - [ACCESS hive docs configuration MOM6 diagnostics](configuring-mom6-diagnostics);
  - [Dougie on adding diagnostics](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-add-a-diagnostic).
@@ -500,6 +500,7 @@ This would involve a lot of repetitious and error-prone fiddling around if done 
 Here's [an example `diag_table_source.yaml`](https://github.com/COSIMA/make_diag_table/blob/master/diag_table_source.yaml). It is thoroughly commented and should be fairly intelligible.
 
 It is in two sections:
+
 - `global_defaults` which sets the defaults used for every file and field unless overridden in `defaults` in the `diag_table` section
   - the `file_name` list the components which are concatenated to form a standardised filename; their values are defined below
 - `diag_table` which defines the diagnostics to appear in the generated `diag_table`
