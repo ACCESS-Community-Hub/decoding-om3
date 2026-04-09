@@ -722,21 +722,219 @@ We need to understand how MOM6's grid is defined.
 
 Here are two different ways to visualise the C-grid that is used by MOM6. 
 
-1. The first way shows both the horizontal and vertical staggering:
+- The first way shows both the horizontal and vertical staggering. Note that the tracers, velocities and vorticity points are horizontally and vertically staggered:
 
 ![C-grid from XGCM docs](../assets/grid2d_hv.svg)
 
 *Image from the [pycomodo project](https://web.archive.org/web/20160417032300/http://pycomodo.forge.imag.fr/norm.html).*
 
-Note that the tracers, velocties and vorticity points are horizontally staggered.
-
-2. We now focus on the notation that is used in the MOM6 documentation:
+- The second grid visualisation, focuses on the horizontal, and uses the the notation that is used in the MOM6 documentation:
 
 ![MOM6 grid](../assets/mom6grid.png)
 
 *Image from the [MOM6 RTD](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Discrete_Grids.html).*
 
 We can find complete information about the MOM6 grid in this file `access-om3.mom6.static.nc`. This is *very* important when you want to do offline model diagnostics accurately (e.g. fluxes across sections, calculate gradients, integrals etc).
+
+The file has a lot of useful information, so we'll look at it in chunks.
+
+```bash
+[gadi-login-06: output030]$ ncdump -c access-om3.mom6.static.nc | head -n220
+netcdf access-om3.mom6.static {
+dimensions:
+        xh = 1440 ;
+        yh = 1152 ;
+        time = UNLIMITED ; // (1 currently)
+        xq = 1441 ;
+        yq = 1153 ;
+variables:
+        double xh(xh) ;
+                xh:units = "degrees_east" ;
+                xh:long_name = "h point nominal longitude" ;
+                xh:axis = "X" ;
+        double yh(yh) ;
+                yh:units = "degrees_north" ;
+                yh:long_name = "h point nominal latitude" ;
+                yh:axis = "Y" ;
+        double xq(xq) ;
+                xq:units = "degrees_east" ;
+                xq:long_name = "q point nominal longitude" ;
+                xq:axis = "X" ;
+        double yq(yq) ;
+                yq:units = "degrees_north" ;
+                yq:long_name = "q point nominal latitude" ;
+                yq:axis = "Y" ;
+```
+
+Think of the above as "indices" for the Tracer and velocity points. Once, we have these we can then define latitude (`geolat_*`) and longitude (`geolon_*`) anywhere on the C-grid...
+
+```bash
+        double geolat_c(yq, xq) ;
+                geolat_c:_FillValue = 1.e+20 ;
+                geolat_c:missing_value = 1.e+20 ;
+                geolat_c:units = "degrees_north" ;
+                geolat_c:long_name = "Latitude of corner (Bu) points" ;
+                geolat_c:cell_methods = "time: point" ;
+                geolat_c:interp_method = "none" ;
+        double geolat(yh, xh) ;
+                geolat:_FillValue = 1.e+20 ;
+                geolat:missing_value = 1.e+20 ;
+                geolat:units = "degrees_north" ;
+                geolat:long_name = "Latitude of tracer (T) points" ;
+                geolat:cell_methods = "time: point" ;
+        double geolat_u(yh, xq) ;
+                geolat_u:_FillValue = 1.e+20 ;
+                geolat_u:missing_value = 1.e+20 ;
+                geolat_u:units = "degrees_north" ;
+                geolat_u:long_name = "Latitude of zonal velocity (Cu) points" ;
+                geolat_u:cell_methods = "time: point" ;
+                geolat_u:interp_method = "none" ;
+        double geolat_v(yq, xh) ;
+                geolat_v:_FillValue = 1.e+20 ;
+                geolat_v:missing_value = 1.e+20 ;
+                geolat_v:units = "degrees_north" ;
+                geolat_v:long_name = "Latitude of meridional velocity (Cv) points" ;
+                geolat_v:cell_methods = "time: point" ;
+                geolat_v:interp_method = "none" ;
+        double geolon_c(yq, xq) ;
+                geolon_c:_FillValue = 1.e+20 ;
+                geolon_c:missing_value = 1.e+20 ;
+                geolon_c:units = "degrees_east" ;
+                geolon_c:long_name = "Longitude of corner (Bu) points" ;
+                geolon_c:cell_methods = "time: point" ;
+                geolon_c:interp_method = "none" ;
+        double geolon(yh, xh) ;
+                geolon:_FillValue = 1.e+20 ;
+                geolon:missing_value = 1.e+20 ;
+                geolon:units = "degrees_east" ;
+                geolon:long_name = "Longitude of tracer (T) points" ;
+                geolon:cell_methods = "time: point" ;
+        double geolon_u(yh, xq) ;
+                geolon_u:_FillValue = 1.e+20 ;
+                geolon_u:missing_value = 1.e+20 ;
+                geolon_u:units = "degrees_east" ;
+                geolon_u:long_name = "Longitude of zonal velocity (Cu) points" ;
+                geolon_u:cell_methods = "time: point" ;
+                geolon_u:interp_method = "none" ;
+        double geolon_v(yq, xh) ;
+                geolon_v:_FillValue = 1.e+20 ;
+                geolon_v:missing_value = 1.e+20 ;
+                geolon_v:units = "degrees_east" ;
+                geolon_v:long_name = "Longitude of meridional velocity (Cv) points" ;
+                geolon_v:cell_methods = "time: point" ;
+                geolon_v:interp_method = "none" ;
+```
+
+The `areacello` variables (e.g. calculating fluxes through a face):
+
+```bash
+        double areacello(yh, xh) ;
+                areacello:_FillValue = 1.e+20 ;
+                areacello:missing_value = 1.e+20 ;
+                areacello:units = "m2" ;
+                areacello:long_name = "Ocean Grid-Cell Area" ;
+                areacello:cell_methods = "area:sum yh:sum xh:sum time: point" ;
+                areacello:standard_name = "cell_area" ;
+        double areacello_cu(yh, xq) ;
+                areacello_cu:_FillValue = 1.e+20 ;
+                areacello_cu:missing_value = 1.e+20 ;
+                areacello_cu:units = "m2" ;
+                areacello_cu:long_name = "Ocean Grid-Cell Area" ;
+                areacello_cu:cell_methods = "area:sum yh:sum xq:sum time: point" ;
+                areacello_cu:standard_name = "cell_area" ;
+        double areacello_cv(yq, xh) ;
+                areacello_cv:_FillValue = 1.e+20 ;
+                areacello_cv:missing_value = 1.e+20 ;
+                areacello_cv:units = "m2" ;
+                areacello_cv:long_name = "Ocean Grid-Cell Area" ;
+                areacello_cv:cell_methods = "area:sum yq:sum xh:sum time: point" ;
+                areacello_cv:standard_name = "cell_area" ;
+        double areacello_bu(yq, xq) ;
+                areacello_bu:_FillValue = 1.e+20 ;
+                areacello_bu:missing_value = 1.e+20 ;
+                areacello_bu:units = "m2" ;
+                areacello_bu:long_name = "Ocean Grid-Cell Area" ;
+                areacello_bu:cell_methods = "area:sum yq:sum xq:sum time: point" ;
+                areacello_bu:standard_name = "cell_area" ;
+```
+
+The `dx*` and `dy*` variables (e.g. calculating fluxes through a section, calculating gradients, integrals etc):
+
+![C-grid metrics from MOM6 docs](../assets/Grid_metrics.png)
+
+```bash
+        double dxt(yh, xh) ;
+                dxt:_FillValue = 1.e+20 ;
+                dxt:missing_value = 1.e+20 ;
+                dxt:units = "m" ;
+                dxt:long_name = "Delta(x) at thickness/tracer points (meter)" ;
+                dxt:cell_methods = "time: point" ;
+                dxt:interp_method = "none" ;
+        double dyt(yh, xh) ;
+                dyt:_FillValue = 1.e+20 ;
+                dyt:missing_value = 1.e+20 ;
+                dyt:units = "m" ;
+                dyt:long_name = "Delta(y) at thickness/tracer points (meter)" ;
+                dyt:cell_methods = "time: point" ;
+                dyt:interp_method = "none" ;
+        double dxCu(yh, xq) ;
+                dxCu:_FillValue = 1.e+20 ;
+                dxCu:missing_value = 1.e+20 ;
+                dxCu:units = "m" ;
+                dxCu:long_name = "Delta(x) at u points (meter)" ;
+                dxCu:cell_methods = "time: point" ;
+                dxCu:interp_method = "none" ;
+        double dyCu(yh, xq) ;
+                dyCu:_FillValue = 1.e+20 ;
+                dyCu:missing_value = 1.e+20 ;
+                dyCu:units = "m" ;
+                dyCu:long_name = "Delta(y) at u points (meter)" ;
+                dyCu:cell_methods = "time: point" ;
+                dyCu:interp_method = "none" ;
+        double dxCv(yq, xh) ;
+                dxCv:_FillValue = 1.e+20 ;
+                dxCv:missing_value = 1.e+20 ;
+                dxCv:units = "m" ;
+                dxCv:long_name = "Delta(x) at v points (meter)" ;
+                dxCv:cell_methods = "time: point" ;
+                dxCv:interp_method = "none" ;
+        double dyCv(yq, xh) ;
+                dyCv:_FillValue = 1.e+20 ;
+                dyCv:missing_value = 1.e+20 ;
+                dyCv:units = "m" ;
+                dyCv:long_name = "Delta(y) at v points (meter)" ;
+                dyCv:cell_methods = "time: point" ;
+                dyCv:interp_method = "none" ;
+        double dyCuo(yh, xq) ;
+                dyCuo:_FillValue = 1.e+20 ;
+                dyCuo:missing_value = 1.e+20 ;
+                dyCuo:units = "m" ;
+                dyCuo:long_name = "Open meridional grid spacing at u points (meter)" ;
+                dyCuo:cell_methods = "time: point" ;
+                dyCuo:interp_method = "none" ;
+        double dxCvo(yq, xh) ;
+                dxCvo:_FillValue = 1.e+20 ;
+                dxCvo:missing_value = 1.e+20 ;
+                dxCvo:units = "m" ;
+                dxCvo:long_name = "Open zonal grid spacing at v points (meter)" ;
+                dxCvo:cell_methods = "time: point" ;
+                dxCvo:interp_method = "none" ;
+        double deptho(yh, xh) ;
+                deptho:_FillValue = 1.e+20 ;
+                deptho:missing_value = 1.e+20 ;
+                deptho:units = "m" ;
+                deptho:long_name = "Sea Floor Depth" ;
+                deptho:cell_methods = "area:mean yh:mean xh:mean time: point" ;
+                deptho:cell_measures = "area: areacello" ;
+                deptho:standard_name = "sea_floor_depth_below_geoid" ;
+```
+
+Further information:
+
+ - [Discrete Horizontal and Vertical Grids on MOM6 docs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Discrete_Grids.html);
+ - [Lecture: MOM6 spatial discretizations](https://www.youtube.com/watch?v=Rl_GxAamxjQ);
+ - [Tutorial: Analyzing MOM6](https://www.youtube.com/watch?v=SUMjB5jX_dE).
+
 
 ## Interpreting OM3 maxCFL, truncations, warnings, errors.
 Presenter: @helenmacdonald 
