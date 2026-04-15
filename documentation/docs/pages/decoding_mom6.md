@@ -960,7 +960,7 @@ access-om3.err
 ```
 *output shortened for brevity 
 
-If your simulation has finished (you can check using `qstat`), payu will remove the work directory (after copying files into the archive directory) and move access-om3.out, access-om3.err into the archive directory. If your simulation has finished and you can still these files/links in the control directory, or the expectant output is missing from the archive directory it is likely that an error has occurred.
+If your simulation has finished (you can check using `qstat`), payu will remove the work directory (after copying files into the archive directory) and move access-om3.out, access-om3.err into the archive directory. If your simulation has finished and you can still see these files/links in the control directory, or the expected output is missing from the archive directory it is likely that an error has occurred.
 
 There are a few places to check for error messages, starting with these output files
 ```
