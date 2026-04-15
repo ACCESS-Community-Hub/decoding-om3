@@ -1052,7 +1052,7 @@ Common ways to fix the issue are to
 1. decrease the timestep and
 2. modify the bathymetry to remove “lumps” and “bumps” in the coastline and bathymetry that might be contributing to the instability. 
 
-You can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`
+You can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/configurations/Overview/#timesteps).
 
 There are some tools to help with bathymetry modification [here](https://github.com/COSIMA/bathymetry-tools)
 
