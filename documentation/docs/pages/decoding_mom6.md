@@ -991,7 +991,7 @@ We can’t go through every error message that could arise but a few tips for de
 
 If all of these fail, there is the option to [use a debugger](https://docs.access-hive.org.au/models/build_a_model/build_source_code/#setting-up-the-debugger)
 
-Note: If you struggled to find an answer, other people will as well so please consider posting the issue and solution to the [hive foru](https://forum.access-hive.org.au)
+Note: If you struggled to find an answer, other people will as well so please consider posting the issue and solution to the [hive forum](https://forum.access-hive.org.au)
 
 ### Part 2 Truncation errors
 See [here](https://access-om3-configs.access-hive.org.au/Tips-and-tricks/) for more detiled notes on understanding truncation errors.
