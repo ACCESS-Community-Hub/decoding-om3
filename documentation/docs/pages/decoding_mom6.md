@@ -983,7 +983,7 @@ We can’t go through every error message that could arise but a few tips for de
 
 1. Look at whatever the last change was, often this is what caused the error.
 2. Try putting the error message into google, or an AI agent
-3. Search the [hive forum](https://forum.access-hive.org.au]
+3. Search the [hive forum](https://forum.access-hive.org.au)
 4. Check [Gadi status](https://opus.nci.org.au/spaces/Help/pages/399802963/System+Maintenance+and+Notices) just in case the issue is external
 5. Ask a friend or post in the hive forum
 6. [Search through the code-base](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-use-githubs-search-functionality-to-find-code-mom6-as-an-example) for the error message or for key words
