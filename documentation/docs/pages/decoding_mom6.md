@@ -979,7 +979,12 @@ work/log/*
 warnfile.000000.out
 ```
 There are lots of files of the form work/logfile.*.out. Don’t look at them all, just pick one.
-We can’t go through every error message that could arise but a few tips for debugging:
+We can’t go through every error message that could arise but you should first try to classify your error:
+* is it repeatable? (does it happen again if you do payu sweep; payu run?) - if not, it's likely a transient error, eg due to a brief hardware failure on Gadi. You can even [set up payu to automatically sweep and re-run](https://github.com/ACCESS-NRI/access-om2-configs/blob/release-01deg_jra55_iaf/config.yaml#L110-L112) if a particular error occurs.
+* is it associated with a particular model component, or payu?
+* does it happen in the initialisation, or after several timesteps?
+
+A few more tips for debugging:
 
 1. Look at whatever the last change was, often this is what caused the error.
 2. Try putting the error message into google, or an AI agent
@@ -1054,7 +1059,7 @@ Common ways to fix the issue are to
 
 You can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/configurations/Overview/#timesteps).
 
-There are some tools to help with bathymetry modification [here](https://github.com/COSIMA/bathymetry-tools). ACCESS-OM3 users should start with a clone of https://github.com/ACCESS-NRI/make_om3_topo and check out the commit that created the topog.nc their configuration uses.
+Bathymetry modification is not recommend this for anyone using released configs with unaltered topog, as it's quite involved and has many gotchas.  There are some tools to help with bathymetry modification [here](https://github.com/COSIMA/bathymetry-tools). ACCESS-OM3 users should start with a clone of https://github.com/ACCESS-NRI/make_om3_topo and check out the commit that created the topog.nc their configuration uses.
 
 There is not a good universal rule to identify the “lumps and bumps”. Sometimes it is obvious but sometimes it isn’t and it can be helpful to ask some friends for their opinions.
 
