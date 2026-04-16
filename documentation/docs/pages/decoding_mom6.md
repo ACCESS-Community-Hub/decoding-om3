@@ -1000,7 +1000,12 @@ Note: If you struggled to find an answer, other people will as well so please co
 
 ### Part 2 Truncation errors
 See [here](https://access-om3-configs.access-hive.org.au/Tips-and-tricks/) for more detiled notes on understanding truncation errors.
-A common error is when the model goes numerically unstable, creating large velocities. MOM6 deals with these by truncating them (artificially setting them back to a realistic number). When MOM6 does this too many times it will end the simulation early. The following parameters in MOM_input control this process.
+A common error is when the model goes numerically unstable, creating large velocities. MOM6 deals with these by truncating them (artificially setting them back to a realistic number). When MOM6 does this too many times it will end the simulation early with this error message:
+```
+Ocean velocity has been truncated too many times
+```
+
+The following parameters in MOM_input control this process.
 
 ```
 U_TRUNC_FILE = "U_velocity_truncations" ! default = ""
