@@ -967,7 +967,7 @@ work/logfile.*.out
 work/log/*
 work/warnfile.000000.out
 ```
-There are lots of files of the form work/logfile.*.out. Don’t look at them all, just pick one.
+There are lots of files of the form `work/logfile.*.out`. Don’t look at them all, just pick one.
 We can’t go through every error message that could arise but you should first try to classify your error:
 * is it repeatable? (does it happen again if you do payu sweep; payu run?) - if not, it's likely a transient error, eg due to a brief hardware failure on Gadi. You can even [set up payu to automatically sweep and re-run](https://github.com/ACCESS-NRI/access-om2-configs/blob/release-01deg_jra55_iaf/config.yaml#L110-L112) if a particular error occurs.
 * is it associated with a particular model component, or payu?
