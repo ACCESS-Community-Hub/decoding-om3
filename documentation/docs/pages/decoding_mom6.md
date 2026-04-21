@@ -983,7 +983,7 @@ A few more tips for debugging:
 4. Check [Gadi status](https://opus.nci.org.au/spaces/Help/pages/399802963/System+Maintenance+and+Notices) just in case the issue is external
 5. Ask a friend or post in the hive forum
 6. [Search through the code-base](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-use-githubs-search-functionality-to-find-code-mom6-as-an-example) for the error message or for key words
-7)	Go back to a last working copy and slowly implement your changes, checking for errors along the way 
+7.	Go back to a last working copy and slowly implement your changes, checking for errors along the way 
 
 If all of these fail, there is the option to [use a debugger](https://docs.access-hive.org.au/models/build_a_model/build_source_code/#setting-up-the-debugger)
 
