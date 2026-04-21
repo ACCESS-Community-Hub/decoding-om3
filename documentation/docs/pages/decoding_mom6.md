@@ -1050,6 +1050,7 @@ There is a notebook to help investigate the location and timing of the truncatio
 
 
 Common ways to fix the issue are to:
+
 1. decrease the timestep and
 2. modify the bathymetry to remove “lumps” and “bumps” in the coastline and bathymetry that might be contributing to the instability. 
 
