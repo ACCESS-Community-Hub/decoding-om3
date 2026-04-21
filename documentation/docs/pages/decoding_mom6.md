@@ -205,6 +205,7 @@ exe: "symmetric_FMS2-e7d09b7"
 With the above information, one could then compile using the `mom6-ninja-nci` workflow written by @angus-g -- [see here](https://github.com/angus-g/mom6-ninja-nci).
 
 More information:
+
  - https://github.com/angus-g/mom6-ninja-nci
  - https://github.com/COSIMA/access-om2/wiki/Developers-guide (possibly out of date)
  - http://github.com/cosima/access-om3 (deprecated!)
