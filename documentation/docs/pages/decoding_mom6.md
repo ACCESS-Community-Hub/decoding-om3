@@ -944,23 +944,12 @@ Date: 16/04/2026
 
 When your simulation is running, your control directory will have links to an archive and work directory along with a .out and .err file:
 ```
-ls -ltr
-.
-.
-.
 archive -> /scratch/project/user/access-om3/archive/my-buggy-run
 work -> /scratch/project/user/access-om3/work/my-buggy-run
-.
-.
 access-om3.out
 access-om3.err
-
-.
-.
 ```
-*output shortened for brevity 
-
-If your simulation has finished (you can check using `qstat`), payu will remove the work directory (after copying files into the archive directory) and move access-om3.out, access-om3.err into the archive directory. If your simulation has finished and you can still see these files/links in the control directory, or the expected output is missing from the archive directory it is likely that an error has occurred.
+If your simulation has finished (you can check using `qstat`), payu will remove the work directory (after copying files into the archive directory) and move access-om3.out and access-om3.err into the archive directory. If your simulation has finished and you can still see some or all of these files/links in the control directory, or the expected output is missing from the archive directory it is likely that an error has occurred.
 
 There are a few places to check for error messages, starting with these output files
 ```
@@ -976,7 +965,7 @@ It can also be helpful to look at log files in your work directory:
 ```
 work/logfile.*.out
 work/log/*
-warnfile.000000.out
+work/warnfile.000000.out
 ```
 There are lots of files of the form work/logfile.*.out. Don’t look at them all, just pick one.
 We can’t go through every error message that could arise but you should first try to classify your error:
@@ -1062,9 +1051,9 @@ Common ways to fix the issue are to
 1. decrease the timestep and
 2. modify the bathymetry to remove “lumps” and “bumps” in the coastline and bathymetry that might be contributing to the instability. 
 
-You can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/configurations/Overview/#timesteps).
+You can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/configurations/Overview/#timesteps). Make sure your coupling timestep (set in 'nuopc.runseq') is divisable by `DT` and `DT_THERM`.
 
-Bathymetry modification is not recommend this for anyone using released configs with unaltered topog, as it's quite involved and has many gotchas.  There are some tools to help with bathymetry modification [here](https://github.com/COSIMA/bathymetry-tools). ACCESS-OM3 users should start with a clone of https://github.com/ACCESS-NRI/make_om3_topo and check out the commit that created the topog.nc their configuration uses.
+Bathymetry modification is not recommend for anyone using released configs with unaltered topog, as it's quite involved and has many gotchas, including the need to recreate other files (e.g. the mesh files).  There are some tools to help with bathymetry modification [here](https://github.com/COSIMA/bathymetry-tools). ACCESS-OM3 users should start with a clone of https://github.com/ACCESS-NRI/make_om3_topo and check out the commit that created the topog.nc their configuration uses.
 
 There is not a good universal rule to identify the “lumps and bumps”. Sometimes it is obvious but sometimes it isn’t and it can be helpful to ask some friends for their opinions.
 
