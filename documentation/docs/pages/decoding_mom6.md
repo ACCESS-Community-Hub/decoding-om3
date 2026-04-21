@@ -1049,7 +1049,7 @@ These truncation files contain information on where and when the truncations occ
 There is a notebook to help investigate the location and timing of the truncation errors [here](https://github.com/ACCESS-NRI/access-eval-recipes/blob/main/ocean/Examine_truncation_data.ipynb).
 
 
-Common ways to fix the issue are to 
+Common ways to fix the issue are to:
 1. decrease the timestep and
 2. modify the bathymetry to remove “lumps” and “bumps” in the coastline and bathymetry that might be contributing to the instability. 
 
