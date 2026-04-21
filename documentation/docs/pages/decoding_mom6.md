@@ -942,7 +942,7 @@ Date: 16/04/2026
 
 ### Part 1 How do I know I have an error?
 
-When your simulation is running, your control directory will have links to an archive and work directory along with a .out and .err file:
+When your simulation is running, your control directory will have links to an archive and work directory along with a `access-om3.out` and `access-om3.err` file:
 ```
 archive -> /scratch/project/user/access-om3/archive/my-buggy-run
 work -> /scratch/project/user/access-om3/work/my-buggy-run
