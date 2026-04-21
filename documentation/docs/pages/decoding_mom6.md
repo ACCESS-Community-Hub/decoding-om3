@@ -1054,7 +1054,7 @@ Common ways to fix the issue are to:
 1. decrease the timestep and
 2. modify the bathymetry to remove “lumps” and “bumps” in the coastline and bathymetry that might be contributing to the instability. 
 
-You can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/configurations/Overview/#timesteps). Make sure your coupling timestep (set in 'nuopc.runseq') is divisable by `DT` and `DT_THERM`.
+For 1, You can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/configurations/Overview/#timesteps). Make sure your coupling timestep (set in 'nuopc.runseq') is divisable by `DT` and `DT_THERM`.
 
 For 2, bathymetry modification is not recommend for anyone using released configs with unaltered topography, as it's quite involved and has many gotchas, including the need to recreate other files (e.g. the mesh files).  There are some tools to help with bathymetry modification [here](https://github.com/COSIMA/bathymetry-tools). ACCESS-OM3 users are advised to start with a clone of [`make_om3_topo`](https://github.com/ACCESS-NRI/make_om3_topo) and check out the commit that created the `topog.nc` their configuration uses.
 
