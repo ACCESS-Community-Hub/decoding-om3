@@ -1031,7 +1031,7 @@ CFL_TRUNCATE_RAMP_TIME = 7200.0 !   [s] default = 0.0
 CFL_TRUNCATE_START = 0.0        !   [nondim] default = 0.0
 
 ```
-Note that increasing MAXTRUNC usually doesn’t make the problem go away. In particular, when an issue comes up, it affects other variables such as sea surface elevation which can crash the simulation before you reach `MAXTRUNC`. As such it is worth looking for truncation errors if you are getting these sorts of errors:
+Note that increasing `MAXTRUNC` usually doesn’t make the problem go away. In particular, when an issue comes up, it affects other variables such as sea surface elevation which can crash the simulation before you reach `MAXTRUNC`. As such it is worth looking for truncation errors if you are getting these sorts of errors:
 
 ```
 WARNING from PE  1170: Extreme surface sfc_state detected
