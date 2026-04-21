@@ -958,7 +958,7 @@ access-om3.err
 1deg_jra55do_ia.e158765798
 1deg_jra55do_ia.o158765798
 ```
-Note that the last 2 of these files will have different names. They are usually some of the last files to be created and are of the form: jobname.ejobid and jobname.ojobid
+Note that the last 2 of these files will have different names. They are usually some of the last files to be created and are of the form: `jobname.ejobid` and `jobname.ojobid`.
 The error messagees are usually near the bottom of the files but can be a bit cryptic so also scroll up to see if there are some warnings about, e.g., a missing file.
 
 It can also be helpful to look at log files in your work directory:
