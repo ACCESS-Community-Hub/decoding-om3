@@ -1,4 +1,4 @@
-# Season 1
+# Season 1 
 
 ## General info on decoding MOM6 sessions
 - The early sessions of these “Decoding MOM6” segments will talk through the tools that might be useful to navigate the MOM6 code
