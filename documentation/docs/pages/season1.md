@@ -1061,10 +1061,13 @@ For 2: bathymetry modification has a few potential pitfals, including the need t
 
 There is not a good universal rule to identify the “lumps and bumps”. Sometimes it is obvious but sometimes it isn’t and it can be helpful to ask some friends for their opinions.
 
+ 
+## Part 1: How to contribute code back to MOM6
 
-## How to contribute code back to MOM6: writing diagnostics 
-Date: 23/04/2026
-Presenter: Josef Bisits (@jbisits)
+Date: 23/04/2026.
+
+Presenter: Josef Bisits (@jbisits).
+
 Benefits:
 
  - allows for online calculation (very precise);
@@ -1109,4 +1112,11 @@ Further background is available:
  - [Contributing to MOM6 video](https://www.youtube.com/watch?v=JsjEBxt9A6I).
  - [ACCESS-NRI on MOM6 node PR testing](https://access-om3-configs.access-hive.org.au/infrastructure/MOM6-node-PR-testing/).
  - [ACCESS-NRI MOM6 branch management](https://github.com/accESS-nRI/mom6/wiki) (relevant for making contributions).
+
+## Part 2: How to contribute code back to MOM6
+
+Date: 30/04/2026.
+
+Presenter: Dougie Squire (@dougiesquire).
+
 
