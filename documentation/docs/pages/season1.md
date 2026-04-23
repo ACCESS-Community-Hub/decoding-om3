@@ -1062,7 +1062,51 @@ For 2: bathymetry modification has a few potential pitfals, including the need t
 There is not a good universal rule to identify the “lumps and bumps”. Sometimes it is obvious but sometimes it isn’t and it can be helpful to ask some friends for their opinions.
 
 
-## How to contribute code back to MOM6 
-Presenter: @ jbisits and @ dougiesquire 
+## How to contribute code back to MOM6: writing diagnostics 
 Date: 23/04/2026
+Presenter: Josef Bisits (@jbisits)
+Benefits:
+
+ - allows for online calculation (very precise);
+ - could be of enduring value to the community;
+ - it will get maintained for you once you've contributed it!
+
+Background: Joey did this once recently and will walk us through the steps. Today, he'll focus on diagnostics as they are a friendly place to start. A related issue is how to edit the source code and then build the model, this will be the focus of a later session. In general, one needs to 
+
+> find the relevant model code --> do a calculation --> output it
+
+Important to be aware that there are two different types of memory `non-symmetric` and `symmetric` in MOM6. This influences where your data lives on the grid:
+
+[@jbisits can you please insert the image you showed]
+
+ - the crosses (`x`) are h points
+ - faces are the `u` and `v` points
+
+Another consideration is that MOM6 has internal dimensions (non-dimensionalised) and typical external units.
+
+e.g. `[CU H L2 T-1 --> conc m3 s_1 or conc kg s-1]`
+so. `CU` is Concentration in internal dimnsions this would become `conc`
+
+One will see these kinds of statements in the headers (Joey then showed examples). Will save you some time to think about this earlier rather than later!
+
+One then does their calculation (see example) [@jbisits can you please insert a code link]
+
+Another routine will then handle the conversion to useful units [@jbisits can you please insert the code you showed or a link to it].
+
+@jbisits has been working on a contribution on his own fork:
+
+ - https://github.com/jbisits/MOM6/tree/jib/numerical-mixing
+
+Once one is happy with a code contribution. It is then possible, via the [ACCESS-NRI MOM6 fork](https://github.com/aCCESS-NRI/mom6), to go through a process by which it gets accepted into the ["upstream" `mom-ocean` codebase](http://github.com/mom-ocean/mom6). We will cover this process in more detail in a future presentation. 
+
+Further background is available:
+
+ - Marshall Ward (@marshallward) on:
+    - [contributing to MOM6](https://www.marshallward.org/mom6workshop/contrib.html#/summary)
+    - [the MOM6 development cycle](https://www.marshallward.org/woco2023/#/title-slide)
+    - [Testing: verification and validation](https://www.marshallward.org/mom6vv/#/title-slide)
+    - [Dimensional and rotational testing of MOM6](https://www.marshallward.org/fortrancon2021/#/title-slide)
+ - [Contributing to MOM6 video](https://www.youtube.com/watch?v=JsjEBxt9A6I).
+ - [ACCESS-NRI on MOM6 node PR testing](https://access-om3-configs.access-hive.org.au/infrastructure/MOM6-node-PR-testing/).
+ - [ACCESS-NRI MOM6 branch management](https://github.com/accESS-nRI/mom6/wiki) (relevant for making contributions).
 
