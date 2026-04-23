@@ -1066,3 +1066,14 @@ There is not a good universal rule to identify the “lumps and bumps”. Someti
 Presenter: @ jbisits and @ dougiesquire 
 Date: 23/04/2026
 
+
+
+## Navigating MOM6 as a non-oceanographer: a MOM6 mini-app for GPU work.
+
+Date: 7/05/2026.
+
+Presenter: Jorge Gálvez Vallejo (@ ).
+
+Link: [hackathon_mom6_miniapp](https://github.com/JorgeG94/hackathon_mom6_miniapp) 
+
+
