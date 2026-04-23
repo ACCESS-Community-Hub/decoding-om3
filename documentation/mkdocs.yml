@@ -95,8 +95,8 @@ markdown_extensions:
 
 # Navigation
 nav:
+  - Home:                  index.md
   - Decoding OM3:          
-        - Overview:        pages/overview.md
         - Season 1:        pages/season1.md
         - Season 2:        pages/season2.md
   - AOMSS:                 pages/AOMSS_Lecture_Notes.md
