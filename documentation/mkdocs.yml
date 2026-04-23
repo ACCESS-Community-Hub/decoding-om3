@@ -95,8 +95,10 @@ markdown_extensions:
 
 # Navigation
 nav:
-  - Home:                  pages/index.md
-  - Decoding MOM6:         pages/decoding_mom6.md
+  - Home:                  index.md
+  - Decoding OM3:          
+        - Season 1:        pages/season1.md
+        - Season 2:        pages/season2.md
   - AOMSS:                 pages/AOMSS_Lecture_Notes.md
 
 # Footer
