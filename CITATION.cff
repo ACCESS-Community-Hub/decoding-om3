@@ -47,7 +47,12 @@ authors:
     family-names: Macdonald
     email: helen.macdonald@anu.edu.au
     affiliation: Australia’s Climate Simulator (ACCESS-NRI), Australian National University, Canberra, Australia
-    orcid: '0000-0003-4734-3150'
+    orcid: '0000-0003-4734-3150'  
+- given-names: Paul
+    family-names: Spence
+    email: paul.spence@utas.edu.au
+    affiliation: University of Tasmania, Hobart, Australia
+    orcid: 'https://orcid.org/0000-0001-5156-2204'
 repository-code: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 url: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 repository-artifact: >-
