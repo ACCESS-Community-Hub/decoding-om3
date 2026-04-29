@@ -1088,9 +1088,10 @@ Important to be aware that there are two different types of memory `non-symmetri
  - faces are the `u` and `v` points
 
 Another consideration is that MOM6 has internal dimensions (non-dimensionalised) and typical external units.
-
-e.g. `[CU H L2 T-1 --> conc m3 s_1 or conc kg s-1]`
-In the above example `CU` is Concentration in internal dimnsions and becomes `conc` when the conversion to output units is done.
+These are documented throughout the source cod, for example: 
+```fortran
+[CU H L2 T-1 --> conc m3 s_1 or conc kg s-1]
+```
 
 In the above, `CU` is the concentration of any tracer in internal dimensions which, once transformed, becomes the physical concentration unit; see [for here](https://github.com/ACCESS-NRI/MOM6/blob/c664721ebd58c033964b502e7fcdcccd05f02947/src/tracer/MOM_tracer_types.F90#L11). For example, the internal dimension of temperature is `CU` but the output `conc` will be degrees Celsius. Additionally, in the above `H` is the layer thickness, `L` is the horizontal length and `T` is time which are transformed to conc m3 s-1 when the model output is saved.
 
