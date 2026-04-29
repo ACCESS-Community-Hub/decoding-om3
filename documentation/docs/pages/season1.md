@@ -1080,7 +1080,9 @@ Background: Joey did this once recently and will walk us through the steps. Toda
 
 Important to be aware that there are two different types of memory `non-symmetric` and `symmetric` in MOM6. This influences where your data lives on the grid:
 
-[@jbisits can you please insert the image you showed]
+| Non-symmetric | Symmetric |
+-----------------------------
+| ![](https://mom6.readthedocs.io/en/dev-gfdl/_images/Horizontal_NE_indexing_nonsym.png) | ![](https://mom6.readthedocs.io/en/dev-gfdl/_images/Horizontal_NE_indexing_sym.png) |
 
  - the crosses (`x`) are h points
  - faces are the `u` and `v` points
@@ -1088,15 +1090,25 @@ Important to be aware that there are two different types of memory `non-symmetri
 Another consideration is that MOM6 has internal dimensions (non-dimensionalised) and typical external units.
 
 e.g. `[CU H L2 T-1 --> conc m3 s_1 or conc kg s-1]`
-In the above example `CU` is Concentration in internal dimnsions this would become `conc`
+In the above example `CU` is Concentration in internal dimnsions and becomes `conc` when the conversion to output units is done.
 
 In the above, `CU` is the concentration of any tracer in internal dimensions which, once transformed, becomes the physical concentration unit; see [for here](https://github.com/ACCESS-NRI/MOM6/blob/c664721ebd58c033964b502e7fcdcccd05f02947/src/tracer/MOM_tracer_types.F90#L11). For example, the internal dimension of temperature is `CU` but the output `conc` will be degrees Celsius. Additionally, in the above `H` is the layer thickness, `L` is the horizontal length and `T` is time which are transformed to conc m3 s-1 when the model output is saved.
 
-One will see these kinds of statements in the headers (Joey then showed examples). Will save you some time to think about this earlier rather than later!
+One will see these kinds of statements in the headers of subroutines:
+```fortran
+subroutine calculate_diagnostic_fields(u, v, h, uh, vh, tv, ADp, CDp, p_surf, &
+                                       dt, diag_pre_sync, G, GV, US, CS)
+  type(ocean_grid_type),   intent(inout) :: G    !< The ocean's grid structure.
+  type(verticalGrid_type), intent(in)    :: GV   !< The ocean's vertical grid structure.
+  type(unit_scale_type),   intent(in)    :: US   !< A dimensional unit scaling type
+  real, dimension(SZIB_(G),SZJ_(G),SZK_(GV)), &
+                           intent(in)    :: u    !< The zonal velocity [L T-1 ~> m s-1].
+```
+Will save you some time to think about this earlier rather than later!
 
 One then does their calculation. See [here](https://github.com/jbisits/MOM6/blob/45d9ea4acf54959149d01e85c4b497b1f20c1428/src/tracer/MOM_tracer_numerical_mixing.F90#L41-L67) for a demonstration of a subroutine that defines dimensions of inputs and outputs and carries out a calculation for an output diagnostic.
 
-Having defined a diagnostic, for the model to output it a `conversion` needs to be specified so that the output data is in the correct units. The `conversion` is specified in when the diagnostic is registered, see the registering of the [zonal mass transport](https://github.com/jbisits/MOM6/blob/45d9ea4acf54959149d01e85c4b497b1f20c1428/src/diagnostics/MOM_diagnostics.F90#L2217-L2220) which converts the internal units into `kgs^-1` for output
+Having defined a diagnostic, for the model to output it a `conversion` needs to be specified so that the output data is in the correct units. The `conversion` is specified in when the diagnostic is registered, see the registering of the [zonal mass transport](https://github.com/jbisits/MOM6/blob/45d9ea4acf54959149d01e85c4b497b1f20c1428/src/diagnostics/MOM_diagnostics.F90#L2217-L2220) which converts the internal units into `kgs^-1` for output.
 
 @jbisits has been working on a contribution on his own fork:
 
