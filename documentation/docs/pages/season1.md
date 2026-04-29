@@ -1081,7 +1081,7 @@ Background: Joey did this once recently and will walk us through the steps. Toda
 Important to be aware that there are two different types of memory `non-symmetric` and `symmetric` in MOM6. This influences where your data lives on the grid:
 
 | Non-symmetric | Symmetric |
------------------------------
+|---------------|-----------|
 | ![](https://mom6.readthedocs.io/en/dev-gfdl/_images/Horizontal_NE_indexing_nonsym.png) | ![](https://mom6.readthedocs.io/en/dev-gfdl/_images/Horizontal_NE_indexing_sym.png) |
 
  - the crosses (`x`) are h points
