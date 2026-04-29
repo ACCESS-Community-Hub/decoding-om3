@@ -1061,8 +1061,77 @@ For 2: bathymetry modification has a few potential pitfals, including the need t
 
 There is not a good universal rule to identify the “lumps and bumps”. Sometimes it is obvious but sometimes it isn’t and it can be helpful to ask some friends for their opinions.
 
+ 
+## Part 1: How to contribute code back to MOM6
 
-## How to contribute code back to MOM6 
-Presenter: @ jbisits and @ dougiesquire 
-Date: 23/04/2026
+Date: 23/04/2026.
+
+Presenter: Josef Bisits (@jbisits).
+
+Benefits:
+
+ - allows for online calculation (very precise);
+ - could be of enduring value to the community;
+ - it will get maintained for you once you've contributed it!
+
+Background: Joey did this once recently and will walk us through the steps. Today, he'll focus on diagnostics as they are a friendly place to start. A related issue is how to edit the source code and then build the model, this will be the focus of a later session. In general, one needs to 
+
+> find the relevant model code --> do a calculation --> output it
+
+Important to be aware that there are two different types of memory `non-symmetric` and `symmetric` in MOM6. This influences where your data lives on the grid:
+
+| Non-symmetric | Symmetric |
+|---------------|-----------|
+| ![](https://mom6.readthedocs.io/en/dev-gfdl/_images/Horizontal_NE_indexing_nonsym.png) | ![](https://mom6.readthedocs.io/en/dev-gfdl/_images/Horizontal_NE_indexing_sym.png) |
+
+ - the crosses (`x`) are h points
+ - faces are the `u` and `v` points
+
+Another consideration is that MOM6 has internal dimensions (non-dimensionalised) and typical external units.
+These are documented throughout the source cod, for example: 
+```fortran
+[CU H L2 T-1 --> conc m3 s_1 or conc kg s-1]
+```
+
+In the above, `CU` is the concentration of any tracer in internal dimensions which, once transformed, becomes the physical concentration unit; see [for here](https://github.com/ACCESS-NRI/MOM6/blob/c664721ebd58c033964b502e7fcdcccd05f02947/src/tracer/MOM_tracer_types.F90#L11). For example, the internal dimension of temperature is `CU` but the output `conc` will be degrees Celsius. Additionally, in the above `H` is the layer thickness, `L` is the horizontal length and `T` is time which are transformed to conc m3 s-1 when the model output is saved.
+
+One will see these kinds of statements in the headers of subroutines:
+```fortran
+subroutine calculate_diagnostic_fields(u, v, h, uh, vh, tv, ADp, CDp, p_surf, &
+                                       dt, diag_pre_sync, G, GV, US, CS)
+  type(ocean_grid_type),   intent(inout) :: G    !< The ocean's grid structure.
+  type(verticalGrid_type), intent(in)    :: GV   !< The ocean's vertical grid structure.
+  type(unit_scale_type),   intent(in)    :: US   !< A dimensional unit scaling type
+  real, dimension(SZIB_(G),SZJ_(G),SZK_(GV)), &
+                           intent(in)    :: u    !< The zonal velocity [L T-1 ~> m s-1].
+```
+Will save you some time to think about this earlier rather than later!
+
+One then does their calculation. See [here](https://github.com/jbisits/MOM6/blob/45d9ea4acf54959149d01e85c4b497b1f20c1428/src/tracer/MOM_tracer_numerical_mixing.F90#L41-L67) for a demonstration of a subroutine that defines dimensions of inputs and outputs and carries out a calculation for an output diagnostic.
+
+Having defined a diagnostic, for the model to output it a `conversion` needs to be specified so that the output data is in the correct units. The `conversion` is specified in when the diagnostic is registered, see the registering of the [zonal mass transport](https://github.com/jbisits/MOM6/blob/45d9ea4acf54959149d01e85c4b497b1f20c1428/src/diagnostics/MOM_diagnostics.F90#L2217-L2220) which converts the internal units into `kgs^-1` for output.
+
+@jbisits has been working on a contribution on his own fork:
+
+ - https://github.com/jbisits/MOM6/tree/jib/numerical-mixing
+
+Once one is happy with a code contribution. It is then possible, via the [ACCESS-NRI MOM6 fork](https://github.com/aCCESS-NRI/mom6), to go through a process by which it gets accepted into the ["upstream" `mom-ocean` codebase](http://github.com/mom-ocean/mom6). We will cover this process in more detail in a future presentation. 
+
+Further background is available:
+
+ - Marshall Ward (@marshallward) on:
+    - [contributing to MOM6](https://www.marshallward.org/mom6workshop/contrib.html#/summary)
+    - [the MOM6 development cycle](https://www.marshallward.org/woco2023/#/title-slide)
+    - [Testing: verification and validation](https://www.marshallward.org/mom6vv/#/title-slide)
+    - [Dimensional and rotational testing of MOM6](https://www.marshallward.org/fortrancon2021/#/title-slide)
+ - [Contributing to MOM6 video](https://www.youtube.com/watch?v=JsjEBxt9A6I).
+ - [ACCESS-NRI on MOM6 node PR testing](https://access-om3-configs.access-hive.org.au/infrastructure/MOM6-node-PR-testing/).
+ - [ACCESS-NRI MOM6 branch management](https://github.com/accESS-nRI/mom6/wiki) (relevant for making contributions).
+
+## Part 2: How to contribute code back to MOM6
+
+Date: 30/04/2026.
+
+Presenter: Dougie Squire (@dougiesquire).
+
 
