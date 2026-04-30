@@ -1134,4 +1134,33 @@ Date: 30/04/2026.
 
 Presenter: Dougie Squire (@dougiesquire).
 
+_Schematic of MOM6 consortium with it's 8 development nodes._
+
+MOM6 Consortium
+- ACCESS-NRI is a member of the MOM6 consortium
+- Contributinons start at the outside and work their way in. All code contributions go through development nodes.
+- All members review-test contriubtions to the "official" codebase (MOM-ocean main)
+- ACCESS-OM3 is built from the ACCESS-NRi fork
+
+For example, Joey Bisits is working in his own fork of ACCESS-NRI's MOM6 fork, a PR will then merge Joey's code into our organisation's
+
+We would then review/test.
+
+Collating several of these together will.
+
+For example, currently on our fork `2026.01` is "14 commits ahead of and 18 commits behind mom-ocean/MOM6:main".
+
+What does thi smean for me?
+
+ - Pull requests shuld be made to `ACCESS-NRI:MOM6`
+ - In practice, we prefer Pull Requests are made from branches in ACCESS-NRI:MOM6 (it makes testing easier), rather than people's own personal fork.
+ - We can help. Open an issue in ACCESS-NRI:MOM6 if you are thinking about contributing something and we can chat it over and give people write access to the repository.
+ - It may take some time for your code to reach mom-ocean:MOM6.
+ - Offer technical support for people's work.
+
+Audience question: how does one know that the thing they're working on not being worked on elsewhere?
+ - Bi-weekly MOM6 developer meetings
+ - Look at 
+ - Open an issue
+
 
