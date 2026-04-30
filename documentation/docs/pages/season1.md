@@ -1134,4 +1134,37 @@ Date: 30/04/2026.
 
 Presenter: Dougie Squire (@dougiesquire).
 
+![MOM6 consortium](../assets/MOM6-consortium.png)
+_Schematic of MOM6 consortium with it's 8 development nodes._
 
+MOM6 Consortium
+
+- ACCESS-NRI is a member of the MOM6 consortium.
+- Contributions start at the outside and work their way in. All code contributions (preferably) go through development nodes.
+- All members review/test contributions to the "official" codebase (`mom-ocean/MOM6:main`).
+- ACCESS-OM3 is built from the ACCESS-NRI fork.
+
+For example, Joey Bisits is working in his own fork of ACCESS-NRI's MOM6 fork, a PR will then merge Joey's code into our organisation's fork -- as part of the PR, ACCESS-NRI will do some testing. Collating several of these kinds of contributions together, we will eventually put a PR together to `mom-ocean/MOM6:main`. This will then be tested by all the development nodes and they all separately need to approve it before it will be merged into `mom-ocean/MOM6:main`. Further details of the tests ACCESS-NRI does is [available here](https://access-om3-configs.access-hive.org.au/infrastructure/MOM6-node-PR-testing/).
+
+At times, the ACCESS-NRI fork is out of step with `mom-ocean/MOM6:main`, this occurs across all the development nodes. For example, currently on our fork, on the `2026.01` branch, it is "14 commits ahead of and 18 commits behind mom-ocean/MOM6:main".
+
+What does this mean for me (a community person)?
+
+ - Pull requests should be made to `ACCESS-NRI/MOM6`
+ - In practice, we prefer Pull Requests are made from branches in `ACCESS-NRI/MOM6` (it makes testing easier as our infrastructure is set up there), rather than people's own personal fork.
+ - We want to help the community contribute code. Open an issue in `ACCESS-NRI/MOM6` if you are thinking about contributing something and we can chat it over and give people write access to the repository.
+ - It may take some time for your code to reach `mom-ocean/MOM6`.
+ - We offer technical support for people's work.
+
+Audience question: how does one know that the thing they're working on not being worked on elsewhere?
+
+ - We can ask at the bi-weekly MOM6 developer meetings
+ - Look at `mom-ocean` PRs and development occurring at other development nodes (e.g. [gfdl](https://github.com/NOAA-GFDL/MOM6))
+ - Open an issue on the [`ACCESS-NRI/MOM6` fork to discuss](https://github.com/acCESS-nri/mom6) -- it's okay to do this earlier whilst you are still working out a plan.
+
+Further information is available:
+
+ - Marshall Ward (@marshallward) on:
+    - [contributing to MOM6](https://www.marshallward.org/mom6workshop/contrib.html#/summary)
+ - [Contributing to MOM6 video](https://www.youtube.com/watch?v=JsjEBxt9A6I).
+ - [ACCESS-NRI MOM6 branch management](https://github.com/accESS-nRI/mom6/wiki) (relevant for making contributions).
