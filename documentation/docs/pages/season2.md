@@ -1,4 +1,13 @@
 # Season 2
+
+## Navigating MOM6 as a non-oceanographer: a MOM6 mini-app for GPU work.
+
+Date: 7/05/2026.
+
+Presenter: Jorge Gálvez Vallejo (@JorgeG94 ).
+
+Link: [hackathon_mom6_miniapp](https://github.com/JorgeG94/hackathon_mom6_miniapp)
+
 ## Navier Stokes -> stacked shallow water (adiabatic)
 ## Generalised vertical coordinates
 ## Vertical Lagrangian remapping
