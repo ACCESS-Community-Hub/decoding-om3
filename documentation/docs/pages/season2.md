@@ -35,40 +35,95 @@ the most time there. Then naturally you go ask the people that work on the codeb
 because everyone is using it for a different thing you will hear different things, this is where the oceanography
 knowledge becomes useful! 
 
-So the first step as a non-oceanographer was to ask what are the common problems/bottlenecks in the current workflows. Quickly
-you start hearing "ah the barotropic solver", "the continuity bit is a bit slow", "the remapping of vertical coords, definetly". 
-And, of course, you have no idea what this means. 
-
 What is the best way to understand a gigantic codebase with thousands of lines of code? Simplify it! I.e. the creation of a mini-app. 
 This is also the best thing to do for a hackathon, because you can capture algorithmic complexity, main pain points, and you 
 end up with a smaller application that is easy to build, easy to verify, and low stakes if you completely break it! 
 
-How does one create a mini-app? Usually you pick the most expensive part of the codebase and strip it for its parts. For MOM6,
-as I pointed out earlier, there are no clear bottlenecks it is a bunch of routines/loops that are executed in different bits
-of the code that take the most time. So if you want to get a clear picture of the _overall_ code you need to grab the 
-multiple bits. In the case for this mini-app we chose the vertical and horizontal viscosities, the continuity equation, the
-barotropic solver, and the coriolis force. 
+How does one create a mini-app? First, ask the oceanographers what are the pain points! They'll quickly tell you about the 
+"dynamical core", which is where the basic physics are solved, i.e. the fluid mechanics part of the code. This crucial bit 
+here is to adopt a "how hard can it be?" mentality, be positive. I was quickly pointed to the file `MOM_dyn_split_RK2.F90`, 
+which contains the mail RK2 timestepping procedure. Fortran is our friend here, there is not a lot of object orientation 
+shenanigans happening, i.e. what you read is what you get (most of the time). The RK2 step can be summarized as:
 
-How do you strip something to its parts? Well, this is when understanding a bit of the maths helps! At the very bottom, each
-piece is following an algorithm to solve whatever equation it is solving. For example, the vertical viscosity is a tridiagonal
-solver. You can search and learn _what_ a tridiagonal solver is and how to implement one (say in Python), then based on that 
-newly acquired knowledge you look at the `MOM_vert_visc.F90` and see that around all the `if` statements, and `subroutine` calls, 
-there is just a plain-old, vanilla tridiagonal solver at the bottom. Then you just yank it out, and work _backwards_ to obtain 
-the input data.  
+```fortran 
+!! The split RK2 scheme:
+!!   1. Predictor phase:
+!!      - Compute horizontal viscosity
+!!      - Compute Coriolis/momentum advection (CAu, CAv)
+!!      - Apply vertical viscosity
+!!      - Advance barotropic mode (fast 2D dynamics)
+!!      - Update layer thicknesses via continuity
+!!   2. Corrector phase:
+!!      - Recompute tendencies with updated state
+!!      - Apply vertical viscosity
+!!      - Final barotropic step
+!!      - Final continuity update
+!!
+```
 
-Looking at code where you understand a bit of the maths (especially in Fortran) helps narrow down your knowledge gap, since you
-start noticing the `if` statements that add certain parameters, add drags, what do you do at the bottom?, etc. 
+Don't get too distracted by initialization procedures, those might look ugly but once you pay attention they are simply setting arrays
+to something. The above algorithm has done most of the work for us now! We now know what routines we need to look for:
 
-The rest is just plain old elbow grease of spending time correlating code to physics. Thankfully there are lots of lectures on 
-the internet about physical oceanography, many from ARC centres of excellence. I like to listen to them as if they were 
-podcasts, on my way to work or while I workout (yeah, I'm that kind of guy, helps keep pace if there's no beat). The more times
-you hear "geostrophy", "non-hydrostatic Boussinesq equations", "piecewise parabolic method", "Thomas solver", "continuity", 
-"vorticity", etc. coupled with your curiosity and lack of notetaking, leading to constant googling of "what is geostrophy" leads
-to solidifying your knowledge base. 
+- Horizontal/Vertical viscosity 
+- Coriolis 
+- Barotropic solver 
+- Continuity
 
-Why should you invest into learning both? Well, speedups in code can come from new algorithms, and new algorthms can only be 
-developed if you understand the physics! If you understand the approximations the equations are working under, you can determine
-if a certan trick can be applied for a 10-20% speedup gain in the code. 
+A key concept here can be extract from MOM, the first M means "modular". Each physics engine should be a module, i.e. it should be able to 
+be run a standalone. Why? Because if I only want to optimize the Coriolis routines, why should I have to run everything else? So when creating a miniapp
+alwyas try to have a separation of concerns. 
+
+We go into the magical place that is `MOM6/src/core` that is where most of the routines we're interested in are. The viscosities are _parametrizations_, i.e. 
+approximations to extremely annoying physics. If you're feeling adventurous codeup a non-hydrostatic solver that tries to resolve the vertical physics. It is
+_ a w f u l_. Here we have:
+
+```
+MOM_barotropic.F90
+MOM_continuity_PPM.F90
+MOM_CoriolisAdv.F90
+```
+
+So then we follow the `MOM_dyn_split_RK2.F90` to find the function names that are the most interesting, for simplicity we will do the `call btstep(..)`. Inside
+a MOM6 subroutine, we can think of them like:
+
+```fortran 
+subroutine btstep(....)
+real :: x
+integer :: y
+logical :: a 
+
+! indices mapping 
+is = G%isc ; ie = G%iec ; js = G%jsc ; je = G%jec ; nz = GV%ke 
+
+! bookkeeping (timing, profiling) 
+
+if(OBC) then 
+
+endif 
+
+! halo updates (look for do_group_pass)
+call create_group_pass(...)
+
+! begin real work 
+...
+
+end subroutine btstep
+```
+This is not the rule everywhere, specially in helper functions and subroutines. But realizing that _most_ do some bookkeeping, accounting at the start, and then 
+they check for configs, such as `OBCs` etc. will make your life less overwhelming. Once in the magic is just realizing the loops are just loops! 
+
+```fortran 
+      do j=js,je ; do I=is-1,ie
+        uhbt0(I,j) = uhbt(I,j) - find_uhbt(dt*ubt(I,j), BTCL_u(I,j)) * Idt
+      enddo ; enddo
+```
+
+As you go into the routine you'll realize that there are patterns. Certain routine sloop over certain indices, there's `u`s and `v`s and you start quickly 
+noticing how the algorithms are structured. This is the way, you simply just continue doing this _with a lot of patience_. 
+
+The mini app is a work of hackathon and obsession, trying to compare lots of stuff (serial, openmp, openacc, cuda-fortran) just to get knowledge about the 
+advantages and disadvantages of each approach. Testing performance without having to worry too much about breaking MOM6. 
+
 
 
 
