@@ -456,7 +456,7 @@ arguments or something.
 
 To compile the program, you can put the above module and program into the same file, say `example.f90`, and
 compile it with `gfortran example.f90 -o example.x`. You can then execute it with `./example.x`. You should
-get `42` with many zeros printed!
+get `45` with many zeros printed!
 
 MOM6 is a much more complex codebase with many more dependencies and consequently more complex build system.
 
