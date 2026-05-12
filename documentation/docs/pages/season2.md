@@ -155,18 +155,21 @@ Presenter: @edoyango (Edward Yang).
 
 Date: 14/05/2026
 
-Contributing to [MOM6](https://github.com/acCESS-nri/mom6) can be extra daunting if you're not used to programming in Fortran. These notes aim to introduce Fortran to
-someone who might already be familiar with Python. And thankfully, most of the Fortran features exercised in MOM6 have a Python
-equivalent. Here, we won't be looking at MOM6 code directly, because the code itself is quite long -- even if the language
-features used aren't too complicated. Instead, we'll build a simple example program that uses some of the concepts that MOM6 is
-built with. The program takes a 3d array (first two indices represent the lateral domain, and the last represents the columns), and performs either a sum or max operation along the column, reducing the result to a 2d array that represents the lateral domain only.
+Contributing to [MOM6](https://github.com/acCESS-nri/mom6) can be extra daunting if you're not used to programming in Fortran. These
+notes aim to introduce Fortran to someone who might already be familiar with Python. And thankfully, most of the Fortran features
+exercised in MOM6 have a Python equivalent. Here, we won't be looking at MOM6 code directly, because the code itself is quite long
+-- even if the language features used aren't too complicated. Instead, we'll build a simple example program that uses some of the
+concepts that MOM6 is built with. The program takes a 3d array (first two indices represent the lateral domain, and the last
+represents the columns), and performs either a sum or max operation along the column, reducing the result to a 2d array that
+represents the lateral domain only.
 
 ### Programs and modules
 
 Most of the code in MOM6 is organised into "modules" which usually relate to a certain area of the ocean physics. For example,
-`MOM_barotropic.F90` contains the [barotropic solver code](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_barotropic.F90), and `MOM_tracer_advect.F90` contains the [tracer advection code](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/tracer/MOM_tracer_advect.F90) and so on.
-Modules contains code that can be reused in other modules or "programs". Modules cannot be directly compiled and run, and so
-modules' code must be "used" from a program. The skeleton of this arrangement can look like:
+`MOM_barotropic.F90` contains the [barotropic solver code](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_barotropic.F90),
+and `MOM_tracer_advect.F90` contains the [tracer advection code](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/tracer/MOM_tracer_advect.F90)
+and so on. Modules contains code that can be reused in other modules or "programs". Modules cannot be directly compiled and run, and
+so modules' code must be "used" from a program. The skeleton of this arrangement can look like:
 
 ```fortran
 module my_module ! my_module is the name of the module
@@ -180,18 +183,29 @@ end program my_program
 ```
 
 The module and program's boundaries in the code are deliniated by `program/module` and `end program/module` couples. The
-program/module's name must follow the first `program/module` and matching `end program/module` (including the program/module name is optional, but
-it's a requirement to include the name in modules in).
+program/module's name must follow the first `program/module` and matching `end program/module` (including the program/module name is
+optional, but it's a requirement to include the name in modules in).
 
 `implicit none` is a "quirk" of Fortran. It says that all variables' type must be declared. Otherwise, the compiler can make an
-"educated guess" as to what the type it is, which can result in unexpected behaviour. Hence, it is best practice to always include `implicit none` in every module and program.
+"educated guess" as to what the type it is, which can result in unexpected behaviour. Hence, it is best practice to always include
+`implicit none` in every module and program.
 
 ### Subroutines and declaring variables
 
-Programs can have runnable code. But as your codebase gets larger, it's likely that you will 1. want to organise the code in some way to make it easier to understand and maintain (e.g. group code related to certain physics together), and 2. store code that is reused in multiple places. Subroutines help facilitate this. Subroutines are similar to Python functions except that subroutines don't return anything, and instead, they modify its arguments instead. Fortran does have functions also, but are used less frequently in MOM6.
+Programs can have runnable code. But as your codebase gets larger, it's likely that you will 1. want to organise the code in some
+way to make it easier to understand and maintain (e.g. group code related to certain physics together), and 2. store code that is
+reused in multiple places. Subroutines help facilitate this. Subroutines are similar to Python functions except that subroutines
+don't return anything, and instead, they modify its arguments instead. Fortran does have functions also, but are used less
+frequently in MOM6.
 
-The example above is trivial as both the program or module have no code. So let's create our first subroutine (Fortran comments
-are prefixed with `!`):
+Like programs and modules, subroutines are bounded by `subroutine <name>` and `end subroutine <name>`. The subroutine's arguments
+follow the name, followed by the type declaration of the arguments and local variables. Unlike Python, the types of all variables
+must be declared and cannot change. In the example below, the variable attributes commonly used in MOM6 are shown (type, dimension,
+and intent). Variables can be declared in any order, but a common convention (that MOM6 follows) is to declare the arguments first,
+followed by local variables.
+
+The example above is trivial as both the program or module have no code. So let's create our first subroutine (Fortran comments are
+prefixed with `!`):
 
 ```fortran
 module my_module
@@ -206,8 +220,10 @@ contains
 
     ! each argument's type must be declared. Here we have:
     ! * type (integer/real)
-    !   * real is equivalent to np.float32. However, MOM6 opts to control the precision at compile time.
-    ! * dimension aka shape. No dimension means that variable is scalar. dimension(...) means the variable is an array.
+    !   * real is equivalent to np.float32. However, MOM6 opts to control the precision at compile
+    !     time.
+    ! * dimension aka shape. No dimension means that variable is scalar. dimension(...) means the
+    !   variable is an array.
     !   * dimension(a:b) means that for the given index, only indices a to b are defined
     ! * intent
     !   * `in`: the variable will only be read
@@ -234,35 +250,31 @@ contains
 end module my_module
 ```
 
-Like programs and modules, subroutines are bounded by `subroutine <name>` and `end subroutine <name>`. The subroutine's
-arguments follow the name, followed by the type declaration of the arguments and local variables. Unlike Python, the
-types of all variables must be declared and cannot change. In the above example, the variable attributes commonly used
-in MOM6 are shown (type, dimension, and intent). Variables can be declared in any order, but a common convention (that
-MOM6 follows) is to declare the arguments first, followed by local variables.
-
 Note that subroutines are invoked with `call <subroutine>(...)`
 
 ### Array copies
 
-Like with Python NumPy, arrays' contents can be copied between each other. If the arrays are of the same shape, they can
-be copied with specifying array indices (`a = b`), or you may specify which slices to copy e.g. `a(1:10) = b(1:10)`, or
-`a(:, 1) = b(:)` etc. Noting that Fortran accesses array elements/slices using round brackets `()` instead of square
-brackets `[]` common in other languages. It is also worth noting that array assignments/copies copies the array's values
-(different from Python where `a = b` means something different from `a[:] = b[:]`).
+Like with Python NumPy, arrays' contents can be copied between each other. If the arrays are of the same shape, they can be copied
+with specifying array indices (`a = b`), or you may specify which slices to copy e.g. `a(1:10) = b(1:10)`, or `a(:, 1) = b(:)` etc.
+Noting that Fortran accesses array elements/slices using round brackets `()` instead of square brackets `[]` common in other
+languages. It is also worth noting that array assignments/copies copies the array's values (different from Python where `a = b`
+means something different from `a[:] = b[:]`).
 
 ### Loops
 
-Loops are dilineated by `do variable=start,end,step` and `enddo` - which is like `for variable in range(start,end+1,step):`
-in Python. The main difference between fortran loop ranges and Python ranges is that the `end` is included in the range.
+Loops are dilineated by `do variable=start,end,step` and `enddo` - which is like `for variable in range(start,end+1,step):` in
+Python. The main difference between fortran loop ranges and Python ranges is that the `end` is included in the range.
 
-You may have also noticed that the loop ordering is a bit strange - where the outer loop iterates of the middle index, with the outer index in the middle, and the inner-most loop iterating over the first. This is quite common in MOM6!
+You may have also noticed that the loop ordering is a bit strange - where the outer loop iterates of the middle index, with the
+outer index in the middle, and the inner-most loop iterating over the first. This is quite common in MOM6!
 
 ### Derived types
 
-Derived types are similar to Python classes in that they can be instantiated and group related information. Like Python classes, Fortran derived types has a name and attributes (or members). One of the key derived
-types in MOM6 is the [`ocean_grid_type`](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_grid_type.F90) which describe the grid extents (including the computational and halo extents). It
-also stores other grid information like lateral dimensions of the columns, masking etc. We can create a simple version
-of the grid type and use it in our subroutine:
+Derived types are similar to Python classes in that they can be instantiated and group related information. Like Python classes,
+Fortran derived types has a name and attributes (or members). One of the key derived types in MOM6 is the
+[`ocean_grid_type`](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_grid_type.F90) which describe the grid extents
+(including the computational and halo extents). It also stores other grid information like lateral dimensions of the columns,
+masking etc. We can create a simple version of the grid type and use it in our subroutine:
 
 ```fortran
 module my_module
@@ -281,8 +293,8 @@ contains
   ! we can replace our grid indices with a grid_type
   subroutine sum_along_column(g, arr1, arr2)
     ! We can still use the grid_type's members to define subsequent variables
-    ! below, `g` is an instance of the `grid_type`. This `g`'s members are being accessed with `%`, which in python would be `g.is`.
-    ! `g`'s members are then used to size the input/output arrays.
+    ! below, `g` is an instance of the `grid_type`. This `g`'s members are being accessed with `%`,
+    ! which in python would be `g.is`. `g`'s members are then used to size the input/output arrays.
     type(grid_type),                             intent(in)  :: g    ! g is an instance of grid_type
     real, dimension(g%is:g%ie, g%js:g%je, g%nz), intent(in)  :: arr1
     real, dimension(g%is:g%ie, g%js:g%je),       intent(out) :: arr2
@@ -300,10 +312,9 @@ contains
 end module my_module
 ```
 
-Let's also introduce another pattern used in MOM6: the "control structure". Each module will have its own control
-structure that mostly stores information to control MOM6's behaviour e.g. which algorithm to use or whether a certain
-physics is turned on or not. In our simple example, the control structure will simply control whether to do a sum
-or max along columns.
+Let's also introduce another pattern used in MOM6: the "control structure". Each module will have its own control structure that
+mostly stores information to control MOM6's behaviour e.g. which algorithm to use or whether a certain physics is turned on or not.
+In our simple example, the control structure will simply control whether to do a sum or max along columns.
 
 ```fortran
 module my_module
@@ -325,7 +336,7 @@ module my_module
     integer :: which_op = 1          !< which operation to do - default is 1 (sum)
   end type control_structure_type
 
-  ! Explicitly say which types/subroutines can be used - do_sum/max_along_column cannot be directly used
+  ! Explicitly say which things can be used - do_sum/max_along_column cannot be directly used
   public :: grid_type, control_structure_type, do_something_along_column
 
 contains
@@ -384,40 +395,39 @@ contains
 end module my_module
 ```
 
-The module is much larger now - the control structure type has been added and two subroutines have also been
-added. `max_along_column` is almost identical to `sum_along_column` except that it does a `max` operation
-instead of `+`. 
+The module is much larger now - the control structure type has been added and two subroutines have also been added.
+`max_along_column` is almost identical to `sum_along_column` except that it does a `max` operation instead of `+`.
 
 ### If statements
 
-In the module, we've also added a 3-branch if statement. If statements look quite similar to Python's except
-that the evaluation must be put it into brackets and is followe by `then`: i.e. `if (statement) then`.
-Otherwise the semantics are identical.
+In the module, we've also added a 3-branch if statement. If statements look quite similar to Python's except that the evaluation
+must be put it into brackets and is followe by `then`: i.e. `if (statement) then`. Otherwise the semantics are identical.
 
 ### Module public and private
 
-To hide details, MOM6 likes to leverage "public" and "private" statements in modules. MOM6 modules will
-declare everything as `private` by default (by having an unqualified `private` clause), and then explicitly
-list the objects that should be accessible outside of the module with `public :: list, of, objects, and, procedures`.
-Private things are visible to other things within the module, but not outside.
+To hide details, MOM6 likes to leverage "public" and "private" statements in modules. MOM6 modules will declare everything as
+`private` by default (by having an unqualified `private` clause), and then explicitly list the objects that should be accessible
+outside of the module with `public :: list, of, objects, and, procedures`. Private things are visible to other things within the
+module, but not outside.
 
 ### Documenting comments
 
-MOM6 uses [Doxygen comments](https://www.doxygen.nl/manual/docblocks.html) that automatically generate documentation for the code. These type of comments
-are sentineled with !< (as opposed to only !). Procedures (functions and subroutines), types and members, and
+MOM6 uses [Doxygen comments](https://www.doxygen.nl/manual/docblocks.html) that automatically generate documentation for the code.
+These type of comments are sentineled with !< (as opposed to only !). Procedures (functions and subroutines), types and members, and
 arguments must be documented.
 
 ### Using modules
 
-Let's finish our program and use the module code! The program will be very simple -- uses hardcoded values to
-initialize everything.
+Let's finish our program and use the module code! The program will be very simple -- uses hardcoded values to initialize everything.
 
 ```fortran
 program my_program
   ! specify which things we want from the module
   ! Python analogue: from my_module import grid_type, control_structure_type, do_something_along_column
-  ! note that because of the privacy in the module, if we tried to use sum_along_column, the program
-  ! would fail to compile since `sum_along_column` hasn't been declared as public.
+  ! note that because of the privacy in the module, `sum_along_column` is not included in the
+  ! `public :: ...` list. This means that importing or calling `sum_along_column` from this
+  ! program would fail. Adding `sum_along_column` to the `public :: ...` list would make it
+  ! available here.
   ! Note that excluding `only` would lead to everything public being available. However, MOM6
   ! ensures to make imports explicit. This is, in general, good practice as it makes it easier to
   ! identify where something used inside the program/module comes from.
@@ -450,22 +460,19 @@ program my_program
 end program my_program
 ```
 
-A program itself looks quite similar the subroutines above, except there aren't any arguments. Near the top
-we `use` the module and select which things we want. This convention isn't mandatory, but is closely followed
-by MOM6.
+A program itself looks quite similar the subroutines above, except there aren't any arguments. Near the top we `use` the module and
+select which things we want. This convention isn't mandatory, but is closely followed by MOM6.
 
 ### Allocatable arrays
 
-Unlike subroutines, programs cannot get array sizes by simply passing them in. So, often arrays are made
-given the "allocatable" attribute, which lets the program "allocate" the array based on some user input or
-similar. Here, we allocate the arrays' based on hardcoded values, but that could be changed to use CLI
-arguments or something.
+Unlike subroutines, programs cannot get array sizes by simply passing them in. So, often arrays are made given the "allocatable"
+attribute, which lets the program "allocate" the array based on some user input or similar. Here, we allocate the arrays' based on
+hardcoded values, but that could be changed to use CLI arguments or something.
 
 ### Compiling and running the example
 
-To compile the program, you can put the above module and program into the same file, say `example.f90`, and
-compile it with `gfortran example.f90 -o example.x`. You can then execute it with `./example.x`. You should
-get `45` with many zeros printed!
+To compile the program, you can put the above module and program into the same file, say `example.f90`, and compile it with
+`gfortran example.f90 -o example.x`. You can then execute it with `./example.x`. You should get `45` with many zeros printed!
 
 MOM6 is a much more complex codebase with many more dependencies and consequently more complex build system.
 
