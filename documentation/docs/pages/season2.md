@@ -14,7 +14,7 @@ Joining a new project in a field you did not study can be extremely daunting! Bu
 fortune favors the brave. I'd say there are three options here:
 
 - You are an oceanographer that has little knowledge of high performance computing 
-- You are a high performance computing perso that has no knowledge of oceanography 
+- You are a high performance computing person that has no knowledge of oceanography 
 - You are a new student and don't know either
 
 The third one naturally has the most to overcome, but they also have the most time. The first one
@@ -25,7 +25,7 @@ on them understanding the physics of the ocean dynamics.
 I am a stubborn person that doesn't like to write code I don't understand, so I basically like to 
 create more work for myself.  
 
-### Detailed notes (flow of conciousness) 
+### Detailed notes (flow of consciousness) 
 
 As an HPC person whose goal is to either optimize code or port it to different architectures the key 
 aspect to understand is *what are the bottlenecks?* in the current code. In ocean simulations, to my 
@@ -40,9 +40,9 @@ This is also the best thing to do for a hackathon, because you can capture algor
 end up with a smaller application that is easy to build, easy to verify, and low stakes if you completely break it! 
 
 How does one create a mini-app? First, ask the oceanographers what are the pain points! They'll quickly tell you about the 
-"dynamical core", which is where the basic physics are solved, i.e. the fluid mechanics part of the code. This crucial bit 
+"dynamical core", which is where the basic physics are solved, i.e. the fluid mechanics part of the code. The crucial bit 
 here is to adopt a "how hard can it be?" mentality, be positive. I was quickly pointed to the file `MOM_dyn_split_RK2.F90`, 
-which contains the mail RK2 timestepping procedure. Fortran is our friend here, there is not a lot of object orientation 
+which contains the main RK2 timestepping procedure. Fortran is our friend here, there is not a lot of object orientation 
 shenanigans happening, i.e. what you read is what you get (most of the time). The RK2 step can be summarized as:
 
 ```fortran 
@@ -64,17 +64,17 @@ shenanigans happening, i.e. what you read is what you get (most of the time). Th
 Don't get too distracted by initialization procedures, those might look ugly but once you pay attention they are simply setting arrays
 to something. The above algorithm has done most of the work for us now! We now know what routines we need to look for:
 
-- Horizontal/Vertical viscosity 
+- Horizontal/Vertical viscosities
 - Coriolis 
 - Barotropic solver 
 - Continuity
 
-A key concept here can be extract from MOM, the first M means "modular". Each physics engine should be a module, i.e. it should be able to 
-be run a standalone. Why? Because if I only want to optimize the Coriolis routines, why should I have to run everything else? So when creating a miniapp
-alwyas try to have a separation of concerns. 
+A key concept here can be extracted from MOM, the first M means "modular". Each physics engine should be a module, i.e. it should be able to 
+be run as standalone. Why? Because if I only want to optimize the Coriolis routines, why should I have to run everything else? So when creating a mini-app
+always try to have a separation of concerns. 
 
-We go into the magical place that is `MOM6/src/core` that is where most of the routines we're interested in are. The viscosities are _parametrizations_, i.e. 
-approximations to extremely annoying physics. If you're feeling adventurous codeup a non-hydrostatic solver that tries to resolve the vertical physics. It is
+We go into the magical place that is `MOM6/src/core`, which is where most of the routines we're interested in are. The viscosities are _parametrizations_, i.e. 
+approximations to extremely annoying physics. If you're feeling adventurous code up a non-hydrostatic solver that tries to resolve the vertical physics. It is
 _ a w f u l_. Here we have:
 
 ```
@@ -109,8 +109,8 @@ call create_group_pass(...)
 
 end subroutine btstep
 ```
-This is not the rule everywhere, specially in helper functions and subroutines. But realizing that _most_ do some bookkeeping, accounting at the start, and then 
-they check for configs, such as `OBCs` etc. will make your life less overwhelming. Once in the magic is just realizing the loops are just loops! 
+This is not the rule everywhere, especially in helper functions and subroutines. But realizing that _most_ do some bookkeeping, accounting at the start, and then 
+they check for configs, such as `OBCs` etc. will make your life less overwhelming. Once in, the magic is just realizing the loops are just loops! 
 
 ```fortran 
       do j=js,je ; do I=is-1,ie
@@ -118,10 +118,10 @@ they check for configs, such as `OBCs` etc. will make your life less overwhelmin
       enddo ; enddo
 ```
 
-As you go into the routine you'll realize that there are patterns. Certain routine sloop over certain indices, there's `u`s and `v`s and you start quickly 
+As you go into the routine you'll realize that there are patterns. Certain routines loop over certain indices, there's `u`s and `v`s and you start quickly 
 noticing how the algorithms are structured. This is the way, you simply just continue doing this _with a lot of patience_. 
 
-The mini app is a work of hackathon and obsession, trying to compare lots of stuff (serial, openmp, openacc, cuda-fortran) just to get knowledge about the 
+The mini-app is a work of hackathon and obsession, trying to compare lots of stuff (serial, openmp, openacc, cuda-fortran) just to get knowledge about the 
 advantages and disadvantages of each approach. Testing performance without having to worry too much about breaking MOM6. 
 
 
