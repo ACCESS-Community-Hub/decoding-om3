@@ -4,7 +4,7 @@
 
 Date: 7/05/2026.
 
-Presenter: Jorge Gálvez Vallejo (@JorgeG94 ).
+Presenter: Jorge Gálvez Vallejo (@JorgeG94).
 
 Link to repo: [hackathon_mom6_miniapp](https://github.com/JorgeG94/hackathon_mom6_miniapp)
 
