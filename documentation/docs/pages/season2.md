@@ -524,8 +524,20 @@ To compile the program, you can put the above module and program into the same f
 
 MOM6 is a much more complex codebase with many more dependencies and consequently more complex build system.
 
+## Fortran 101 re-visited: MOM6 dynamics split rk2 
+
+Date: 21/05/2026.
+
+Presenter: Jorge Gálvez Vallejo (@JorgeG94).
 
 ## Navier Stokes -> stacked shallow water (adiabatic)
+
+Date: 28/05/2026.
+
+Presenter: Andrew Kiss (@aekiss).
+
+
+
 ## Generalised vertical coordinates
 ## Vertical Lagrangian remapping
 ## Pressure forces
