@@ -534,7 +534,7 @@ Presenter: Jorge Gálvez Vallejo (@JorgeG94).
 
 Date: 28/05/2026.
 
-Presenter: Andrew Kiss (@aekiss).
+Presenter: Andrew Kiss (@aekiss). 
 
 
 
