@@ -139,8 +139,8 @@ notes aim to introduce Fortran to someone who might already be familiar with Pyt
 exercised in MOM6 have a Python equivalent. Here, we won't be looking at MOM6 code directly, because the code itself is quite long
 -- even if the language features used aren't too complicated. 
 
-<details><summary>Python equivalent of the example program to be built</summary>
 
+??? code "Python equivalent of the example program to be built"
 ```python
 """
 Python code that emulates the example Fortran program.
@@ -203,7 +203,6 @@ if __name__ == "__main__":
     print(np.sum(output_array))
 ```
 
-</details>
 
 
 ### Programs and modules
