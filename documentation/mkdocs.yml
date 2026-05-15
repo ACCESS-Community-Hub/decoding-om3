@@ -114,6 +114,7 @@ extra:
 
 extra_css:
   - "https://fonts.googleapis.com/icon?family=Material+Icons"   # Material Icons Reference - https://material.io/resources/icons/?style=baseline
+  - "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" # for admonishment icons - see https://github.com/ACCESS-Community-Hub/decoding-om3/issues/30#issuecomment-4457238476
   - fontello/css/fontello-codes.css
   - fontello/css/fontello-ie7-codes.css
   - fontello/css/fontello-ie7.css

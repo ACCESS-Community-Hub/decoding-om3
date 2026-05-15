@@ -139,71 +139,70 @@ notes aim to introduce Fortran to someone who might already be familiar with Pyt
 exercised in MOM6 have a Python equivalent. Here, we won't be looking at MOM6 code directly, because the code itself is quite long
 -- even if the language features used aren't too complicated. 
 
-<details><summary>Python equivalent of the example program to be built</summary>
 
-```python
-"""
-Python code that emulates the example Fortran program.
-It uses Python functions and classes to represent the equivalent Fortran
-subroutines and derived types.
-"""
+??? code "Python equivalent of the example program to be built"
+    ```python
+    """
+    Python code that emulates the example Fortran program.
+    It uses Python functions and classes to represent the equivalent Fortran
+    subroutines and derived types.
+    """
+    
+    import numpy as np
+    
+    class Grid:
+        def __init__(self, is_: int, js: int, ie: int, je: int, nz: int):
+            self.is_ = is_
+            self.js = js
+            self.ie = ie
+            self.je = je
+            self.nz = nz
+    
+    class ControlStructure:
+        def __init__(self, initialized: bool = False, which_op: int = 1):
+            self.initialized = initialized
+            self.which_op = which_op
+    
+    def do_something_along_column(cs: ControlStructure, g: Grid, arr1: np.ndarray) -> np.ndarray:
+        if not cs.initialized:
+            raise RuntimeError("Control structure not initialized!")
+    
+        if cs.which_op == 1:
+            return _sum_along_column(g, arr1)
+        if cs.which_op == 2:
+            return _max_along_column(g, arr1)
+        raise ValueError("Invalid operation provided! must be either 1 or 2")
+    
+    def _sum_along_column(g: Grid, arr1: np.ndarray) -> np.ndarray:
+        arr2 = arr1[:, :, 0].copy()
+        for j in range(g.je - g.js + 1):
+            for k in range(1, g.nz):
+                for i in range(g.ie - g.is_ + 1):
+                    arr2[i, j] += arr1[i, j, k]
+        return arr2
+    
+    def _max_along_column(g: Grid, arr1: np.ndarray) -> np.ndarray:
+        arr2 = arr1[:, :, 0].copy()
+        for j in range(g.je - g.js + 1):
+            for k in range(1, g.nz):
+                for i in range(g.ie - g.is_ + 1):
+                    arr2[i, j] = max(arr2[i, j], arr1[i, j, k])
+        return arr2
+    
+    import numpy as np
+    
+    from my_module import ControlStructure, Grid, do_something_along_column
+    
+    if __name__ == "__main__":
+        g = Grid(is_=1, js=2, ie=3, je=4, nz=5)
+        cs = ControlStructure(initialized=True, which_op=1)
+    
+        input_array = np.ones((g.ie - g.is_ + 1, g.je - g.js + 1, g.nz))
+        output_array = do_something_along_column(cs, g, input_array)
+    
+        print(np.sum(output_array))
+    ```
 
-import numpy as np
-
-class Grid:
-    def __init__(self, is_: int, js: int, ie: int, je: int, nz: int):
-        self.is_ = is_
-        self.js = js
-        self.ie = ie
-        self.je = je
-        self.nz = nz
-
-class ControlStructure:
-    def __init__(self, initialized: bool = False, which_op: int = 1):
-        self.initialized = initialized
-        self.which_op = which_op
-
-def do_something_along_column(cs: ControlStructure, g: Grid, arr1: np.ndarray) -> np.ndarray:
-    if not cs.initialized:
-        raise RuntimeError("Control structure not initialized!")
-
-    if cs.which_op == 1:
-        return _sum_along_column(g, arr1)
-    if cs.which_op == 2:
-        return _max_along_column(g, arr1)
-    raise ValueError("Invalid operation provided! must be either 1 or 2")
-
-def _sum_along_column(g: Grid, arr1: np.ndarray) -> np.ndarray:
-    arr2 = arr1[:, :, 0].copy()
-    for j in range(g.je - g.js + 1):
-        for k in range(1, g.nz):
-            for i in range(g.ie - g.is_ + 1):
-                arr2[i, j] += arr1[i, j, k]
-    return arr2
-
-def _max_along_column(g: Grid, arr1: np.ndarray) -> np.ndarray:
-    arr2 = arr1[:, :, 0].copy()
-    for j in range(g.je - g.js + 1):
-        for k in range(1, g.nz):
-            for i in range(g.ie - g.is_ + 1):
-                arr2[i, j] = max(arr2[i, j], arr1[i, j, k])
-    return arr2
-
-import numpy as np
-
-from my_module import ControlStructure, Grid, do_something_along_column
-
-if __name__ == "__main__":
-    g = Grid(is_=1, js=2, ie=3, je=4, nz=5)
-    cs = ControlStructure(initialized=True, which_op=1)
-
-    input_array = np.ones((g.ie - g.is_ + 1, g.je - g.js + 1, g.nz))
-    output_array = do_something_along_column(cs, g, input_array)
-
-    print(np.sum(output_array))
-```
-
-</details>
 
 
 ### Programs and modules
