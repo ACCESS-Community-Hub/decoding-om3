@@ -563,6 +563,24 @@ You can see now how subtle a small change can break bitwise reproducibility! So,
 fun bit of the code: `MOM6/src/framework/MOM_intrinsic_functions.F90`! This file contains some routines that 
 are not quite trustworthy across compilers. We will focus on the cuberoot! 
 
+The module signature: 
+
+```fortran
+module MOM_intrinsic_functions
+
+use iso_fortran_env, only : stdout => output_unit, stderr => error_unit
+use iso_fortran_env, only : int64, real64
+
+implicit none ; private
+
+public :: invcosh, cuberoot
+public :: intrinsic_functions_unit_tests
+
+!...
+
+end module MOM_intrinsic_functions
+```
+
 ```fortran
 !> Returns the cube root of a real argument at roundoff accuracy, in a form that works properly with
 !! rescaling of the argument by integer powers of 8.  If the argument is a NaN, a NaN is returned.
