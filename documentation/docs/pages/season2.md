@@ -647,8 +647,9 @@ Next, we have a `call rescale_cbrt`:
 ```fortran
 !> Rescale `a` to the range [0.125, 1) and compute its cube-root exponent.
 pure subroutine rescale_cbrt(a, x, e_r, s_a)
-
-  real, intent(out) :: x
+  real, intent(in) :: a
+    !< The number to be rescaled for cube-root computation [A3]
+   real, intent(out) :: x
     !< The rescaled value of a in the range from 0.125 < asx <= 1.0, in ambiguous units cubed [B3]
   integer(kind=int64), intent(out) :: e_r
     !< Cube root of the exponent of the rescaling of `a`
