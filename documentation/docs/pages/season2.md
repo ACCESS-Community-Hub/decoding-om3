@@ -739,6 +739,37 @@ Date: 28/05/2026.
 
 Presenter: Andrew Kiss (@aekiss). 
 
+Navier-Stokes equation: fully 3D
+
+$
+% shorthand for \partial
+\newcommand {\PD}{\partial}
+% 1st partial derivative
+\newcommand {\pd}[2]{\frac{\PD #1}{\PD #2}}
+% 2nd partial derivative
+\newcommand {\pdTwo}[2]{\frac{\PD^{2} #1}{\PD #2^{2}}}
+% 2nd partial derivative, allows more general denominator (eg dxdy)
+\newcommand {\pdTwoX}[2]{\frac{\PD^{2} #1}{ #2}}
+% 3rd partial derivative
+\newcommand {\pdThree}[2]{\frac{\PD^{3} #1}{\PD #2^{3}}}
+% 3rd partial derivative,  allows more general denominator (eg dx^{2}dy)
+\newcommand {\pdThreeX}[2]{\frac{\PD^{3} #1}{ #2}}
+% 4th partial derivative
+\newcommand {\pdFour}[2]{\frac{\PD^{4} #1}{\PD #2^{4}}}
+% 4th partial derivative,  allows more general denominator (eg dx^{3}dy)
+\newcommand {\pdFourX}[2]{\frac{\PD^{4} #1}{ #2}}
+% small 1st partial derivative
+\newcommand {\pds}[2]{\PD #1/\PD #2}
+% small 2nd partial derivative
+\newcommand {\pdTwos}[2]{\PD^{2} #1/\PD #2^{2}}
+\underbrace{
+\underbrace{\underbrace{\pd{\mathbf{u}}{t}}_{\text{Eulerian acceleration}}
+\underbrace{+(\mathbf{u}\cdot\nabla)\mathbf{u}}_{\text{advection}}}_{\frac{D\mathbf{u}}{Dt}\text{: material (Lagrangian) acceleration relative to Earth}} \quad
+\underbrace{+2\bm{\Omega}\times\mathbf{u}}_{\text{Coriolis}}}_\text{Lagrangian acceleration relative to non-rotating frame} \quad
+=\underbrace{\underbrace{-\frac{1}{\rho}\nabla p}_{\text{pressure gradient}}
+\underbrace{+A\nabla^2\mathbf{u}}_{\text{eddy viscosity}}\quad
+\underbrace{+\mathbf{g}}_{\text{gravity}}}_{\frac{\mathbf{F}}{\rho}\text{: Force per unit density}}
+$
 
 
 ## Generalised vertical coordinates
