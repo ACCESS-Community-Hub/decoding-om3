@@ -759,15 +759,15 @@ is Newton's 2nd law $\mathbf{F} = m\mathbf{a}$ for the acceleration $\mathbf{a}$
 
 This 3d momentum equation is equivalent to 3 scalar equations, but has 5 unknowns ($u, v, w, p, \rho$), so to close this system we need 2 more equations. These are an _equation of state_ (e.g. TEOS-10) relating the density to pressure (and temperature $T$ and salinity $S$, in the oceanographic context; in this case additional evolution equations for $T$ and $S$ are also required), and an equation for the _conservation of mass_
 
-$
+$$
 \frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{v}) = 0
-$
+$$
 
 Seawater density varies very little over the range of $p$, $T$ and $S$ in the ocean, and motions are very much slower than the speed of sound (i.e. the Mach number is very small), so to a good approximation the conservation of mass can be written
 
-$
+$$
 \nabla\cdot\mathbf{v} = 0
-$
+$$
 
 This assumption of incompressibility eliminates sound waves.
 
@@ -775,15 +775,15 @@ This assumption of incompressibility eliminates sound waves.
 
 In oceanography it's more convenient to a use coordinates that rotate with the Earth. To account for this rotation we must include the Coriolis and centrifugal forces.
 
-$
+$$
 \underbrace{\frac{D_i\mathbf{v}}{D_it}}_\text{Lagrangian acceleration in inertial frame} = \underbrace{\frac{D\mathbf{v}}{Dt}}_\text{Lagrangian acceleration in rotating frame} + \underbrace{2\mathbf{\Omega}\times\textbf{v}}_\text{Coriolis acceleration} + \underbrace{\mathbf{\Omega}\times\mathbf{\Omega}\times\mathbf{r}}_\text{centrifugal acceleration}
-$
+$$
 
 where $\mathbf{\Omega}$ is Earth's rotation vector and $\mathbf{r}$ is the position vector relative to Earth's centre, and now $\mathbf{v}$ is velocity relative to the rotating Earth. It turns out the centrifugal acceleration is of the same mathematical form as gravity (a conservative vector field), so we can simply redefine $\mathbf{g}$ to include $-\mathbf{\Omega}\times\mathbf{\Omega}\times\mathbf{r}$ and then worry no more about it. This is not the case for the Coriolis acceleration, which we must retain. So we end up with our momentum equation in rotating coordinates
 
-$
+$$
 \underbrace{\frac{D\mathbf{v}}{Dt}}_\text{Lagrangian acceleration in rotating frame} + \underbrace{2\mathbf{\Omega}\times\textbf{v}}_\text{Coriolis acceleration} = \underbrace{\frac{-\nabla p}{\rho}}_\text{pressure gradient} + \underbrace{\nu\nabla^2\mathbf{v}}_\text{molecular viscosity} + \underbrace{\mathbf{g}}_\text{gravity and centrifugal}+ \underbrace{\dots}_\text{any other forces}
-$
+$$
 
 where now $\mathbf{g}$ includes both gravity and the centrifugal acceleration.
 
@@ -807,21 +807,21 @@ The oceans are much shallower than they are wide (like the thickness of a piece 
 
 This allows us to simplify the advection term in the material derivative. The material derivative can be expanded out as
 
-$
+$$
 \frac{D\mathbf{v}}{Dt} = \frac{\partial\mathbf{v}}{\partial t} + (\mathbf{v}\cdot\nabla)\mathbf{v} = \frac{\partial\mathbf{v}}{\partial t} + u\frac{\partial\mathbf{v}}{\partial x} + v\frac{\partial\mathbf{v}}{\partial y} + w\frac{\partial\mathbf{v}}{\partial z}
-$
+$$
 
 so its horizontal part is
 
-$
+$$
 \frac{\partial\mathbf{u}}{\partial t} + u\frac{\partial\mathbf{u}}{\partial x} + v\frac{\partial\mathbf{u}}{\partial y} + w\frac{\partial\mathbf{u}}{\partial z}
-$
+$$
 
 If $w \ll |\mathbf{u}|$ and $\frac{\partial\mathbf{u}}{\partial z}$ is not very large, this can be approximated
 
-$
+$$
 \frac{\partial\mathbf{u}}{\partial t} + u\frac{\partial\mathbf{u}}{\partial x} + v\frac{\partial\mathbf{u}}{\partial y}
-$
+$$
 
 which we will write as $\frac{D\mathbf{u}}{Dt}$.
 
@@ -829,22 +829,24 @@ which we will write as $\frac{D\mathbf{u}}{Dt}$.
 
 In component form,
 
-$2\mathbf{\Omega}\times\textbf{v} = (2\Omega w\cos\phi - 2\Omega v\sin\phi)\mathbf{i} + 2\Omega u\sin\phi\mathbf{j} + 2\Omega u\cos\phi\mathbf{k}$,
+$$
+2\mathbf{\Omega}\times\textbf{v} = (2\Omega w\cos\phi - 2\Omega v\sin\phi)\mathbf{i} + 2\Omega u\sin\phi\mathbf{j} + 2\Omega u\cos\phi\mathbf{k}
+$$
 
 where $\Omega = |\mathbf{\Omega}|$ and $\phi$ is latitude. Since $w \ll |\mathbf{u}|$ it is traditional to neglect $2\Omega w\cos\phi$ relative to $2\Omega v\sin\phi$, which is a good approximation except very close to the Equator where $\sin\phi\to 0$, or in situations when $w$ becomes comparable to $|\mathbf{u}|$ (e.g. non-hydrostatic flows). Making this approximation and defining $\mathbf{f} = 2\Omega\sin\phi\mathbf{k}$, the horizontal momentum equation can be written
 
-$
+$$
 \underbrace{\frac{D\mathbf{u}}{Dt}}_\text{Lagrangian acceleration in rotating frame} + \underbrace{\mathbf{f}\times\textbf{u}}_\text{Coriolis acceleration} = \underbrace{\frac{-\nabla p}{\rho}}_\text{pressure gradient}+ \underbrace{\dots}_\text{any other forces}
-$
+$$
 
 
 #### The hydrostatic approximation
 
 In large-scale oceanic motions the vertical momentum balance is dominated by the vertical pressure gradient and gravity, allowing us to make the hydrostatic approximation
 
-$
+$$
 0 = \underbrace{\frac{-1}{\rho}\frac{dp}{dz}}_\text{pressure gradient}+ \underbrace{\mathbf{g}}_\text{gravity and centrifugal}
-$
+$$
 
 where $g = |\mathbf{g}|$. This is a very good approximation in nearly all oceanographic circumstances in which horizontal scales of motion are much larger than vertical. Exceptions (non-hydrostatic motions) include deep-water gravity waves, deep convection, and fine submesoscale motions, for which vertical Lagrangian acceleration can also be important. 
 
@@ -856,42 +858,6 @@ where $g = |\mathbf{g}|$. This is a very good approximation in nearly all oceano
 ### Stacked shallow-water equations ($n$ layers)
 
 ![StackedLayers](../assets/StackedLayers.png){: style="height:650px;width:900px"}
-
-$
-% \usepackage{cancel}
-% \newcommand{\CancelColor}{Red}
-\cancel{x}
-$
-
-$
-% shorthand for \partial
-\newcommand {\PD}{\partial}
-% 1st partial derivative
-\newcommand {\pd}[2]{\frac{\PD #1}{\PD #2}}
-% 2nd partial derivative
-\newcommand {\pdTwo}[2]{\frac{\PD^{2} #1}{\PD #2^{2}}}
-% 2nd partial derivative, allows more general denominator (eg dxdy)
-\newcommand {\pdTwoX}[2]{\frac{\PD^{2} #1}{ #2}}
-% 3rd partial derivative
-\newcommand {\pdThree}[2]{\frac{\PD^{3} #1}{\PD #2^{3}}}
-% 3rd partial derivative,  allows more general denominator (eg dx^{2}dy)
-\newcommand {\pdThreeX}[2]{\frac{\PD^{3} #1}{ #2}}
-% 4th partial derivative
-\newcommand {\pdFour}[2]{\frac{\PD^{4} #1}{\PD #2^{4}}}
-% 4th partial derivative,  allows more general denominator (eg dx^{3}dy)
-\newcommand {\pdFourX}[2]{\frac{\PD^{4} #1}{ #2}}
-% small 1st partial derivative
-\newcommand {\pds}[2]{\PD #1/\PD #2}
-% small 2nd partial derivative
-\newcommand {\pdTwos}[2]{\PD^{2} #1/\PD #2^{2}}
-\underbrace{
-\underbrace{\underbrace{\pd{\mathbf{u}}{t}}_{\text{Eulerian acceleration}}
-\underbrace{+(\mathbf{u}\cdot\nabla)\mathbf{u}}_{\text{advection}}}_{\frac{D\mathbf{u}}{Dt}\text{: material (Lagrangian) acceleration relative to Earth}} \quad
-\underbrace{+2\bm{\Omega}\times\mathbf{u}}_{\text{Coriolis}}}_\text{Lagrangian acceleration relative to non-rotating frame} \quad
-=\underbrace{\underbrace{-\frac{1}{\rho}\nabla p}_{\text{pressure gradient}}
-\underbrace{+A\nabla^2\mathbf{u}}_{\text{eddy viscosity}}\quad
-\underbrace{+\mathbf{g}}_{\text{gravity}}}_{\frac{\mathbf{F}}{\rho}\text{: Force per unit density}}
-$
 
 
 ## Generalised vertical coordinates
