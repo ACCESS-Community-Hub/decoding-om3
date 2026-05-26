@@ -36,7 +36,9 @@ title: Some Notes on Ocean Modelling
 
   $\frac{\partial u}{\partial x} \to u_{1,1}$
 
-  $\nabla \cdot \mathbf{u} \to u_{i,i}$ $\nabla p \to p_{,i}$
+  $\nabla \cdot \mathbf{u} \to u_{i,i}$
+
+  $\nabla p \to p_{,i}$
 
   $\mathbf{u}  \cdot  \nabla \mathbf{u} \to u_j u_{i,j}$
 
@@ -44,8 +46,16 @@ title: Some Notes on Ocean Modelling
 
   $\nabla \times \mathbf{u}  \to  \epsilon_{ijk} u_{k,j}$ 
 
-  We adopt the summation convention -- where repeated indices imply sum across all
-  dimensions.
+  Here $\varepsilon_{ijk}$ is the Levi-Civita symbol
+
+  $\varepsilon_{ijk} = \begin{cases}
++1 & \text{if }(i,j,k) \text{ is an even permutation of } (1,2,3) \\
+-1 & \text{if }(i,j,k) \text{ is an odd permutation of } (1,2,3) \\
+\;\;\,0 & \text{otherwise}
+\end{cases}$
+
+  We adopt the summation convention -- where repeated indices imply a sum across all
+  dimensions for those indices.
 
 # Fundamentals
 
@@ -98,20 +108,20 @@ $\begin{aligned}
 \frac{D _f \mathbf{u}_f}{D t} &= \frac{D _r \mathbf{u}_f}{D t} + \pmb{\Omega} \times \mathbf{u}_f\\
 &= \frac{D _r }{D t}  \frac{D _f \mathbf{x}}{D t}+ \pmb{\Omega} \times  \frac{D _f \mathbf{x}}{D t}\\
 &= \frac{D _r }{D t} \left[\frac{D _r \mathbf{x}}{D t} + \pmb{\Omega} \times \mathbf{x} \right]+ \pmb{\Omega} \times \left[\frac{D _r \mathbf{x}}{D t} + \pmb{\Omega} \times \mathbf{x}\right]\\
-&= \frac{D _r \mathbf{u}_r}{D t}  + 2 \pmb{\Omega} \times \mathbf{u}_r + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{u}_r.
+&= \frac{D _r \mathbf{u}_r}{D t}  + 2 \pmb{\Omega} \times \mathbf{u}_r + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x}.
 \end{aligned}$
 
 So, the Navier-Stokes equation in the rotating frame can be written
 
-$\frac{D \mathbf{u}}{D t}  + 2 \pmb{\Omega} \times \mathbf{u} + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{u}= \mathbf{g} - \frac{\nabla p}{\rho} + \nu \nabla^2 \mathbf{u}.$
+$\frac{D \mathbf{u}}{D t}  + 2 \pmb{\Omega} \times \mathbf{u} + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x}= \mathbf{g} - \frac{\nabla p}{\rho} + \nu \nabla^2 \mathbf{u}.$
 
-The third time on the right is the centrifugal acceleration - we can show that
+The third term on the right is the centrifugal acceleration - we can show that
 
-$\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{u} = -\mathbf{r} \Omega^2$
+$\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x} = -\mathbf{r} \Omega^2$
 
 where $\mathbf{r}$ is the distance to the axis of rotation. If we define
 
-$\mathbf{g}^* = \mathbf{g} + r \Omega^2$ 
+$\mathbf{g}^* = \mathbf{g} + \mathbf{r} \Omega^2$
 
 then the Navier-Stokes equations become 
 
@@ -160,7 +170,7 @@ $\tilde{f}=2 \Omega \cos\phi$.
 
 ## Hydrostatic balance
 
-In the vertical direction, the primary balance is between gravity pressure gradients -- hydrostatic balance. To see this, take the vertical component of `[\[eq:nsrot\]](#eq:nsrot){reference-type="eqref" reference="eq:nsrot"}`,
+In the vertical direction, the primary balance is between gravity and pressure gradient -- the hydrostatic balance. To see this, take the vertical component of `[\[eq:nsrot\]](#eq:nsrot){reference-type="eqref" reference="eq:nsrot"}`,
 
 $\frac{\partial w}{\partial t} + \mathbf{u} \cdot \nabla w - \tilde{f} u = -g -\frac{1}{\rho}\frac{\partial p}{\partial z} + \nu \nabla^2 w.$
 
