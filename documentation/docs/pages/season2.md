@@ -742,7 +742,7 @@ Presenter: Andrew Kiss (@aekiss).
 **Note:** reload this page if the equations aren't displayed correctly.
 
 I'm following [Vallis' textbook "Atmospheric an Oceanic Fluid Dynamics"](https://www.vallisbook.org/) which you can consult for further details and explanation.
-Also see [these notes](https://decoding-access-om3--29.org.readthedocs.build/AOMSS_Lecture_Notes/), which cover similar material.
+Also see [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/), which cover similar material.
 
 ### Navier-Stokes equations
 The full shebang
@@ -758,7 +758,7 @@ $$
 
 is Newton's 2nd law $\mathbf{F} = m\mathbf{a}$ for the acceleration $\mathbf{a}$ of an infinitesimal fluid parcel of mass $m$ subject to a net force $\mathbf{F}$, rearranged as $\mathbf{a} = \mathbf{F}_V/\rho$, where $\mathbf{F}_V$ is the force divided by the parcel volume and $\rho$ is the parcel's density. $\mathbf{a}$ is the parcel's Lagrangian acceleration, so $\mathbf{a} = \frac{D_i\mathbf{v}}{D_it}$, where $\mathbf{v} = (u, v, w)$ is the fluid velocity and $\frac{D_i}{D_it}$ is the material derivative relative to an _inertial_ (i.e. non-rotating, non-accelerating) coordinate frame. Here $p$ is pressure, $\rho$ is density and $\nu$ is the kinematic molecular viscosity.
 
-This 3d momentum equation is equivalent to 3 scalar equations, but has 5 unknowns ($u, v, w, p, \rho$), so to close this system we need 2 more equations. These are an _equation of state_ relating the density to pressure (and temperature $T$ and salinity $S$, in the oceanographic context, e.g. TEOS-10; in this case additional evolution equations for $T$ and $S$ are also required), and an equation for the _conservation of mass_
+This 3d momentum equation is equivalent to 3 scalar equations, but has 5 unknowns ($u, v, w, p, \rho$), so to close this system we need 2 more equations. These are an _equation of state_ relating the density to pressure (and temperature $T$ and salinity $S$, in the oceanographic context, e.g. TEOS-10; in this case additional evolution equations for $T$ and $S$ are also required), and an equation for the _conservation of mass_ (also known as the _continuity equation_)
 
 $$
 \frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{v}) = 0.
@@ -968,7 +968,10 @@ $$
 
 This just says that the layer becomes thinner where there is horizontal divergence of transport, and it thickens where there is convergence.
 
+#### Isopycnal coordinates
 Although $w$ varies with $z$ in each layer, we don't need it in either the momentum or mass conservation equation, so these are full discretised in depth, with all variables varying with $z$ only between layers, not within them.
+
+Note, however, that we are still using $z$ as a vertical coordinate, in that our horizontal derivatives are being taken at constant $z$. However, because $\rho$ is a montonic function of $z$ in a stable stratification, another approach is to use $\rho$ instead of $z$ as a "vertical" coordinate in the continuously-stratified primitive equations. This is called using _isopycnal coordinates_. In this case the horizontal derivatives are along isopycnals (surfaces of constant $\rho$), rather than surfaces of constant $z$, but the equations can be made as tidy as the primitive equations we've derived here if the horizontal pressure gradient is replaced by the gradient of Mongomery potential $M=\frac{p+\rho gz}{\rho_0}$ on isopycnal surfaces. The $\rho$ coordinate can then be discretised to arrive at layered shallow-water equations with isopycnal coordinates. See [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/) or Vallis section 3.9 for further details.
 
 ## Generalised vertical coordinates
 ## Vertical Lagrangian remapping
