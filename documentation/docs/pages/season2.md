@@ -968,7 +968,7 @@ $$
 
 This just says that the layer becomes thinner where there is horizontal divergence of transport, and it thickens where there is convergence.
 
-Although $w$ varies with $z$ in each layer, we don't need it in either the momentum or mass conservation equation, so these are full discretised in depth, with all variables varying with $z$ only between layers, not within them.
+Although $w$ varies with $z$ in each layer, we don't need it in either the momentum or mass conservation equation, so these are fully discretised in depth, with all variables varying with $z$ only between layers, not within them.
 
 #### Isopycnal coordinates
 
