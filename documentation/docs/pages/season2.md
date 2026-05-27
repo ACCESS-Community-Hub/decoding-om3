@@ -968,10 +968,11 @@ $$
 
 This just says that the layer becomes thinner where there is horizontal divergence of transport, and it thickens where there is convergence.
 
-#### Isopycnal coordinates
 Although $w$ varies with $z$ in each layer, we don't need it in either the momentum or mass conservation equation, so these are full discretised in depth, with all variables varying with $z$ only between layers, not within them.
 
-Note, however, that we are still using $z$ as a vertical coordinate, in that our horizontal derivatives are being taken at constant $z$. However, because $\rho$ is a montonic function of $z$ in a stable stratification, another approach is to use $\rho$ instead of $z$ as a "vertical" coordinate in the continuously-stratified primitive equations. This is called using _isopycnal coordinates_. In this case the horizontal derivatives are along isopycnals (surfaces of constant $\rho$), rather than surfaces of constant $z$, but the equations can be made as tidy as the primitive equations we've derived here if the horizontal pressure gradient is replaced by the gradient of Mongomery potential $M=\frac{p+\rho gz}{\rho_0}$ on isopycnal surfaces. The $\rho$ coordinate can then be discretised to arrive at layered shallow-water equations with isopycnal coordinates. See [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/) or Vallis section 3.9 for further details.
+#### Isopycnal coordinates
+
+Note that we are still using $z$ as a vertical coordinate, in that our horizontal derivatives are being taken by infinitesimal differences at constant $z$ within each layer. However, because $\rho$ is a montonic function of $z$ (assuming a stable stratification), another approach is to use $\rho$ instead of $z$ as a "vertical" coordinate in the continuously-stratified primitive equations. This is called using _isopycnal coordinates_. In this case the horizontal derivatives are along isopycnals (surfaces of constant $\rho$), rather than surfaces of constant $z$, but the equations can be made as tidy as the primitive equations we've derived here if the horizontal pressure gradient is replaced by the gradient of Mongomery potential $M=\frac{p+\rho gz}{\rho_0}$ on isopycnal surfaces. The $\rho$ coordinate can then be discretised to arrive at layered shallow-water equations with isopycnal coordinates. See [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/) or Vallis section 3.9 for further details.
 
 ## Generalised vertical coordinates
 ## Vertical Lagrangian remapping
