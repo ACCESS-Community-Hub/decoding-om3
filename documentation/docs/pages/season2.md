@@ -794,9 +794,9 @@ where now $\mathbf{g}$ includes both gravity and the centrifugal acceleration.
 The so-called "primitive equations" simplify the Navier-Stokes momentum equation by neglecting terms that are insignificant for large-scale oceanographic motions. These approximations are
 
 - shallow-fluid approximation
-- neglect Coriolis acting on $w$
 - hydrostatic balance
 - Boussinesq approximation
+- neglect Coriolis acting on $w$
 
 Although spherical coordinates should be used, for clarity we'll adopt Cartesian coordinates with $x$ eastward, $y$ northward and $z$ upward (in the opposite direction to $\mathbf{g}$) relative to some mid-latitude point on Earth's surface. We define unit vectors $\mathbf{i}$, $\mathbf{j}$, $\mathbf{k}$ in the directions of increasing $x$, $y$, $z$, respectively.
 For convenience we use $\mathbf{u} = (u, v)$ to denote the horizontal component of the full three-dimensional velocity vector $\mathbf{v} = (u, v, w)$.
@@ -825,20 +825,6 @@ $$
 
 which we will write as $\frac{D\mathbf{u}}{Dt}$.
 
-#### The "traditional approximation" (neglecting small components of Coriolis)
-
-In component form,
-
-$$
-2\mathbf{\Omega}\times\mathbf{v} = (2\Omega w\cos\phi - 2\Omega v\sin\phi)\mathbf{i} + 2\Omega u\sin\phi\mathbf{j} - 2\Omega u\cos\phi\mathbf{k}
-$$
-
-where $\Omega = |\mathbf{\Omega}|$ and $\phi$ is latitude. Since $w \ll |\mathbf{u}|$ it is traditional to neglect $2\Omega w\cos\phi$ relative to $2\Omega v\sin\phi$, which is a good approximation except very close to the Equator where $\sin\phi\to 0$, or in situations when $w$ becomes comparable to $|\mathbf{u}|$ (e.g. non-hydrostatic flows). Making this approximation and defining $\mathbf{f} = 2\Omega\sin\phi\mathbf{k}$, the horizontal momentum equation can be written
-
-$$
-\underbrace{\frac{D\mathbf{u}}{Dt}}_\text{Lagrangian acceleration in rotating frame} + \underbrace{\mathbf{f}\times\mathbf{u}}_\text{Coriolis acceleration} = \underbrace{\frac{-\nabla p}{\rho}}_\text{pressure gradient}+ \underbrace{\dots}_\text{any other forces}
-$$
-
 #### The hydrostatic approximation
 
 In large-scale oceanic motions the vertical momentum balance is dominated by the vertical pressure gradient and gravity, allowing us to make the hydrostatic approximation
@@ -854,6 +840,20 @@ It is also common practice to treat $g$ as a constant, neglecting the variation 
 #### The Boussinesq approximation
 
 Because $\rho$ varies only vary slightly in the ocean, we can approximate it by a constant $\rho_0$ in the horizontal momentum equation. However, the vertical hydrostatic equation must retain the actual $\rho$ in order to retain horizontal gradients in pressure due to variations in density.
+
+#### The "traditional approximation" (neglecting small components of Coriolis)
+
+In component form,
+
+$$
+2\mathbf{\Omega}\times\mathbf{v} = (2\Omega w\cos\phi - 2\Omega v\sin\phi)\mathbf{i} + 2\Omega u\sin\phi\mathbf{j} - 2\Omega u\cos\phi\mathbf{k}
+$$
+
+where $\Omega = |\mathbf{\Omega}|$ and $\phi$ is latitude. Since $w \ll |\mathbf{u}|$ it is traditional to neglect $2\Omega w\cos\phi$ relative to $2\Omega v\sin\phi$, which is a good approximation except very close to the Equator where $\sin\phi\to 0$, or in situations when $w$ becomes comparable to $|\mathbf{u}|$ (e.g. non-hydrostatic flows). Making this approximation and defining $\mathbf{f} = 2\Omega\sin\phi\mathbf{k}$, the horizontal momentum equation can be written
+
+$$
+\underbrace{\frac{D\mathbf{u}}{Dt}}_\text{Lagrangian acceleration in rotating frame} + \underbrace{\mathbf{f}\times\mathbf{u}}_\text{Coriolis acceleration} = \underbrace{\frac{-\nabla p}{\rho}}_\text{pressure gradient}+ \underbrace{\dots}_\text{any other forces}
+$$
 
 #### The primitive equations
 
@@ -896,7 +896,7 @@ where we neglect atmospheric pressure. The horizontal pressure gradient is there
 
 $$\nabla_h p_1 = \rho_1 g \nabla_h \eta_0.$$
 
-Consistent with the depth-independence of $\nabla_h p_1$, we can assume that the horizontal velocity $u_1$ is also independent of depth within this layer (note, we are neglecting viscous effects here, e.g. the surface Ekman layer). This strengthens our justification for neglecting $w\frac{\partial \mathbf{u}_1}{\partial z}$ in the horizontal advection, and is exact if the flow is geostrophic ($\mathbf{f}\times\mathbf{u}_1 = -\nabla p_1/\rho_0$).
+Consistent with the depth-independence of $\nabla_h p_1$, we can assume that the horizontal velocity $\mathbf{u}_1$ is also independent of depth within this layer (note, we are neglecting viscous effects here, e.g. the surface Ekman layer). This strengthens our justification for neglecting $w\frac{\partial \mathbf{u}_1}{\partial z}$ in the horizontal advection, and is exact if the flow is geostrophic ($\mathbf{f}\times\mathbf{u}_1 = -\nabla p_1/\rho_0$).
 
 The shallow-water horizontal momentum equation in layer 1 therefore becomes
 
@@ -904,7 +904,7 @@ $$
 \frac{D\mathbf{u}_1}{Dt} + \mathbf{f}\times\mathbf{u}_1 = -g\nabla\eta_0 + \dots
 $$
 
-where $u_1 = u_1(x,y,t)$.
+where $\mathbf{u}_1 = \mathbf{u}_1(x,y,t)$.
 
 The pressure in layer 2 is the pressure imposed by layer 1 plus that within layer 2: 
 
@@ -915,7 +915,7 @@ p_2 &= \rho_1 g(\eta_0 - \eta_1) + \rho_2 g(\eta_1 - z)\\
 \end{aligned}
 $$
 
-where $g'_1 = g(\rho_2-\rho_1)/\rho_1$ is the _reduced gravity_ associated with the interface $\eta_1$. The horizontal pressure gradient is again independent of depth
+where $g'_1 = g(\rho_2-\rho_1)/\rho_1$ is the _reduced gravity_ associated with the interface $\eta_1$. The horizontal pressure gradient is again independent of depth within the layer
 
 $$
 \nabla_h p_2 = \rho_1 g \nabla_h \eta_0 +  \rho_1 g'_1 \nabla_h \eta_1
@@ -933,7 +933,7 @@ $$
 \frac{D\mathbf{u}_k}{Dt} + \mathbf{f}\times\mathbf{u}_k = -\sum_{i=1}^{k}g'_{i-1}\nabla\eta_{i-1} + \dots
 $$
 
-where $g'_{i-1} = g(\rho_i-\rho_{i-1})/\rho_1$ are the interfacial reduced gravities, $g'_0 = g$ and $u_k = u_k(x,y,t)$.
+where $g'_{i-1} = g(\rho_i-\rho_{i-1})/\rho_1$ are the interfacial reduced gravities, $g'_0 = g$ and $\mathbf{u}_k = \mathbf{u}_k(x,y,t)$.
 
 #### Conservation of mass in each layer
 
@@ -972,7 +972,7 @@ Although $w$ varies with $z$ in each layer, we don't need it in either the momen
 
 #### Isopycnal coordinates
 
-Note that we are still using $z$ as a vertical coordinate, in that our horizontal derivatives are being taken by infinitesimal differences at constant $z$ within each layer. However, because $\rho$ is a montonic function of $z$ (assuming a stable stratification), another approach is to use $\rho$ instead of $z$ as a "vertical" coordinate in the continuously-stratified primitive equations. This is called using _isopycnal coordinates_. In this case the horizontal derivatives are along isopycnals (surfaces of constant $\rho$), rather than surfaces of constant $z$, but the equations can be made as tidy as the primitive equations we've derived here if the horizontal pressure gradient is replaced by the gradient of Montgomery potential $M=\frac{p+\rho gz}{\rho_0}$ on isopycnal surfaces. The $\rho$ coordinate can then be discretised to arrive at layered shallow-water equations with isopycnal coordinates. See [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/) or Vallis section 3.9 for further details.
+Note that we are still using $z$ as a vertical coordinate, in that our horizontal derivatives are being taken by infinitesimal differences at constant $z$ within each layer. However, because $\rho$ is a montonic function of $z$ (assuming a stable stratification), another approach is to use $\rho$ instead of $z$ as a "vertical" coordinate in the continuously-stratified primitive equations. This is called using _isopycnal coordinates_. In this case the horizontal derivatives are along isopycnals (surfaces of constant $\rho$), rather than surfaces of constant $z$, but the equations can be made as tidy as the primitive equations we've derived here if the horizontal pressure gradient is replaced by the gradient of Montgomery potential $M=\frac{p+\rho gz}{\rho_0}$ on isopycnal surfaces. The $\rho$ coordinate can then be discretised to arrive at layered shallow-water equations with isopycnal coordinates. See [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/) or [Vallis](https://www.vallisbook.org/) section 3.9 for further details.
 
 ## Generalised vertical coordinates
 ## Vertical Lagrangian remapping
