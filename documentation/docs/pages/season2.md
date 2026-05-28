@@ -741,7 +741,7 @@ Presenter: Andrew Kiss (@aekiss).
 
 **Note:** reload this page if the equations aren't displayed correctly.
 
-I'm following [Vallis' textbook "Atmospheric an Oceanic Fluid Dynamics"](https://www.vallisbook.org/) which you can consult for further details and explanation.
+I'm following [Vallis' textbook "Atmospheric and Oceanic Fluid Dynamics"](https://www.vallisbook.org/) which you can consult for further details and explanation.
 Also see [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/), which cover similar material.
 
 ### Navier-Stokes equations
