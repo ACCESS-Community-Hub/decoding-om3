@@ -911,14 +911,14 @@ The pressure in layer 2 is the pressure imposed by layer 1 plus that within laye
 $$
 \begin{aligned}
 p_2 &= \rho_1 g(\eta_0 - \eta_1) + \rho_2 g(\eta_1 - z)\\
-    &= \rho_1 g\eta_0 + \rho_1 g'\eta_1 - \rho_2 gz,
+    &= \rho_0 g\eta_0 + \rho_0 g'_1\eta_1 - \rho_2 gz,
 \end{aligned}
 $$
 
-where $g'_1 = g(\rho_2-\rho_1)/\rho_1$ is the _reduced gravity_ associated with the interface $\eta_1$. The horizontal pressure gradient is again independent of depth within the layer
+where $g'_1 = g(\rho_2-\rho_1)/\rho_0$ is the _reduced gravity_ associated with the interface $\eta_1$ and we've used $\rho_0 = \rho_1$. The horizontal pressure gradient is again independent of depth within the layer
 
 $$
-\nabla_h p_2 = \rho_1 g \nabla_h \eta_0 +  \rho_1 g'_1 \nabla_h \eta_1
+\nabla_h p_2 = \rho_0 g \nabla_h \eta_0 +  \rho_0 g'_1 \nabla_h \eta_1
 $$
 
 and the layer 2 horizontal momentum equation is
@@ -933,7 +933,7 @@ $$
 \frac{D\mathbf{u}_k}{Dt} + \mathbf{f}\times\mathbf{u}_k = -\sum_{i=1}^{k}g'_{i-1}\nabla\eta_{i-1} + \dots
 $$
 
-where $g'_{i-1} = g(\rho_i-\rho_{i-1})/\rho_1$ are the interfacial reduced gravities, $g'_0 = g$ and $\mathbf{u}_k = \mathbf{u}_k(x,y,t)$.
+where $g'_{i-1} = g(\rho_i-\rho_{i-1})/\rho_0$ are the interfacial reduced gravities, $g'_0 = g$ and $\mathbf{u}_k = \mathbf{u}_k(x,y,t)$.
 
 #### Conservation of mass in each layer
 
