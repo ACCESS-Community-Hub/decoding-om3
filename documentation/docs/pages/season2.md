@@ -1027,6 +1027,9 @@ You may note that this final equation is similar in form to the approximate equa
 
 ## Vertical Lagrangian remapping
 
+Date: 18/06/2026.
+
+Presenter: Angus Gibson (@angus-g). 
 
 ## Pressure forces
 ## Coriolis term
