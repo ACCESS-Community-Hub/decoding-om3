@@ -975,7 +975,16 @@ Although $w$ varies with $z$ in each layer, we don't need it in either the momen
 Note that we are still using $z$ as a vertical coordinate, in that our horizontal derivatives are being taken by infinitesimal differences at constant $z$ within each layer. However, because $\rho$ is a montonic function of $z$ (assuming a stable stratification), another approach is to use $\rho$ instead of $z$ as a "vertical" coordinate in the continuously-stratified primitive equations. This is called using _isopycnal coordinates_. In this case the horizontal derivatives are along isopycnals (surfaces of constant $\rho$), rather than surfaces of constant $z$, but the equations can be made as tidy as the primitive equations we've derived here if the horizontal pressure gradient is replaced by the gradient of Montgomery potential $M=\frac{p+\rho gz}{\rho_0}$ on isopycnal surfaces. The $\rho$ coordinate can then be discretised to arrive at layered shallow-water equations with isopycnal coordinates. See [these notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/) or [Vallis](https://www.vallisbook.org/) section 3.9 for further details.
 
 ## Generalised vertical coordinates
+
+Date: 11/06/2026.
+
+Presenter: Andy Hogg (@AndyHoggANU). 
+
+
+
 ## Vertical Lagrangian remapping
+
+
 ## Pressure forces
 ## Coriolis term
 ## Pressure solver - barotropic / baroclinic split
