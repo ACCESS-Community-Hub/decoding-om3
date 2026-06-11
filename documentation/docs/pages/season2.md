@@ -977,6 +977,12 @@ Note that we are still using $z$ as a vertical coordinate, in that our horizonta
 ## Generalised vertical coordinates
 ## Vertical Lagrangian remapping
 ## Pressure forces
+
+Date: 25/06/2026.
+
+Presenter: Claire Yung (@claireyung). 
+
+
 ## Coriolis term
 ## Pressure solver - barotropic / baroclinic split
 ## Timestepping / Advection schemes
