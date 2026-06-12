@@ -980,7 +980,7 @@ Date: 11/06/2026.
 
 Presenter: Andy Hogg (@AndyHoggANU). 
 
-
+In a z-level model, we have vertical velocities, $w$, which passes through coordinate interfaces.
 
 ## Vertical Lagrangian remapping
 
