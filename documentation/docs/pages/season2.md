@@ -981,6 +981,7 @@ Date: 11/06/2026.
 Presenter: Andy Hogg (@AndyHoggANU). 
 
 In a z-level model, we have vertical velocities, $w$, which passes through coordinate interfaces.
+![RGLayer](../assets/z-level-andy.png){: style="height:450px;width:900px"}
 
 ## Vertical Lagrangian remapping
 
