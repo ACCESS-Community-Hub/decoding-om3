@@ -1006,7 +1006,7 @@ That is, the diasurface velocity, $w^{(\dot{s})}$, and the velocity of the inter
 
 **However,** this is a caveat here, and that is the ``$\approx$'' in the equation above. In fact, the situation is made more complex by geometric effects (basically, the coordinate interface not being flat). For a full treatment of this derivation, I refer you to [Appendix D of the Griffies et al. (2020)](https://doi.org/10.1029/2019MS001954) paper on ALE. There, they show that we can write
 
-$$ w^{(\dot{s})} \. dA = \mathbf{\hat{n}} \cdot (\mathbf{v} - \mathbf{v_{\mathrm{grid}}}) \. dS, $$
+$$ w^{(\dot{s})} \, dA = \mathbf{\hat{n}} \cdot (\mathbf{v} - \mathbf{v_{\mathrm{grid}}}) \, dS, $$
 
 where $dS$ is the area of the surface over the grid cell, $dA$ is the projection of that area onto a flat plane, $\mathbf{\hat{n}}$ is the unit normal and $\mathbf{v}$ is the 3D velocity field.
 
