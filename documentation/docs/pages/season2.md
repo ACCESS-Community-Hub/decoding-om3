@@ -1000,7 +1000,7 @@ In a nutshell, **generalised vertical coordinates** aims to enable both a cross-
 We would take a scalar field $s(x,y,z,t)$, where $s$ is monotonic in $z$ (actually, its derivative cannot be zero).
 Then, to first order, we can calculate the diasurface flux across a surface of constant $s$ to be
 
-$$ w^{(\dot{s})} \\approx w - w_{\mathrm{grid}} $$
+$$ w^{(\dot{s})} \approx w - w_{\mathrm{grid}} $$
 
 That is, the diasurface velocity, $w^{(\dot{s})}$, and the velocity of the interface, $w_{\mathrm{grid}}$, combine to make up the actual vertical velocity.
 
