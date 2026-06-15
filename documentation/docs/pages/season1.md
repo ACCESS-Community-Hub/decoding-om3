@@ -101,7 +101,7 @@ Specifically note that this line `access-om3/2025.08.001` highlights the [Spack 
 Further information:
 
  - [MOM6 fork management for being a development node](https://github.com/ACCESS-NRI/MOM6/wiki);
- - [OM3 build system and deployment](https://access-om3-configs.access-hive.org.au/infrastructure/Building/);
+ - [OM3 build system and deployment](https://access-om3-configs.access-hive.org.au/latest/infrastructure/Building/);
  - [NOAA-GFDL MOM6 development guide](https://github.com/NOAA-GFDL/MOM6-examples/wiki/Developers-guide);
  - [MOM6 development presentation](https://www.marshallward.org/mom6workshop/develop.html) by @marshallward.
 
@@ -161,7 +161,7 @@ Like before, we go to the related `ACCESS-NRI` repositories and find the related
 Note that the above two repositories are forks of the upstream repositories ([CICE](https://github.com/ESCOMP/CICE) and [MOM6](https://github.com/mom-ocean/MOM6))
 
 For more information and other related steps: 
- - https://access-om3-configs.access-hive.org.au/infrastructure/Building/
+ - https://access-om3-configs.access-hive.org.au/latest/infrastructure/Building/
  - https://docs.access-hive.org.au/getting_started/spack/
  - https://docs.access-hive.org.au/models/build_a_model/build_source_code/
  - https://docs.access-hive.org.au/models/build_a_model/create_a_prerelease/ (not shown in this tutorial but can be very simple)
@@ -282,9 +282,9 @@ MOM6 also has an in-built sea-ice model SIS2. An example configuratin is [here](
 ACCESS-NRI ACCESS-OM3 uses a different coupler (NUOPC) compared to the above two examples. It also uses a different "standalone" sea-ice model CICE. So whilst the MOM elements discussed above remain the same. Additional files are required for NUOPC to couple the components. 
 
 ![ACCESS OM3 diagram](../assets/nuopc_overview.png)
-source: https://access-om3-configs.access-hive.org.au/infrastructure/Architecture/
+source: https://access-om3-configs.access-hive.org.au/latest/infrastructure/Architecture/
 
-There's a description of the files found in a configuration here: https://access-om3-configs.access-hive.org.au/configurations/Overview/
+There's a description of the files found in a configuration here: https://access-om3-configs.access-hive.org.au/latest/configurations/Overview/
 
 OM3 configurations are stored here:
 https://github.com/acCESS-nri/access-om3-configs
@@ -292,14 +292,14 @@ https://github.com/acCESS-nri/access-om3-configs
 Configurations that have a `{dev|release}-` prefix are the ones to focus on. Briefly, the configurations branches are named with the following
 `{dev|release}-{MODEL_COMPONENTS}_{nominal_resolution}km_{forcing_data}_{forcing_method}[+{modifier}]`
 
-Further details [here](https://access-om3-configs.access-hive.org.au/#access-om3-configs-overview).
+Further details [here](https://access-om3-configs.access-hive.org.au/latest/#access-om3-configs-overview).
 
-Users are welcome to fork the access-nri configuration repository and share what changes/additions they make to configurations. ACCESS-NRI is also interested in helping support users share configurations ([process outlined here](https://access-om3-configs.access-hive.org.au/contributing/Add-Supported-Config/)). We are also keeping a list of key experiments used for [development here](https://access-om3-configs.access-hive.org.au/Experiments/).
+Users are welcome to fork the access-nri configuration repository and share what changes/additions they make to configurations. ACCESS-NRI is also interested in helping support users share configurations ([process outlined here](https://access-om3-configs.access-hive.org.au/latest/contributing/Add-Supported-Config/)). We are also keeping a list of key experiments used for [development here](https://access-om3-configs.access-hive.org.au/latest/Experiments/).
 
 Handy resources:
 
  - ACCESS-NRI's OM3 configurations [live here](https://github.com/acCESS-nri/access-om3-configs);
- - ACCESS-NRI [ACCESS-OM3 configuration files explanation](https://access-om3-configs.access-hive.org.au/configurations/Overview/); 
+ - ACCESS-NRI [ACCESS-OM3 configuration files explanation](https://access-om3-configs.access-hive.org.au/latest/configurations/Overview/); 
  - [MOM6 runtime parameters format (input.nml, MOM_input)](https://mom6.readthedocs.io/en/main/api/generated/pages/Runtime_Parameter_System.html);
  - [diag_table](https://mom6.readthedocs.io/en/main/api/generated/pages/Diagnostics.html) ;
  - [Another explanation of config files from MOM6 regional](https://regional-mom6.readthedocs.io/en/latest/mom6-file-structure-primer.html);
@@ -533,7 +533,7 @@ We'll focus on a recent dev `MC_25km_jra_iaf-1.0-beta-5165c0f8` [OM3 experiment]
      - [Base configuration](https://github.com/ACCESS-NRI/access-om3-configs/tree/f1307b65ee6b06ad9e92a560ae64bc0b4c91e6ee);
      - [Experiment](https://github.com/ACCESS-Community-Hub/access-om3-experiments/tree/MC_25km_jra_iaf-1.0-beta-5165c0f8) (includes the Payu run log -- has a commit for each time the model cycled / had run time changes).
 
-    Further details about these simulations is [available here](https://access-om3-configs.access-hive.org.au/Experiments/).
+    Further details about these simulations is [available here](https://access-om3-configs.access-hive.org.au/latest/Experiments/).
 
 Looking at the OM3 simulation folder `/home/156/aek156/payu/MC_25km_jra_iaf` we have:
 ```bash
@@ -991,7 +991,7 @@ If all of these fail, there is the option to [use a debugger](https://docs.acces
 Note: If you struggled to find an answer, other people will as well so please consider posting the issue and solution to the [hive forum](https://forum.access-hive.org.au)
 
 ### Part 2 Truncation errors
-See [here](https://access-om3-configs.access-hive.org.au/Tips-and-tricks/) for more detiled notes on understanding truncation errors.
+See [here](https://access-om3-configs.access-hive.org.au/latest/Tips-and-tricks/) for more detiled notes on understanding truncation errors.
 A common error is when the model goes numerically unstable, creating large velocities. MOM6 deals with these by truncating them (artificially setting them back to a realistic number). When MOM6 does this too many times it will end the simulation early with this error message:
 ```
 Ocean velocity has been truncated too many times
@@ -1045,7 +1045,7 @@ work/V_velocity_truncations
 work/U_velocity_truncations
 ```
 
-These truncation files contain information on where and when the truncations occur and there is detailed information on how to interpret the files [here](https://access-om3-configs.access-hive.org.au/Tips-and-tricks/#2-interpret-truncation-log-files).
+These truncation files contain information on where and when the truncations occur and there is detailed information on how to interpret the files [here](https://access-om3-configs.access-hive.org.au/latest/Tips-and-tricks/#2-interpret-truncation-log-files).
 
 There is a notebook to help investigate the location and timing of the truncation errors [here](https://github.com/ACCESS-NRI/access-eval-recipes/blob/main/ocean/Examine_truncation_data.ipynb).
 
@@ -1055,7 +1055,7 @@ Common ways to fix the issue are to:
 1. decrease the timestep and
 2. modify the bathymetry to remove “lumps” and “bumps” in the coastline and bathymetry that might be contributing to the instability. 
 
-For 1: you can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/configurations/Overview/#timesteps). Make sure your coupling timestep (set in `nuopc.runseq`) is divisable by `DT` and `DT_THERM`.
+For 1: you can decrease the timestep in `MOM_input` by reducing parameters `DT` and `DT_THERM`. Changing timestep in ACCESS-OM3 is more involved due to the coupling - see [here](https://access-om3-configs.access-hive.org.au/latest/configurations/Overview/#timesteps). Make sure your coupling timestep (set in `nuopc.runseq`) is divisable by `DT` and `DT_THERM`.
 
 For 2: bathymetry modification has a few potential pitfals, including the need to recreate other files (e.g. the mesh files).  There are some tools to help with bathymetry modification [here](https://github.com/COSIMA/bathymetry-tools). ACCESS-OM3 users are advised to start with a clone of [`make_om3_topo`](https://github.com/ACCESS-NRI/make_om3_topo) and check out the commit that created the `topog.nc` files used in their configuration. The commit is in the metadata of `topog.nc` - 'ncdump -h /path/to/file/topog.nc` (where `/path/to/file/` is documented in `config.yaml`) will get you this information. The `make_om3_topo` script goes through the steps needed to create the topography, including bathymetry modifications already performed. This workflow will also document any new changes to the bathymetry if you need to revisit this at a later date.
 
@@ -1125,7 +1125,7 @@ Further background is available:
     - [Testing: verification and validation](https://www.marshallward.org/mom6vv/#/title-slide)
     - [Dimensional and rotational testing of MOM6](https://www.marshallward.org/fortrancon2021/#/title-slide)
  - [Contributing to MOM6 video](https://www.youtube.com/watch?v=JsjEBxt9A6I).
- - [ACCESS-NRI on MOM6 node PR testing](https://access-om3-configs.access-hive.org.au/infrastructure/MOM6-node-PR-testing/).
+ - [ACCESS-NRI on MOM6 node PR testing](https://access-om3-configs.access-hive.org.au/latest/infrastructure/MOM6-node-PR-testing/).
  - [ACCESS-NRI MOM6 branch management](https://github.com/accESS-nRI/mom6/wiki) (relevant for making contributions).
 
 ## Part 2: How to contribute code back to MOM6
@@ -1144,7 +1144,7 @@ MOM6 Consortium
 - All members review/test contributions to the "official" codebase (`mom-ocean/MOM6:main`).
 - ACCESS-OM3 is built from the ACCESS-NRI fork.
 
-For example, Joey Bisits is working in his own fork of ACCESS-NRI's MOM6 fork, a PR will then merge Joey's code into our organisation's fork -- as part of the PR, ACCESS-NRI will do some testing. Collating several of these kinds of contributions together, we will eventually put a PR together to `mom-ocean/MOM6:main`. This will then be tested by all the development nodes and they all separately need to approve it before it will be merged into `mom-ocean/MOM6:main`. Further details of the tests ACCESS-NRI does is [available here](https://access-om3-configs.access-hive.org.au/infrastructure/MOM6-node-PR-testing/).
+For example, Joey Bisits is working in his own fork of ACCESS-NRI's MOM6 fork, a PR will then merge Joey's code into our organisation's fork -- as part of the PR, ACCESS-NRI will do some testing. Collating several of these kinds of contributions together, we will eventually put a PR together to `mom-ocean/MOM6:main`. This will then be tested by all the development nodes and they all separately need to approve it before it will be merged into `mom-ocean/MOM6:main`. Further details of the tests ACCESS-NRI does is [available here](https://access-om3-configs.access-hive.org.au/latest/infrastructure/MOM6-node-PR-testing/).
 
 At times, the ACCESS-NRI fork is out of step with `mom-ocean/MOM6:main`, this occurs across all the development nodes. For example, currently on our fork, on the `2026.01` branch, it is "14 commits ahead of and 18 commits behind mom-ocean/MOM6:main".
 
