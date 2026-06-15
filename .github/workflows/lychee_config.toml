@@ -110,7 +110,7 @@ glob_ignore_case = false
     '^https://doi\.org\b', # DOI link for articles often causing "Rejected status code" errors
     '^https://gmd\.copernicus\.org\b', # GMD articles often causing "Rejected status code" errors
     '^https://journals\.ametsoc\.org\b', # Articles often causing "Rejected status code" errors
-    '^https://www.marshallward.org', # Often gives this error for the slide deck links: Cannot find fragment: Fragment not found in document. Check if fragment exists or page structure
+    '^https://www\.marshallward\.org\b', # Often gives this error for the slide deck links: Cannot find fragment: Fragment not found in document. Check if fragment exists or page structure
   ]
 
 # Exclude paths from getting checked. The values are treated as regular expressions
