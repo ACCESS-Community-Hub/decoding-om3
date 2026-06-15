@@ -384,7 +384,6 @@ Resources:
  - [Tutorial: Running and controlling MOM6](https://www.youtube.com/watch?v=94m3CMTwJ1E&t=1860s) (31 to 37 minutes);
  - [MOM6 diagnostics on readthedocs](https://mom6.readthedocs.io/en/dev-gfdl/api/generated/pages/Diagnostics.html);
  - [ACCESS hive docs configuration MOM6 diagnostics](https://docs.access-hive.org.au/models/run_a_model/run_access-om3/#configuring-mom6-diagnostics);
- - [Dougie on adding diagnostics](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-add-a-diagnostic).
 
 4 parts to the diag table:
 
@@ -983,7 +982,7 @@ A few more tips for debugging:
 3. Search the [hive forum](https://forum.access-hive.org.au)
 4. Check [Gadi status](https://opus.nci.org.au/spaces/Help/pages/399802963/System+Maintenance+and+Notices) just in case the issue is external
 5. Ask a friend or post in the hive forum
-6. [Search through the code-base](https://decoding-access-om3.readthedocs.io/decoding_mom6/#how-to-use-githubs-search-functionality-to-find-code-mom6-as-an-example) for the error message or for key words
+6. [Search through the code-base](https://decoding-access-om3.readthedocs.io/season1/#how-to-use-githubs-search-functionality-to-find-code-mom6-as-an-example) for the error message or for key words
 7.	Go back to a last working copy and slowly implement your changes, checking for errors along the way 
 
 If all of these fail, there is the option to [use a debugger](https://docs.access-hive.org.au/models/build_a_model/build_source_code/#setting-up-the-debugger)
@@ -1115,7 +1114,7 @@ Having defined a diagnostic, for the model to output it a `conversion` needs to 
 
  - https://github.com/jbisits/MOM6/tree/jib/numerical-mixing
 
-Once one is happy with a code contribution. It is then possible, via the [ACCESS-NRI MOM6 fork](https://github.com/aCCESS-NRI/mom6), to go through a process by which it gets accepted into the ["upstream" `mom-ocean` codebase](http://github.com/mom-ocean/mom6). We will cover this process in more detail in a future presentation. 
+Once one is happy with a code contribution. It is then possible, via the [ACCESS-NRI MOM6 fork](https://github.com/aCCESS-NRI/mom6), to go through a process by which it gets accepted into the ["upstream" `mom-ocean` codebase](https://github.com/mom-ocean/mom6). We will cover this process in more detail in a future presentation. 
 
 Further background is available:
 
