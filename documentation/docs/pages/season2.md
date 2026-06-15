@@ -319,7 +319,7 @@ outer index in the middle, and the inner-most loop iterating over the first. Thi
 
 Derived types are similar to Python classes in that they can be instantiated and group related information. Like Python classes,
 Fortran derived types has a name and attributes (or members). One of the key derived types in MOM6 is the
-[`ocean_grid_type`](https://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_grid_type.F90) which describe the grid extents
+[`ocean_grid_type`](https://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_grid.F90) which describe the grid extents
 (including the computational and halo extents). It also stores other grid information like lateral dimensions of the columns,
 masking etc. We can create a simple version of the grid type and use it in our subroutine:
 
