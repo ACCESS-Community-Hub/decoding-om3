@@ -208,8 +208,8 @@ exercised in MOM6 have a Python equivalent. Here, we won't be looking at MOM6 co
 ### Programs and modules
 
 Most of the code in MOM6 is organised into "modules" which usually relate to a certain area of the ocean physics. For example,
-`MOM_barotropic.F90` contains the [barotropic solver code](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_barotropic.F90),
-and `MOM_tracer_advect.F90` contains the [tracer advection code](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/tracer/MOM_tracer_advect.F90)
+`MOM_barotropic.F90` contains the [barotropic solver code](https://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_barotropic.F90),
+and `MOM_tracer_advect.F90` contains the [tracer advection code](https://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/tracer/MOM_tracer_advect.F90)
 and so on. Modules contains code that can be reused in other modules or "programs". Modules cannot be directly compiled and run, and
 so modules' code must be "used" from a program. The skeleton of this arrangement can look like:
 
@@ -319,7 +319,7 @@ outer index in the middle, and the inner-most loop iterating over the first. Thi
 
 Derived types are similar to Python classes in that they can be instantiated and group related information. Like Python classes,
 Fortran derived types has a name and attributes (or members). One of the key derived types in MOM6 is the
-[`ocean_grid_type`](http://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_grid_type.F90) which describe the grid extents
+[`ocean_grid_type`](https://github.com/ACCESS-NRI/MOM6/blob/2026.01/src/core/MOM_grid.F90) which describe the grid extents
 (including the computational and halo extents). It also stores other grid information like lateral dimensions of the columns,
 masking etc. We can create a simple version of the grid type and use it in our subroutine:
 
