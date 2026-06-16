@@ -58,6 +58,11 @@ authors:
     email: edward.yang@anu.edu.au
     affiliation: Australia’s Climate Simulator (ACCESS-NRI), Australian National University, Canberra, Australia
     orcid: 'https://orcid.org/0009-0004-5881-0695'
+- given-names: Jorge Luis
+    family-names: Galvez Vallejo
+    email: jorge.galvezvallejo@anu.edu.au
+    affiliation: National Computational Infrastructure (NCI), Australian National University, Canberra, Australia
+    orcid: 'https://orcid.org/0000-0003-4744-2087'
 repository-code: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 url: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 repository-artifact: >-
