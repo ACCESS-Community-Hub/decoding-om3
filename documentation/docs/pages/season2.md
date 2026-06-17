@@ -1031,11 +1031,10 @@ Date: 18/06/2026.
 
 Presenter: Angus Gibson (@angus-g).
 
-With **generalised vertical coordinates**, we know that vertical velocities permit
+With **generalised vertical coordinates (GVC)**, we know that vertical velocities permit
 a range of grid evolution from fully Lagrangian (zero dia-surface transport) to fully
-Eulerian (zero grid velocity). For the *vertical Lagrangian-remap* method, we tend
-toward the fully Lagrangian side: the GVC $s$ follows fluid elements so that the
-dia-surface volume flux $w^{(\dot{s})} = 0$.
+Eulerian (zero grid velocity). In MOM6, the dynamics are written in the fully Lagrangian sense:
+the GVC $s$ follows fluid elements so that the dia-surface volume flux $w^{(\dot{s})} = 0$.
 
 If the model is using a purely Lagrangian coordinate, how do we have any control
 over it? In general, these coordinates drift to a less useful representation of the
@@ -1045,7 +1044,9 @@ processes. Even more simply, there is indeed irreversible mixing across surfaces
 that must be captured somehow.
 
 The method has three steps:
-1. the Vertical Lagrangian step: evolve the model as above;
+
+1. the Vertical Lagrangian step: evolve the model with a purely Lagrangian
+   generalised coordinate;
 2. the Vertical Regrid step: explicitly set the generalised coordinate;
 3. the Vertical Remap step: ensure consistency between the ocean state
    and the new coordinate.
@@ -1071,6 +1072,7 @@ quantities are conserved.
 ![Vertical Lagrangian remapping](../assets/vertical-lagrange-remap.png)
 
 There are two big advantages to using this method:
+
 1. There is no vertical CFL limit! As long as the remapping can handle
    interpolation over more than a single cell, the target grid can be
    arbitrary.
