@@ -36,7 +36,9 @@ title: Some Notes on Ocean Modelling
 
   $\frac{\partial u}{\partial x} \to u_{1,1}$
 
-  $\nabla \cdot \mathbf{u} \to u_{i,i}$ $\nabla p \to p_{,i}$
+  $\nabla \cdot \mathbf{u} \to u_{i,i}$
+
+  $\nabla p \to p_{,i}$
 
   $\mathbf{u}  \cdot  \nabla \mathbf{u} \to u_j u_{i,j}$
 
@@ -44,8 +46,16 @@ title: Some Notes on Ocean Modelling
 
   $\nabla \times \mathbf{u}  \to  \epsilon_{ijk} u_{k,j}$ 
 
-  We adopt the summation convention -- where repeated indices imply sum across all
-  dimensions.
+  Here $\varepsilon_{ijk}$ is the Levi-Civita symbol
+
+  $\varepsilon_{ijk} = \begin{cases}
++1 & \text{if }(i,j,k) \text{ is an even permutation of } (1,2,3) \\
+-1 & \text{if }(i,j,k) \text{ is an odd permutation of } (1,2,3) \\
+\;\;\,0 & \text{otherwise}
+\end{cases}$
+
+  We adopt the summation convention -- where repeated indices imply a sum across all
+  dimensions for those indices.
 
 # Fundamentals
 
@@ -54,7 +64,7 @@ of mass equation, or *continuity equation*:
 $\label{eq:continuity}
    \nabla \cdot \mathbf{u} = 0.$ 
 
-And the Navier-Stokes equation:
+And the Navier-Stokes _momentum equation_:
 
 $\label{eq:ns}    \frac{D \mathbf{u}}{D t} =  \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot \nabla \mathbf{u} = \mathbf{g} - \frac{\nabla p}{\rho} + \nu \nabla^2 \mathbf{u}$
 
@@ -98,20 +108,20 @@ $\begin{aligned}
 \frac{D _f \mathbf{u}_f}{D t} &= \frac{D _r \mathbf{u}_f}{D t} + \pmb{\Omega} \times \mathbf{u}_f\\
 &= \frac{D _r }{D t}  \frac{D _f \mathbf{x}}{D t}+ \pmb{\Omega} \times  \frac{D _f \mathbf{x}}{D t}\\
 &= \frac{D _r }{D t} \left[\frac{D _r \mathbf{x}}{D t} + \pmb{\Omega} \times \mathbf{x} \right]+ \pmb{\Omega} \times \left[\frac{D _r \mathbf{x}}{D t} + \pmb{\Omega} \times \mathbf{x}\right]\\
-&= \frac{D _r \mathbf{u}_r}{D t}  + 2 \pmb{\Omega} \times \mathbf{u}_r + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{u}_r.
+&= \frac{D _r \mathbf{u}_r}{D t}  + 2 \pmb{\Omega} \times \mathbf{u}_r + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x}.
 \end{aligned}$
 
 So, the Navier-Stokes equation in the rotating frame can be written
 
-$\frac{D \mathbf{u}}{D t}  + 2 \pmb{\Omega} \times \mathbf{u} + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{u}= \mathbf{g} - \frac{\nabla p}{\rho} + \nu \nabla^2 \mathbf{u}.$
+$\frac{D \mathbf{u}}{D t}  + 2 \pmb{\Omega} \times \mathbf{u} + \pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x}= \mathbf{g} - \frac{\nabla p}{\rho} + \nu \nabla^2 \mathbf{u}.$
 
-The third time on the right is the centrifugal acceleration - we can show that
+The third term on the right is the centrifugal acceleration - we can show that
 
-$\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{u} = -\mathbf{r} \Omega^2$
+$\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x} = -\mathbf{r} \Omega^2$
 
 where $\mathbf{r}$ is the distance to the axis of rotation. If we define
 
-$\mathbf{g}^* = \mathbf{g} + r \Omega^2$ 
+$\mathbf{g}^* = \mathbf{g} + \mathbf{r} \Omega^2$
 
 then the Navier-Stokes equations become 
 
@@ -160,7 +170,7 @@ $\tilde{f}=2 \Omega \cos\phi$.
 
 ## Hydrostatic balance
 
-In the vertical direction, the primary balance is between gravity pressure gradients -- hydrostatic balance. To see this, take the vertical component of `[\[eq:nsrot\]](#eq:nsrot){reference-type="eqref" reference="eq:nsrot"}`,
+In the vertical direction, the primary balance is between gravity and pressure gradient -- the hydrostatic balance. To see this, take the vertical component of `[\[eq:nsrot\]](#eq:nsrot){reference-type="eqref" reference="eq:nsrot"}`,
 
 $\frac{\partial w}{\partial t} + \mathbf{u} \cdot \nabla w - \tilde{f} u = -g -\frac{1}{\rho}\frac{\partial p}{\partial z} + \nu \nabla^2 w.$
 
@@ -170,7 +180,9 @@ $\Delta x, \Delta y \sim 10^4$ m, $U,V\sim 1$ m/s,
 $\tilde{f}\sim 10^{-4}$ s$^{-1}$ ...all terms are tiny except for
 
 $\label{eq:hydrostatic}
- \frac{\partial p}{\partial z} = -\rho g.$ This is the hydrostatic balance and for large-scale models it replaces the vertical component of the momentum equation.
+ \frac{\partial p}{\partial z} = -\rho g.$
+
+This is the _hydrostatic balance_ and for large-scale models it replaces the vertical component of the momentum equation.
 
 Thus, we only find vertical velocity from the continuity equation,
 `[\[eq:continuity\]](#eq:continuity){reference-type="eqref" reference="eq:continuity"}`:
@@ -230,18 +242,22 @@ thickness $h(x,y,t)$ and density $\rho_1$, with a free surface elevation
 of $\eta_0(x,y,z)$.
 
 Let's start with pressure. Within the upper (active) layer, at height
-$-z$, pressure is written 
+$z$, pressure is written
 
-$p_1 = \rho_1 g \eta_0 + \rho_1 g z$
+$p_1 = \rho_1 g (\eta_0 - z)$,
+
+where we neglect atmospheric pressure. The horizontal pressure gradient is therefore due only to surface slope
 
 $\nabla_h p_1 = \rho_1 g \nabla_h \eta_0$ 
 
 In the lower layer,
 
 $\begin{aligned}
-p_2 &= \rho_1 g h + \rho_2 g (z - (h-\eta_0))\\
-&=\rho_1 g \eta_0 - \Delta \rho g (h - \eta_0) + \rho_2 g z
-\end{aligned}$ where $\Delta\rho \equiv \rho_2 - \rho_1$. Now
+p_2 &= \rho_1 g h + \rho_2 g (\eta_0 - h - z)\\
+&=\rho_1 g \eta_0 + \Delta \rho g (\eta_0 - h) - \rho_2 g z
+\end{aligned}$
+
+where $\Delta\rho \equiv \rho_2 - \rho_1$. Now
 $\nabla_h p_2 = \rho_1  g \nabla_h \eta_0  + \Delta \rho g \nabla_h \eta_1$
 
 where we have defined $\eta_1 =  \eta_0 - h$ as the height of the internal interface.
@@ -255,7 +271,7 @@ where $g' \equiv g \Delta \rho/\rho_1$. So the interface simply mirrors the
 free surface! This means that $\nabla p_1$ can be written either using
 the free surface or the interface height.
 
-Now, let's integrate out equations across the layer, i.e. from $\eta_1$
+Now, let's integrate our equations across the layer, i.e. from $\eta_1$
 to $\eta_0$. In doing this we will assume that $u,v$ are functions of
 $(x,y,t)$ only, for simplicity. (But we will retain the $z$-dependence
 of $w$.) Integrating continuity:
@@ -264,9 +280,9 @@ $h\frac{\partial u}{\partial x} + h \frac{\partial v}{\partial y} + w\bigg|^{\ma
 
 But
 
-$w(z=\eta_0) = \frac{\partial \eta_0}{\partial t} + u \frac{\partial \eta_0}{\partial x} + v \frac{\partial eta_0}{\partial y}$
+$w(z=\eta_0) = \frac{\partial \eta_0}{\partial t} + u \frac{\partial \eta_0}{\partial x} + v \frac{\partial \eta_0}{\partial y}$
 
-$w(z=\eta_1) = \frac{\partial \eta_1}{\partial t} + u \frac{\partial \eta_1}{\partial x} + v \frac{\partial eta_1}{\partial y}$
+$w(z=\eta_1) = \frac{\partial \eta_1}{\partial t} + u \frac{\partial \eta_1}{\partial x} + v \frac{\partial \eta_1}{\partial y}$
 
 so that
 
@@ -275,6 +291,8 @@ $w\bigg|^{\mathsf{top}}_{\mathsf{bot}}= \frac{\partial h}{\partial t} + u \frac{
 Giving our conservation of mass (within the layer) to be
 
 $h\frac{\partial u}{\partial x} + h \frac{\partial v}{\partial y} + \frac{\partial h}{\partial t} + u \frac{\partial h}{\partial x} + v \frac{\partial h}{\partial y}=0$
+
+which can be rearranged to
 
 $\label{eq:masslayer}
 \frac{\partial h}{\partial t} +  \frac{\partial (uh)}{\partial x} +  \frac{\partial (vh)}{\partial y}=0$
