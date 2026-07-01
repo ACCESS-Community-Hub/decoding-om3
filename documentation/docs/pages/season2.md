@@ -1134,30 +1134,27 @@ Date: 2/7/2026.
 
 Presenters: Chris Bull (@chrisb) and Dave Munday.
 
-### Motivation: why Coriolis is fundamental and subtle
+**Motivation: why Coriolis is fundamental and subtle**
 
-!!!abstract
-      The Coriolis acceleration is one of the most important terms in large-scale ocean dynamics. It's fundamental for geostrophic balance and so has a ubiquitous influence on global ocean circulation. In everyday use, we treat it as a simple $f\mathbf{k} \times \mathbf{u}$ term in the horizontal momentum equation. But the full story involves a coordinate transformation, the absorption of centrifugal effects into gravity, a careful decomposition of the Earth's rotation vector in local coordinates, and a scaling argument to discard "non-traditional" terms. Each of these steps involves assumptions that are worth understanding, especially if you ever encounter situations where they might break down.
+The Coriolis acceleration is one of the most important terms in large-scale ocean dynamics. It's fundamental for geostrophic balance and so has a ubiquitous influence on global ocean circulation. In everyday use, we treat it as a simple $f\mathbf{k} \times \mathbf{u}$ term in the horizontal momentum equation. But the full story involves...
 
-Some assumptions we'll end up making:
+1. **Rotating-frame transformation** — applying the transport rule twice produces the Coriolis ($2\pmb{\Omega} \times \mathbf{u}$) and centrifugal ($\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x}$) accelerations. The factor of 2 arises because the cross product contributes once from each of the two bracket expansions.
+2. **Centrifugal absorbed into $\mathbf{g}^*$** — valid because $r\Omega^2 / g \lesssim 0.3\%$ everywhere on Earth; the tiny tilt of $\mathbf{g}^*$ from the local vertical is also ignored.
+3. **Spherical geometry** — resolving $\pmb{\Omega}$ in local coordinates gives $\pmb{\Omega} = (0, \Omega\cos\phi, \Omega\sin\phi)$, with no eastward component, producing both the traditional Coriolis parameter $f = 2\Omega\sin\phi$ and the non-traditional $\tilde{f} = 2\Omega\cos\phi$.
+4. **Traditional approximation** — the non-traditional terms $\tilde{f}w$ (zonal equation) and $\tilde{f}u$ (vertical equation) are dropped: the former because $w \ll |\mathbf{u}|$, the latter because the vertical equation is replaced by hydrostatic balance, which is orders of magnitude larger.
 
- - the earth is spherical;
- - the earth rotates around the poles (not into them);
- - non-traditional Coriolis terms are unimportant;
- - gravity is stronger than centrifugal effects.
+!!! danger 
+    The result is: MOM6 accounts for Coriolis by adding $-fv$ to the zonal acceleration and $+fu$ to the meridional acceleration.
 
-These notes follow and expand on the Coriolis section of the [AOMSS Lecture Notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/). The goal is to walk through the derivation carefully enough that each step feels motivated, and to make explicit exactly which approximations we make — and why — before arriving at the simple $\mathbf{f}k \times \mathbf{u}$ that MOM6 actually computes.
+These above steps involves assumptions that are worth understanding, especially if you ever encounter situations where they might break down. These notes follow and expand on the Coriolis section of the [AOMSS Lecture Notes](https://decoding-access-om3.readthedocs.io/AOMSS_Lecture_Notes/). The goal is to walk through the derivation carefully enough that each step feels motivated, and to make explicit exactly which approximations we make — and why — before arriving at the simple $\mathbf{f}k \times \mathbf{u}$ that MOM6 actually computes.
 
 For further thoughts, Chris' favorite explanation is A.2.2. in _Williams, R. G., & Follows, M. J. (2011). Ocean dynamics and the carbon cycle: Principles and mechanisms. Cambridge University Press_.
 
-Some background on Coriolis scheme choices in MOM6:
+We start with our friend, the Navier-Stokes momentum equation in a _fixed_ reference frame:
 
- - Currently we use `CORIOLIS_SCHEME = "SADOURNY75_ENSTRO"` in `dev-MC_25km_jra_iaf` [link](https://github.com/ACCESS-NRI/access-om3-configs/blob/cbdb59e7eeaa92b2950b0bbe0bddcb02d3b6f16a/MOM_input#L478); 
- - [MOM6 code](https://github.com/ACCESS-NRI/MOM6/blob/2026.05.001/src/core/MOM_CoriolisAdv.F90#L910-L912) for the `CORIOLIS_SCHEME = "SADOURNY75_ENSTRO"` is here: [CAu (zonal Coriolis term)](https://github.com/ACCESS-NRI/MOM6/blob/2026.05.001/src/core/MOM_CoriolisAdv.F90#L716-L720) and [CAv (meridional Coriolis term)](https://github.com/ACCESS-NRI/MOM6/blob/2026.05.001/src/core/MOM_CoriolisAdv.F90#L943-L947);
- - Is this a good idea? [Join the discussion!](https://github.com/ACCESS-NRI/access-om3-configs/issues/697)
+$$\frac{D \mathbf{u}}{D t} =  \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot \nabla \mathbf{u} = \mathbf{g} - \frac{\nabla p}{\rho} + \nu \nabla^2 \mathbf{u}$$
 
-!!! danger 
-    Take-home: MOM6 accounts for Coriolis by adding $-fv$ to the zonal acceleration and $+fu$ to the meridional acceleration.
+Our goal is to re-write this in terms of a _rotating_ reference frame. So we need to do a coordinate transformation...
 
 ### Derivation: Velocity Transformation Between Fixed and Rotating Frames
 
@@ -1185,15 +1182,9 @@ $\frac{D _f \mathbf{x}}{D t} = \frac{D _r \mathbf{x}}{D t} + \pmb{\Omega} \times
       <br>
      This single formula is applied twice below — once to the velocity vector $\mathbf{u}_f$, and once to the position vector $\mathbf{x}$. 
 
-We start with our friend, the Navier-Stokes momentum equation in a _fixed_ reference frame:
 
-$$\frac{D \mathbf{u}}{D t} =  \frac{\partial \mathbf{u}}{\partial t} + \mathbf{u}\cdot \nabla \mathbf{u} = \mathbf{g} - \frac{\nabla p}{\rho} + \nu \nabla^2 \mathbf{u}$$
-
-Our goal is to re-write this in terms of a _rotating_ reference frame.
-
-We start from the definition of acceleration in the fixed frame and arrive
+Going back to our LHS of the navier stokes, we start from the definition of acceleration in the fixed frame and arrive
 at its expression in terms of rotating-frame quantities:
-
 
 $$
 \begin{aligned}
@@ -1309,13 +1300,6 @@ Source: Williams, R. G., & Follows, M. J. (2011).
 
 ### Absorbing the centrifugal acceleration into gravity
 
-The centrifugal term can be written $\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x} = -\mathbf{r}\Omega^2$, where $\mathbf{r}$ is the vector pointing perpendicularly outward from the Earth's rotation axis to the parcel's location, and $\Omega = |\pmb{\Omega}|$ is a scalar. Crucially, this is the gradient of a scalar potential — it has the same mathematical character as gravity. We can therefore absorb it into a modified gravitational acceleration:
-
-$$\mathbf{g}^* = \mathbf{g} + \mathbf{r}\Omega^2.$$
-
-The effect on the direction of $\mathbf{g}^*$ is also worth noting. At the Equator both gravity and the centrifugal vector are aligned with the local vertical plane, so $\mathbf{g}^*$ remains vertical, just slightly reduced in magnitude. At mid-latitudes (say 45°), the centrifugal vector $\mathbf{r}\Omega^2$ points outward from the rotation axis — not the local vertical — so decomposing it into local vertical and horizontal components leaves a tiny residual horizontal piece. The resulting $\mathbf{g}^*$ points at a very slight angle from the true local vertical. In practice we always set $\mathbf{g}^* \approx \mathbf{g}$, pointing exactly along the local vertical, and ignore this tiny tilt — if we did not, a horizontal component of effective gravity would appear in the horizontal momentum equations, making them considerably more complex.
-
-
 <figure markdown="span">
 ![Coriolis1](../assets/WilliamsFollowsCoriolis02.png)
 <figcaption>
@@ -1324,10 +1308,16 @@ The centrifugal acceleration means that a rotating fluid has to change its mass 
 </figcaption>
 </figure>
 
-!!! note "Scalar vs vector $\Omega$"
-    How large is the centrifugal correction? At the Equator it is at it's largest, $r \approx 6 \times 10^6$ m and $\Omega \approx 7 \times 10^{-5}$ rad s$^{-1}$, giving $r\Omega^2 \approx 0.03$ m s$^{-2}$. This is less than 0.3% of $g \approx 9.81$ m s$^{-2}$. Away from the Equator, $r$ (the perpendicular distance to the rotation axis, not to Earth's centre) decreases, so the correction is smaller still.
+The centrifugal term can be written $\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x} = -\mathbf{r}\Omega^2$, where $\mathbf{r}$ is the vector pointing perpendicularly outward from the Earth's rotation axis to the parcel's location, and $\Omega = |\pmb{\Omega}|$ is a scalar. We can absorb it into a modified gravitational acceleration:
 
-The ratio $r\Omega^2 / g$ is at most $\sim$0.3% on Earth. On a hypothetical rapidly-rotating or very large planet this could be significant, but for Earth oceanography the approximation is excellent everywhere.
+$$\mathbf{g}^* = \mathbf{g} + \mathbf{r}\Omega^2.$$
+
+??? code "The effect on the direction of $\mathbf{g}^*$ is also worth noting..."
+    At the Equator both gravity and the centrifugal vector are aligned with the local vertical plane, so $\mathbf{g}^*$ remains vertical, just slightly reduced in magnitude. At mid-latitudes (say 45°), the centrifugal vector $\mathbf{r}\Omega^2$ points outward from the rotation axis — not the local vertical — so decomposing it into local vertical and horizontal components leaves a tiny residual horizontal piece. The resulting $\mathbf{g}^*$ points at a very slight angle from the true local vertical. In practice we always set $\mathbf{g}^* \approx \mathbf{g}$, pointing exactly along the local vertical, and ignore this tiny tilt — if we did not, a horizontal component of effective gravity would appear in the horizontal momentum equations, making them considerably more complex.
+
+
+How large is the centrifugal correction? At the Equator it is at it's largest, $r \approx 6 \times 10^6$ m and $\Omega \approx 7 \times 10^{-5}$ rad s$^{-1}$, giving $r\Omega^2 \approx 0.03$ m s$^{-2}$. This is less than 0.3% of $g \approx 9.81$ m s$^{-2}$. Away from the Equator, $r$ (the perpendicular distance to the rotation axis, not to Earth's centre) decreases, so the correction is smaller still. On a hypothetical rapidly-rotating or very large planet this could be significant, but for Earth oceanography the approximation is excellent everywhere.
+  
 
 With this, the rotating-frame momentum equation simplifies to
 
@@ -1340,9 +1330,9 @@ We orient local Cartesian coordinates at a point on the Earth's surface with $\m
 We now resolve the Earth's rotation vector $\pmb{\Omega}$ in these local coordinates. This is a geometric exercise: the Earth rotates around its polar axis, and we need to project that rotation vector onto our local $(\mathbf{i}, \mathbf{j}, \mathbf{k})$ basis. The rotation axis lies in the plane containing the local vertical and the meridian, so there is **no component in the $\mathbf{i}$ (eastward) direction**. The projections onto $\mathbf{j}$ (northward) and $\mathbf{k}$ (upward) depend on latitude $\phi$:
 
 <figure markdown="span">
-![Coriolis3](../assets/Coriolis3.png)
+![Coriolis1](../assets/WilliamsFollowsCoriolis03.png)
 <figcaption>
-At a point <span class="arithmatex">\( \mathbf{x} \)</span> on Earth's surface at latitude <span class="arithmatex">\( \phi \)</span>, the local vertical <span class="arithmatex">\( \mathbf{k} \)</span> and local north <span class="arithmatex">\( \mathbf{j} \)</span> form a frame tilted by <span class="arithmatex">\( \phi \)</span> relative to the fixed rotation vector <span class="arithmatex">\( \mathbf{\Omega} \)</span> (parallel to the polar axis). Decomposing <span class="arithmatex">\( \mathbf{\Omega} \)</span> into this tilted frame gives a vertical component <span class="arithmatex">\( \Omega \sin\phi \)</span> and a northward component <span class="arithmatex">\( \Omega \cos\phi \)</span>, while the eastward direction <span class="arithmatex">\( \mathbf{i} \)</span>, perpendicular to the plane of the page, picks up none of <span class="arithmatex">\( \mathbf{\Omega} \)</span>.
+Source: Williams, R. G., & Follows, M. J. (2011). 
 </figcaption>
 </figure>
 
@@ -1401,25 +1391,20 @@ At the pole, the Coriolis force is entirely in the horizontal plane and the non-
 
 ### The traditional approximation
 
+!!! note "When does the traditional approximation fail?"
+    The approximation is excellent for large-scale, hydrostatic flows. It becomes questionable in two situations. First, **near the Equator**: $f \to 0$ as $\phi \to 0$, so the ratio $\tilde{f}w / fv$ need not be small. Some studies of equatorial dynamics explicitly retain the non-traditional terms. Second, in **non-hydrostatic flows** (deep convection, fine-scale submesoscale dynamics): when vertical accelerations are significant, $w$ can become comparable to $u$ and $v$, and $\tilde{f}u$ can appear alongside terms no longer dominated by hydrostatic balance.
+
 We have four Coriolis terms in total, but large-scale hydrostatic ocean models retain only two: $fv$ (in the zonal equation) and $fu$ (in the meridional equation). Dropping the $\tilde{f}$ terms is called the **traditional approximation**, justified by two separate scaling arguments.
 
 **For $\tilde{f}w$ in the zonal equation:** The magnitude scales as $\tilde{f}w \sim 2\Omega\cos\phi \cdot w$. Because the ocean is a thin shell, vertical velocities are many orders of magnitude smaller than horizontal velocities ($w \ll |\mathbf{u}|$, typically by three to four orders of magnitude). So $\tilde{f}w \ll fv$ everywhere except very close to the Equator where $f \to 0$.
 
 **For $\tilde{f}u$ in the vertical equation:** This term could in principle be non-negligible, since $\tilde{f}u \sim 2\Omega\cos\phi \cdot u$ and horizontal velocities are large. However, the vertical momentum equation at large scales is overwhelmingly dominated by **hydrostatic balance** — the pressure gradient and buoyancy terms are of order $\rho g \sim 10^4$ Pa m$^{-1}$, while $\tilde{f}u \sim 10^{-4}$ m s$^{-2}$. The entire prognostic vertical momentum equation is replaced by the diagnostic hydrostatic approximation $\partial p / \partial z = -\rho g$, and with it the $\tilde{f}u$ term disappears.
 
-After the traditional approximation, the Coriolis force reduces entirely to a horizontal rotation:
-
-$$2\pmb{\Omega} \times \mathbf{u} \;\approx\; \mathbf{f} \times \mathbf{u}, \qquad \text{where } \mathbf{f} = f\mathbf{k} = 2\Omega\sin\phi\;\mathbf{k}.$$
-
-Equivalently, we treat the rotation vector as if it pointed purely in the local vertical direction: $\pmb{\Omega} \approx \Omega\sin\phi\;\mathbf{k}$. This is the form that appears in MOM6.
-
-!!! note "When does the traditional approximation fail?"
-    The approximation is excellent for large-scale, hydrostatic flows. It becomes questionable in two situations. First, **near the Equator**: $f \to 0$ as $\phi \to 0$, so the ratio $\tilde{f}w / fv$ need not be small. Some studies of equatorial dynamics explicitly retain the non-traditional terms. Second, in **non-hydrostatic flows** (deep convection, near-inertial waves, fine-scale submesoscale dynamics): when vertical accelerations are significant, $w$ can become comparable to $u$ and $v$, and $\tilde{f}u$ can appear alongside terms no longer dominated by hydrostatic balance.
-
+After the traditional approximation, the Coriolis force reduces to $-fv$ added to the zonal acceleration and $+fu$ to the meridional acceleration.
 
 ### Implementation in MOM6
 
-After all of the above, what MOM6 actually computes in `MOM_CoriolisAdv.F90` is the traditional Coriolis acceleration (when in hydrostatic mode):
+What MOM6 actually computes in `MOM_CoriolisAdv.F90` is the traditional Coriolis acceleration (when in hydrostatic mode):
 
 $$
 \begin{aligned}
@@ -1444,15 +1429,11 @@ A non-trivial numerical complication arises on MOM6's Arakawa C-grid: $u$ veloci
 !!! note "Non-traditional Coriolis in non-hydrostatic mode"
     For non-hydrostatic simulations (uncommon in large-scale ocean modelling but used for process studies), the hydrostatic approximation is relaxed and the full vertical momentum equation is solved. 
 
-### Summary: the chain of approximations
+Some background on Coriolis scheme choices in MOM6:
 
-To arrive at the Coriolis term as implemented in MOM6:
-
-1. **Rotating-frame transformation** — applying the transport rule twice produces the Coriolis ($2\pmb{\Omega} \times \mathbf{u}$) and centrifugal ($\pmb{\Omega} \times \pmb{\Omega} \times \mathbf{x}$) accelerations. The factor of 2 arises because the cross product contributes once from each of the two bracket expansions.
-2. **Centrifugal absorbed into $\mathbf{g}^*$** — valid because $r\Omega^2 / g \lesssim 0.3\%$ everywhere on Earth; the tiny tilt of $\mathbf{g}^*$ from the local vertical is also ignored.
-3. **Spherical geometry** — resolving $\pmb{\Omega}$ in local coordinates gives $\pmb{\Omega} = (0, \Omega\cos\phi, \Omega\sin\phi)$, with no eastward component, producing both the traditional Coriolis parameter $f = 2\Omega\sin\phi$ and the non-traditional $\tilde{f} = 2\Omega\cos\phi$.
-4. **Traditional approximation** — the non-traditional terms $\tilde{f}w$ (zonal equation) and $\tilde{f}u$ (vertical equation) are dropped: the former because $w \ll |\mathbf{u}|$, the latter because the vertical equation is replaced by hydrostatic balance, which is orders of magnitude larger.
-5. **Result** — $2\pmb{\Omega} \times \mathbf{u} \to f\mathbf{k} \times \mathbf{u}$, with $f = 2\Omega\sin\phi$. And this is what MOM6 computes! 
+ - Currently we use `CORIOLIS_SCHEME = "SADOURNY75_ENSTRO"` in `dev-MC_25km_jra_iaf` [link](https://github.com/ACCESS-NRI/access-om3-configs/blob/cbdb59e7eeaa92b2950b0bbe0bddcb02d3b6f16a/MOM_input#L478); 
+ - [MOM6 code](https://github.com/ACCESS-NRI/MOM6/blob/2026.05.001/src/core/MOM_CoriolisAdv.F90#L910-L912) for the `CORIOLIS_SCHEME = "SADOURNY75_ENSTRO"` is here: [CAu (zonal Coriolis term)](https://github.com/ACCESS-NRI/MOM6/blob/2026.05.001/src/core/MOM_CoriolisAdv.F90#L716-L720) and [CAv (meridional Coriolis term)](https://github.com/ACCESS-NRI/MOM6/blob/2026.05.001/src/core/MOM_CoriolisAdv.F90#L943-L947);
+ - Is this a good idea? [Join the discussion!](https://github.com/ACCESS-NRI/access-om3-configs/issues/697)
 
 ## Pressure solver - barotropic / baroclinic split
 ## Timestepping / Advection schemes
