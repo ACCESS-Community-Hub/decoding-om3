@@ -63,6 +63,11 @@ authors:
     email: jorge.galvezvallejo@anu.edu.au
     affiliation: National Computational Infrastructure (NCI), Australian National University, Canberra, Australia
     orcid: 'https://orcid.org/0000-0003-4744-2087'
+ - given-names: David 
+    family-names: Munday
+    email: danday@bas.ac.uk
+    affiliation: British Antarctic Survey, Cambridge, UK.
+    orcid: 'https://orcid.org/0000-0003-1920-708X'
 repository-code: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 url: 'https://github.com/ACCESS-Community-Hub/decoding-om3'
 repository-artifact: >-
