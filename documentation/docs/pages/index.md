@@ -1,6 +1,11 @@
 
 Welcome to the documentation for the [_decoding-om3_](https://github.com/ACCESS-Community-Hub/decoding-om3) project! The purpose of this open source project is to encourage community users to delve inside the murky inner workings of om3.
 
+## General Info on Decoding MOM6 Sessions
+
+- The early sessions of these "Decoding MOM6" segments will talk through the tools that might be useful to navigate the MOM6 code
+- The later sessions will dive deeper into the code itself
+
 Currently these topics are being explored as training as part of the regular Thursday 11:30 am COSIMA meetings being coordinated [here](https://docs.google.com/spreadsheets/d/1vk8m-oDRZChAFPnZ-HuF81YmiF7dkSXQkhZXekuj4fw/edit?gid=0#gid=0). Please get in touch with @chrisb13 (`chris.bull@anu.edu.au`) or @adele-morrison to get involved. Meetings are [announced on this thread](https://forum.access-hive.org.au/t/cosima-working-group-announce/238/181) and the [meeting link is this](https://utas.zoom.us/j/82678917036?from=addon).
 
 A possible path forward from @AndyHoggANU and @chrisb13:
@@ -10,7 +15,7 @@ A possible path forward from @AndyHoggANU and @chrisb13:
 
 **Contributions from people of all career stages and backgrounds are highly encouraged.** All these models and configurations are developed are open source. Development is led by the [COSIMA working group](https://cosima.org.au/) and ACCESS-NRI and where we follow an open model.
 
-Contributors so far include: Christopher Bull (ACCESS-NRI), Andy Hogg (ACCESS-NRI), Helen Macdonald (ANU), Paige E. Martin (ACCESS-NRI), Angus H. Gibson (ANU), Josef I. Bisits (UNSW), Claire Yung (ANU), Paul Spence (UTas), Dougal Squire (ACCESS-NRI), Edward Yang (ACCESS-NRI), Andrew Kiss (ANU), Jorge Luis Galvez Vallejo (NCI).
+Contributors so far include: Christopher Bull (ACCESS-NRI), Andy Hogg (ACCESS-NRI), Helen Macdonald (ANU), Paige E. Martin (ACCESS-NRI), Angus H. Gibson (ANU), Josef I. Bisits (UNSW), Claire Yung (ANU), Paul Spence (UTas), Dougal Squire (ACCESS-NRI), Edward Yang (ACCESS-NRI), Andrew Kiss (ANU), Jorge Luis Galvez Vallejo (NCI), David Munday (BAS).
 
 ### Report a typo or make a suggestion
 
