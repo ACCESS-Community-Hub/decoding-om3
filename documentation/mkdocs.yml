@@ -96,28 +96,27 @@ markdown_extensions:
 # Navigation
 nav:
   - Home:                              pages/index.md
-  - Decoding OM3:                      
-    - Practicalities:
-      - How to Search GitHub:          pages/practicalities/how-to-search-github.md
-      - MOM6 Dev Lessons:              pages/practicalities/mom6-dev-lessons.md
-      - Finding Executables:           pages/practicalities/finding-executables.md
-      - MOM6 Diagnostics:              pages/practicalities/mom6-diagnostics.md
-      - Diag Table Overview:           pages/practicalities/diag-table-overview.md
-      - MOM6 Code Structure:           pages/practicalities/mom6-code-structure.md
-      - Specifying Model Outputs:      pages/practicalities/specifying-model-outputs.md
-      - OM3 Runtime Output:            pages/practicalities/om3-runtime-output.md
-      - Interpreting OM3 Errors:       pages/practicalities/interpreting-om3-errors.md
-      - Contributing to MOM6:          pages/practicalities/contributing-to-mom6.md
-      - MOM6 Mini-app & GPU:           pages/practicalities/mom6-miniapp-gpu.md
-      - Fortran 101:                   pages/practicalities/fortran-101.md
-      - Fortran Intrinsics:            pages/practicalities/fortran-intrinsics.md
-    - From Theory to MOM6:
-      - Navier-Stokes Equations:       pages/mom6/navier-stokes-equations.md
-      - Generalised Vertical Coords:   pages/mom6/generalised-vertical-coords.md
-      - Vertical Lagrangian Remapping: pages/mom6/vertical-lagrangian-remapping.md
-      - Pressure Forces:               pages/mom6/pressure-forces.md
-      - Coriolis Term:                 pages/mom6/coriolis-term.md
-    - Future Topics:                   pages/future-topics.md
+  - Practicalities:
+    - How to Search GitHub:          pages/practicalities/how-to-search-github.md
+    - MOM6 Dev Lessons:              pages/practicalities/mom6-dev-lessons.md
+    - Finding Executables:           pages/practicalities/finding-executables.md
+    - MOM6 Diagnostics:              pages/practicalities/mom6-diagnostics.md
+    - Diag Table Overview:           pages/practicalities/diag-table-overview.md
+    - MOM6 Code Structure:           pages/practicalities/mom6-code-structure.md
+    - Specifying Model Outputs:      pages/practicalities/specifying-model-outputs.md
+    - OM3 Runtime Output:            pages/practicalities/om3-runtime-output.md
+    - Interpreting OM3 Errors:       pages/practicalities/interpreting-om3-errors.md
+    - Contributing to MOM6:          pages/practicalities/contributing-to-mom6.md
+    - MOM6 Mini-app & GPU:           pages/practicalities/mom6-miniapp-gpu.md
+    - Fortran 101:                   pages/practicalities/fortran-101.md
+    - Fortran Intrinsics:            pages/practicalities/fortran-intrinsics.md
+  - From Theory to MOM6:
+    - Navier-Stokes Equations:       pages/mom6/navier-stokes-equations.md
+    - Generalised Vertical Coords:   pages/mom6/generalised-vertical-coords.md
+    - Vertical Lagrangian Remapping: pages/mom6/vertical-lagrangian-remapping.md
+    - Pressure Forces:               pages/mom6/pressure-forces.md
+    - Coriolis Term:                 pages/mom6/coriolis-term.md
+  - Future Topics:                   pages/future-topics.md
   - AOMSS:                             pages/AOMSS_Lecture_Notes.md
 
 # Footer
