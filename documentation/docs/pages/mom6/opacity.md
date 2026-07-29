@@ -1,18 +1,22 @@
 # Shortwave penetration in MOM6
 
+Date: 30/07/2026
+
+Presenter: Dougie Squire (@dougiesquire)
+
 ## The general stuff
 
 Incoming shortwave radiation (SW) penetrates and heats a finite layer of the water column. Getting the vertical penetration right is important for SST and mixed-layer dynamics.
 
 Absorption is strongly wavelength-dependent. Over half the incoming total SW is near-infrared and is absorbed within the top metre or so. The visible band penetrates further, with blue light reaching deepest. The optical properties of the ocean are strongly affected by phytoplankton/chlorophyll, dissolved organic matter and suspended particulates.
 
-MOM6 has a number of different schemes for defining how SW pentrates into the ocean interior.
+MOM6 has a number of different schemes for defining how SW penetrates into the ocean interior.
 
 ### Beer–Lambert law
 
 The Beer-Lambert law states that the loss of light intensity when it propagates in a medium is directly proportional to intensity and path length. This leads to an exponential attenuation law:
 
-$\mathrm{SW}(d,b) = \mathrm{SW}(0,b) · \exp(−\kappa(d,b) \cdot d)$
+$\mathrm{SW}(d,b) = \mathrm{SW}(0,b) \cdot \exp \left( - \int_{0}^{d} \kappa(z,b) dz \right)$
 
 The attenuation coefficient $\kappa$ is often referred to as the "optical density" or the "opacity". Larger $\kappa$ gives a shallower e-folding depth so is SW absorbed (and heats the ocean) closer to the surface.
 
@@ -22,7 +26,7 @@ The different opacity schemes in MOM6 provide different ways to define $\mathrm{
 
 In MOM6, the implementation of the SW penetration is split into two parts:
 
-1. Scheme-dependent calculation of the opacity and penetrating SW at the surface ($\kappa(d,b)$ and $\mathrm{SW}(0,b)$ above). This occurs in the `MOM_opacity` module, specifically in the `set_opacity` routine, which sets the following arrays:
+1. Scheme-dependent calculation of the opacity and penetrating SW at the surface ($\kappa(d,b)$ and $\mathrm{SW}(0,b)$ above). This occurs in the `MOM_opacity` module, specifically in the [`set_opacity`](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6%20set_opacity&type=code) routine, which sets the following arrays:
 
   ```fortran
   type, public :: optics_type
@@ -32,9 +36,10 @@ In MOM6, the implementation of the SW penetration is split into two parts:
     ...
   end type optics_type
   ```
-2. Scheme-independent application of the SW flux. This occurs in the `MOM_diabatic_aux` module, specifically in the `applyBoundaryFluxesInOut` routine, which
+
+2. Scheme-independent application of the SW flux. This occurs in the `MOM_diabatic_aux` module, specifically in the [`applyBoundaryFluxesInOut`](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6+applyBoundaryFluxesInOut&type=code) routine, which
   - Accounts for the surface layer heating from the SW that does not penetrate (in `extractFluxes1d`);
-  - Accounts for heating from penetrating SW by appling Beer-Lambert per band and through the column (in `absorbRemainingSW`). The heat added to a given layer is calculated from the convergence of the flux across all bands, i.e. the difference beween the total flux entering the top and leaving the bottom. Any unabsorbed SW at the bottom of the column is added as a uniform temperature increment across the column.
+  - Accounts for heating from penetrating SW by applying Beer-Lambert per band and through the column (in `absorbRemainingSW`). The heat added to a given layer is calculated from the convergence of the flux across all bands, i.e. the difference between the total flux entering the top and leaving the bottom. Any unabsorbed SW at the bottom of the column is added as a uniform temperature increment across the column.
 
 ## MOM6 opacity schemes
 
@@ -56,7 +61,7 @@ User sets:
 
 ### `OPACITY_SCHEME = MOREL_88`: chlorophyll-dependent, one band
 
-Based on [Morel (1988)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/jc093ic09p10749) and [Morel & Antoine (1994)](https://journals.ametsoc.org/view/journals/phoc/24/7/1520-0485_1994_024_1652_hrwtuo_2_0_co_2.xml). The opacity and penetrating fraction are calculated from polynomial functions of chlorophyll concentration. Note this scheme allows specifying multiple bands, but in this case the opacaity and penetrating fraction are simply the same in each band.
+Based on [Morel (1988)](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/jc093ic09p10749) and [Morel & Antoine (1994)](https://journals.ametsoc.org/view/journals/phoc/24/7/1520-0485_1994_024_1652_hrwtuo_2_0_co_2.xml). The opacity and penetrating fraction are calculated from polynomial functions of chlorophyll concentration. Note this scheme allows specifying multiple bands, but in this case the opacity and penetrating fraction are simply the same in each band.
 
 User can set:
 - `OPACITY_VALUES_MOREL`: coefficients to calculate the opacity from the chlorophyll
