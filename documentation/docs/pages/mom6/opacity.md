@@ -28,16 +28,17 @@ In MOM6, the implementation of the SW penetration is split into two parts:
 
 1. Scheme-dependent calculation of the opacity and penetrating SW at the surface ($\kappa(d,b)$ and $\mathrm{SW}(0,b)$ above). This occurs in the `MOM_opacity` module, specifically in the [`set_opacity`](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6%20set_opacity&type=code) routine, which sets the following arrays:
 
-  ```fortran
-  type, public :: optics_type
-    integer :: nbands
-    real, allocatable :: opacity_band(:,:,:,:) ! <-- kappa(band, i, j, k)
-    real, allocatable :: sw_pen_band(:,:,:)    ! <-- SW_0(band, i, j)
-    ...
-  end type optics_type
-  ```
+    ```fortran
+    type, public :: optics_type
+      integer :: nbands
+      real, allocatable :: opacity_band(:,:,:,:) ! <-- kappa(band, i, j, k)
+      real, allocatable :: sw_pen_band(:,:,:)    ! <-- SW_0(band, i, j)
+      ...
+    end type optics_type
+    ```
 
 2. Scheme-independent application of the SW flux. This occurs in the `MOM_diabatic_aux` module, specifically in the [`applyBoundaryFluxesInOut`](https://github.com/search?q=repo%3AACCESS-NRI%2FMOM6+applyBoundaryFluxesInOut&type=code) routine, which
+
   - Accounts for the surface layer heating from the SW that does not penetrate (in `extractFluxes1d`);
   - Accounts for heating from penetrating SW by applying Beer-Lambert per band and through the column (in `absorbRemainingSW`). The heat added to a given layer is calculated from the convergence of the flux across all bands, i.e. the difference between the total flux entering the top and leaving the bottom. Any unabsorbed SW at the bottom of the column is added as a uniform temperature increment across the column.
 
