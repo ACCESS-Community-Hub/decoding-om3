@@ -117,6 +117,7 @@ nav:
     - Pressure Forces:               pages/mom6/pressure-forces.md
     - Coriolis Term:                 pages/mom6/coriolis-term.md
     - Shortwave penetration:         pages/mom6/opacity.md
+    - Vertical Lagrangian Remapping Code: pages/mom6/vertical-lagrangian-remapping-code.md
   - Future Topics:                   pages/future-topics.md
   - AOMSS:                             pages/AOMSS_Lecture_Notes.md
 
