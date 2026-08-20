@@ -4,14 +4,18 @@ Date: 19/08/2026.
 
 Presenter: Krishiv Kukreja (@KKukreja-code).
 
-This set of notes intends to continue the discussion of the Lagrangian remapping algorithm covered in a previous page (see https://decoding-access-om3.readthedocs.io/mom6/vertical-lagrangian-remapping/ for a refresher).
+This set of notes intends to continue the discussion of the Lagrangian remapping algorithm covered in a [previous page](https://decoding-access-om3.readthedocs.io/mom6/vertical-lagrangian-remapping/).
 
 The basic problem the remapping algorithm aims to solve is being able to compute tracer concentrations on a new target grid, given discrete tracer values on the current source grid. In the context of MOM6, the model has evolved in a Lagrangian frame of reference to give a certain source grid that had moved with the fluid flow. We now wish to view the ocean state on a pre-defined target grid to avoid the problem of vertical surface entanglement that would arise from a continuous Lagrangian evolution.
 
 ## intersect_src_tgt_grids Subroutine
 We first aim to view the source and target grids relative to each other. To do this, we create a structure called a subgrid, which is a union of the interfaces of both grids. Subcells are defined as the grid cells between two consecutive interfaces of this union, and an image is shown below.
 
-![Subgrid](../../assets/subgrid.png)
+<figure markdown="span">
+  ![Subgrid](../../assets/subgrid.png)
+  <figcaption>An example of a subgrid. The blue interfaces are source grid interfaces, while the green ones are target grid interfaces.
+</figcaption>
+</figure>
 
 This subroutine returns the thickness of each sub-cell within the subgrid. It determines the start and end indices of the subcells within each source or target cell. Finally, it also saves the thickest sub-cell within each source cell, which will be useful for a later conservation algorithm.
 
@@ -22,7 +26,11 @@ The subroutine keeps track of local variables `h0_supply` and `h1_supply`, which
 ## Polynomial Reconstruction
 Once we have a subgrid containing the combined relative thickness information of the source and target grids, we need to find tracer values on each of the subcells. To do this, we need to make some assumption of a piecewise continuous model of tracer distribution down the column, as the subgrid is a (non-strictly) finer partition of the source column. We can have piecewise constant (PCM), piecewise linear (PLM), piecewise parabolic (PPM), and piecewise quartic (PQM) reconstructions of tracer distribution, and the error associated with each scheme depends on the degree of the polynomial we use to model the tracer content.
 
-![Polynomial Reconstruction Options for Tracer Distribution (Collated by Adcroft (2016))](../../assets/poly_reconstruct.png)
+<figure markdown="span">
+  ![Polynomial Reconstruction](../../assets/poly_reconstruct.png)
+  <figcaption>Polynomial Reconstruction Options for Tracer Distribution (Collated by Adcroft (2016))
+</figcaption>
+</figure>
 
 A higher-order scheme will more accurately be able to model the unknown underlying distribution, but requires more computational resources due to the need to find more coefficients. It also requires more numerical limiters which prevent the creation of spurious extrema and excessive oscillations in slope between neighbouring cells. However, higher-order schemes reduce numerical mixing: intuitively, a smoother interpolation of tracer values reduces the amount of spurious "averaging" that needs to be done when finding tracer values on a new grid column.
 
