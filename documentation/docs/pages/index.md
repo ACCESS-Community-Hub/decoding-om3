@@ -15,7 +15,7 @@ A possible path forward from @AndyHoggANU and @chrisb13:
 
 **Contributions from people of all career stages and backgrounds are highly encouraged.** All these models and configurations are developed are open source. Development is led by the [COSIMA working group](https://cosima.org.au/) and ACCESS-NRI and where we follow an open model.
 
-Contributors so far include: Christopher Bull (ACCESS-NRI), Andy Hogg (ACCESS-NRI), Helen Macdonald (ANU), Paige E. Martin (ACCESS-NRI), Angus H. Gibson (ANU), Josef I. Bisits (UNSW), Claire Yung (ANU), Paul Spence (UTas), Dougal Squire (ACCESS-NRI), Edward Yang (ACCESS-NRI), Andrew Kiss (ANU), Jorge Luis Galvez Vallejo (NCI), David Munday (BAS).
+Contributors so far include: Christopher Bull (ACCESS-NRI), Andy Hogg (ACCESS-NRI), Helen Macdonald (ANU), Paige E. Martin (ACCESS-NRI), Angus H. Gibson (ANU), Josef I. Bisits (UNSW), Claire Yung (ANU), Paul Spence (UTas), Dougal Squire (ACCESS-NRI), Edward Yang (ACCESS-NRI), Andrew Kiss (ANU), Jorge Luis Galvez Vallejo (NCI), David Munday (BAS), Krishiv Kukreja (University of Oxford).
 
 ### Report a typo or make a suggestion
 
@@ -25,14 +25,14 @@ Technical issues related to _decoding-om3_  are best posted to [github.com/ACCES
 
 We appreciate contributions, typo and bugs fixes to this documentation. To make suggestions please see steps below.
 
-#### Quick contributions 
+#### Quick contributions
 !!! tip
     This method has the advantage is that it's *very quick* (<1 minute!). The caveat is that, unless you have write access to the `decoding-om3` repository, you will not be able to preview the changes rendered into a website or create whole new pages. <br>
 
-The simplest and fastest way to make a change to an _existing_ page is to click the edit "pencil" on the top-right corner. This will go to the relevant GitHub markdown file and clicking the _top-right pencil again_ on GitHub will allow you to edit the file. Once complete, click `Commit changes...`. There are then _two_ possibilities, depending on whether you have  write access to [`decoding-om3`](https://github.com/ACCESS-Community-Hub/decoding-om3): 
+The simplest and fastest way to make a change to an _existing_ page is to click the edit "pencil" on the top-right corner. This will go to the relevant GitHub markdown file and clicking the _top-right pencil again_ on GitHub will allow you to edit the file. Once complete, click `Commit changes...`. There are then _two_ possibilities, depending on whether you have  write access to [`decoding-om3`](https://github.com/ACCESS-Community-Hub/decoding-om3):
 
-1.  **No write access**: this will prompt you to make a fork and then a pull request (less than 1 minute!). 
-1.  **You have write access**: please commit changes on a new branch and then use a pull request (this relates to the next option). 
+1.  **No write access**: this will prompt you to make a fork and then a pull request (less than 1 minute!).
+1.  **You have write access**: please commit changes on a new branch and then use a pull request (this relates to the next option).
 
 #### Larger contributions (online PR-previews)
 !!! tip
